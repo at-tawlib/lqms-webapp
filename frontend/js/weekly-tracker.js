@@ -97,8 +97,8 @@ export const renderWeekLyActivityTracker = () => {
 
     contentDiv.innerHTML = `
             <div class="bg-green-600 text-white p-4 rounded-t-lg mb-0">
-            <h2 class="text-2xl font-bold">CENTRAL LABORATORY SERVICES-KORLE BU TEACHING HOSPITAL</h2>
-            <p class="text-green-100 text-sm">ITINERARY FOR THE WEEK-FKBTH-CL/OP/0603</p>
+              <h2 class="text-2xl font-bold">CENTRAL LABORATORY SERVICES-KORLE BU TEACHING HOSPITAL</h2>
+              <p class="text-green-100 text-sm">ITINERARY FOR THE WEEK-FKBTH-CL/OP/0603</p>
             </div>
 
             <div class="bg-white p-6 rounded-b-lg shadow-lg">

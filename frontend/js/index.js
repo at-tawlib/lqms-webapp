@@ -1,3 +1,4 @@
+import { renderAuditNonConformities } from "./accreditation.js";
 import { renderWeekLyActivityTracker } from "./weekly-tracker.js";
 
 // TODO: Mock data storage - will be replaced with Firebase later
@@ -559,6 +560,8 @@ function renderDashboard() {
       const sectionName = card.dataset.section;
       if (sectionName === "Weekly Activity Tracker") {
         renderWeekLyActivityTracker();
+      } else if (sectionName === "Accreditation") {
+        renderAuditNonConformities();
       } else handleNavClick(sectionName);
     });
   });
