@@ -1,4 +1,5 @@
 import { renderAuditNonConformities } from "./accreditation.js";
+import { renderMeeting } from "./meeting.js";
 import { renderPowerTracker } from "./power-tracker.js";
 import { renderWeekLyActivityTracker } from "./weekly-tracker.js";
 
@@ -565,6 +566,8 @@ function renderDashboard() {
         renderAuditNonConformities();
       } else if (sectionName == "Power Stability Tracker") {
         renderPowerTracker();
+      } else if (sectionName === "Meeting Schedule") {
+        renderMeeting();
       } else handleNavClick(sectionName);
     });
   });
