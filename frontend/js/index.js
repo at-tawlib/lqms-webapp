@@ -1,4 +1,5 @@
 import { renderAuditNonConformities } from "./accreditation.js";
+import { renderPowerTracker } from "./power-tracker.js";
 import { renderWeekLyActivityTracker } from "./weekly-tracker.js";
 
 // TODO: Mock data storage - will be replaced with Firebase later
@@ -562,6 +563,8 @@ function renderDashboard() {
         renderWeekLyActivityTracker();
       } else if (sectionName === "Accreditation") {
         renderAuditNonConformities();
+      } else if (sectionName == "Power Stability Tracker") {
+        renderPowerTracker();
       } else handleNavClick(sectionName);
     });
   });
