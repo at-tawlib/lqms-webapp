@@ -1,4 +1,5 @@
 import { renderAuditNonConformities } from "./accreditation.js";
+import { renderAppraisalTracker } from "./appraisal-tracker.js";
 import { renderMeeting } from "./meeting.js";
 import { renderPowerTracker } from "./power-tracker.js";
 import { renderRiskManagement } from "./risk-management.js";
@@ -571,6 +572,8 @@ function renderDashboard() {
         renderMeeting();
       } else if (sectionName === "Risk Management") {
         renderRiskManagement();
+      } else if (sectionName === "Appraisal Tracker") {
+        renderAppraisalTracker();
       } else handleNavClick(sectionName);
     });
   });
