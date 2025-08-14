@@ -121,7 +121,7 @@ export const renderImprovementProjects = () => {
 
   setTimeout(() => {
     contentDiv.innerHTML = `
-            <div class="bg-teal-600 text-white p-4 rounded-t-lg mb-0">
+            <div class="bg-green-600 text-white p-4 rounded-t-lg mb-0">
               <h2 class="text-2xl font-bold">CENTRAL LABORATORY SERVICES-KORLE BU TEACHING HOSPITAL</h2>
               <p class="text-teal-100 text-sm">CONTINUAL IMPROVEMENT-FKBTH-CL/QM/1615</p>
             </div>
