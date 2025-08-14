@@ -1,6 +1,7 @@
 import { renderAuditNonConformities } from "./accreditation.js";
 import { renderAppraisalTracker } from "./appraisal-tracker.js";
 import { renderImprovementProjects } from "./improvement-projects.js";
+import { renderIQCRegister } from "./icqc-register.js";
 import { renderMeeting } from "./meeting.js";
 import { renderPowerTracker } from "./power-tracker.js";
 import { renderRiskManagement } from "./risk-management.js";
@@ -565,6 +566,7 @@ function renderDashboard() {
   document.querySelectorAll(".dashboard-grid .card").forEach((card) => {
     card.addEventListener("click", () => {
       const sectionName = card.dataset.section;
+      console.log(sectionName);
       if (sectionName === "Weekly Activity Tracker") {
         renderWeekLyActivityTracker();
       } else if (sectionName === "Accreditation") {
@@ -583,6 +585,8 @@ function renderDashboard() {
         renderServiceInterruptions();
       } else if (sectionName === "Training Plan") {
         renderTrainingPlan();
+      } else if (sectionName === "ICQC Register") {
+        renderIQCRegister();
       } else handleNavClick(sectionName);
     });
   });
