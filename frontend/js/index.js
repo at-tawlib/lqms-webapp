@@ -8,6 +8,7 @@ import { renderRiskManagement } from "./risk-management.js";
 import { renderServiceInterruptions } from "./service-interruptions.js";
 import { renderTrainingPlan } from "./training-plan.js";
 import { renderWeekLyActivityTracker } from "./weekly-tracker.js";
+import { renderComingSoon } from "./coming-soon.js";
 
 // TODO: Mock data storage - will be replaced with Firebase later
 let mockData = {};
@@ -602,7 +603,8 @@ function handleNavClick(sectionName) {
       link.classList.remove("active");
     }
   });
-  renderSection(sectionName.toLowerCase().replace(/ /g, "-"), sections[sectionName]);
+  // renderSection(sectionName.toLowerCase().replace(/ /g, "-"), sections[sectionName]);
+  renderComingSoon(sectionName);
 }
 
 // Generate dynamic nav links
