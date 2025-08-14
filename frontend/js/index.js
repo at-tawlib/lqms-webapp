@@ -1,6 +1,11 @@
 import { renderAuditNonConformities } from "./accreditation.js";
+import { renderAppraisalTracker } from "./appraisal-tracker.js";
+import { renderImprovementProjects } from "./improvement-projects.js";
 import { renderMeeting } from "./meeting.js";
 import { renderPowerTracker } from "./power-tracker.js";
+import { renderRiskManagement } from "./risk-management.js";
+import { renderServiceInterruptions } from "./service-interruptions.js";
+import { renderTrainingPlan } from "./training-plan.js";
 import { renderWeekLyActivityTracker } from "./weekly-tracker.js";
 
 // TODO: Mock data storage - will be replaced with Firebase later
@@ -568,6 +573,16 @@ function renderDashboard() {
         renderPowerTracker();
       } else if (sectionName === "Meeting Schedule") {
         renderMeeting();
+      } else if (sectionName === "Risk Management") {
+        renderRiskManagement();
+      } else if (sectionName === "Appraisal Tracker") {
+        renderAppraisalTracker();
+      } else if (sectionName === "Improvement Projects") {
+        renderImprovementProjects();
+      } else if (sectionName === "Service Interruptions") {
+        renderServiceInterruptions();
+      } else if (sectionName === "Training Plan") {
+        renderTrainingPlan();
       } else handleNavClick(sectionName);
     });
   });
