@@ -10,6 +10,7 @@ import { renderTrainingPlan } from "./training-plan.js";
 import { renderWeekLyActivityTracker } from "./weekly-tracker.js";
 import { renderComingSoon } from "./coming-soon.js";
 import { renderCorrespondenceManager } from "./correspondence.js";
+import { renderSupplyPlanner } from "./supply-planner.js";
 
 // TODO: Mock data storage - will be replaced with Firebase later
 let mockData = {};
@@ -591,6 +592,8 @@ function renderDashboard() {
         renderIQCRegister();
       } else if (sectionName === "Correspondence Manager") {
         renderCorrespondenceManager();
+      } else if (sectionName === "Supply Planner") {
+        renderSupplyPlanner();
       } else handleNavClick(sectionName);
     });
   });
