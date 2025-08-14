@@ -9,6 +9,7 @@ import { renderServiceInterruptions } from "./service-interruptions.js";
 import { renderTrainingPlan } from "./training-plan.js";
 import { renderWeekLyActivityTracker } from "./weekly-tracker.js";
 import { renderComingSoon } from "./coming-soon.js";
+import { renderCorrespondenceManager } from "./correspondence.js";
 
 // TODO: Mock data storage - will be replaced with Firebase later
 let mockData = {};
@@ -588,6 +589,8 @@ function renderDashboard() {
         renderTrainingPlan();
       } else if (sectionName === "ICQC Register") {
         renderIQCRegister();
+      } else if (sectionName === "Correspondence Manager") {
+        renderCorrespondenceManager();
       } else handleNavClick(sectionName);
     });
   });
