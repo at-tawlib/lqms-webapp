@@ -132,7 +132,7 @@ export const renderWeekLyActivityTracker = () => {
             style="overflow-y: auto;"
             >
             <div class="bg-white rounded-lg shadow-2xl max-w-lg w-full">
-                <div class="bg-blue-600 text-white p-4 rounded-t-lg">
+              <div class="bg-blue-600 text-white p-4 rounded-t-lg">
                 <h3 id="entryModalTitle" class="text-lg font-bold">Add New Entry</h3>
                 </div>
                 <form id="entryForm" class="p-4 space-y-4">

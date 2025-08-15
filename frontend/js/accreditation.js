@@ -1,7 +1,7 @@
 import { createTable } from "./ui-utils/create-table.js";
 import { showLoading } from "./ui-utils/show-loading.js";
 
-const sectionNameRaw = "Audit Non-conformities";
+const sectionNameRaw = "Internal Audit Non-conformities: FKBTH-CL/IA/0901.28";
 const sectionName = sectionNameRaw.toLowerCase().replace(/ /g, "-");
 
 // Department data with NC counts
@@ -48,143 +48,232 @@ export function renderAuditNonConformities() {
   showLoading(contentDiv);
 
   setTimeout(() => {
+    document.getElementById("sectionTitle").textContent = sectionNameRaw;
+    
     contentDiv.innerHTML = `
-      <div class="space-y-6">
-        <!-- Header -->
-        <div class="bg-green-600 text-white p-4 rounded-lg">
-          <div class="flex items-center gap-4">
-            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0yMCAzNUM5IDM1IDAgMjYgMCAyMEMwIDkgOSAwIDIwIDBDMzEgMCA0MCA5IDQwIDIwQzQwIDI2IDMxIDM1IDIwIDM1WiIgZmlsbD0iIzAwN0JGRiIvPgo8L3N2Zz4K" alt="KBTH Logo" class="w-10 h-10">
-            <div>
-              <h2 class="text-2xl font-bold">CENTRAL LABORATORY SERVICES-KORLE BU TEACHING HOSPITAL</h2>
-              <p class="text-green-100 text-sm">Internal Audit Non-conformities: FKBTH-CL/IA/0901.28</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Navigation Tabs -->
-        <div class="flex border-b border-gray-200">
-          <button id="departmentTab" class="px-4 py-2 text-sm font-medium text-blue-600 border-b-2 border-blue-600 bg-blue-50">
-            Departments Overview
-          </button>
-          <button id="actionPlanTab" class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700">
-            Action Plan
-          </button>
-        </div>
-
-        <!-- Department Overview Section -->
-        <div id="departmentSection" class="bg-white p-6 rounded-lg shadow-lg">
-          <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-semibold text-gray-800">Department Non-conformities Overview</h3>
-            <button id="addDepartmentBtn" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm transition-colors">
-              + Add Department
+        <div>
+          <!-- Navigation Tabs -->
+          <div class="flex border-b border-gray-200">
+            <button
+              id="departmentTab"
+              class="px-4 py-2 text-sm font-medium text-blue-600 border-b-2 border-blue-600 bg-blue-50"
+            >
+              Departments Overview
+            </button>
+            <button
+              id="actionPlanTab"
+              class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700"
+            >
+              Action Plan
             </button>
           </div>
-          <div id="departmentTableContainer" class="overflow-x-auto rounded-lg shadow-md border border-gray-200 max-h-96"></div>
+
+          <!-- Department Overview Section -->
+          <div id="departmentSection" class="bg-white p-2">
+            <div class="flex justify-between items-center mb-2">
+              <h3 class="text-xl font-semibold text-gray-800">Department Non-conformities Overview</h3>
+              <button
+                id="addDepartmentBtn"
+                class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm transition-colors"
+              >
+                + Add Department
+              </button>
+            </div>
+            <div
+              id="departmentTableContainer"
+              class="overflow-x-auto rounded-lg shadow-md border border-gray-200"
+            ></div>
+          </div>
+
+          <!-- Action Plan Section -->
+          <div id="actionPlanSection" class="bg-white p-2 hidden">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-xl font-semibold text-gray-800">Action Plan</h3>
+              <div class="flex gap-2">
+                <button
+                  id="addActionBtn"
+                  class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm transition-colors"
+                >
+                  + Add Action Item
+                </button>
+                <button
+                  id="exportExcelBtn"
+                  class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors"
+                >
+                  Export Excel
+                </button>
+                <button
+                  id="printBtn"
+                  class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded text-sm transition-colors"
+                >
+                  Print
+                </button>
+              </div>
+            </div>
+            <div
+              id="actionPlanTableContainer"
+              class="overflow-x-auto rounded-lg shadow-md border border-gray-200"
+            ></div>
+          </div>
         </div>
 
-        <!-- Action Plan Section -->
-        <div id="actionPlanSection" class="bg-white p-6 rounded-lg shadow-lg hidden">
-          <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-semibold text-gray-800">Action Plan</h3>
-            <div class="flex gap-2">
-              <button id="addActionBtn" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm transition-colors">
-                + Add Action Item
-              </button>
-              <button id="exportExcelBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors">
-                Export Excel
-              </button>
-              <button id="printBtn" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded text-sm transition-colors">
-                Print
-              </button>
+        <!-- Department Modal -->
+        <div
+          id="departmentModal"
+          class="fixed inset-0 flex items-center justify-center p-4 hidden z-50 bg-black bg-opacity-50"
+        >
+          <div class="bg-white rounded-lg shadow-2xl max-w-md w-full">
+            <div class="bg-blue-600 text-white p-4 rounded-t-lg">
+              <h3 id="departmentModalTitle" class="text-lg font-bold">Add Department</h3>
             </div>
+            <form id="departmentForm" class="p-4 space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Department Name</label>
+                <input
+                  type="text"
+                  id="departmentName"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  required
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Number of NCs Resolved</label>
+                <input
+                  type="number"
+                  id="resolvedCount"
+                  min="0"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  required
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Number of NCs Pending</label>
+                <input
+                  type="number"
+                  id="pendingCount"
+                  min="0"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  required
+                />
+              </div>
+              <div class="flex gap-2 pt-4">
+                <button
+                  type="submit"
+                  class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-colors"
+                >
+                  Save
+                </button>
+                <button
+                  type="button"
+                  id="cancelDepartmentBtn"
+                  class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
           </div>
-          <div id="actionPlanTableContainer" class="overflow-x-auto rounded-lg shadow-md border border-gray-200"></div>
         </div>
-      </div>
 
-      <!-- Department Modal -->
-      <div id="departmentModal" class="fixed inset-0 flex items-center justify-center p-4 hidden z-50 bg-black bg-opacity-50">
-        <div class="bg-white rounded-lg shadow-2xl max-w-md w-full">
-          <div class="bg-blue-600 text-white p-4 rounded-t-lg">
-            <h3 id="departmentModalTitle" class="text-lg font-bold">Add Department</h3>
+        <!-- Action Plan Modal -->
+        <div
+          id="actionModal"
+          class="fixed inset-0 flex items-center justify-center p-4 hidden z-50 bg-black bg-opacity-50"
+          style="overflow-y: auto"
+        >
+          <div class="bg-white rounded-lg shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+            <div class="fixed bg-blue-600 text-white p-4 rounded-t-lg max-w-lg w-full h-12">
+              <h3 id="actionModalTitle" class="text-lg font-bold">Add Action Item</h3>
+            </div>
+            <form id="actionForm" class="p-6 mt-12 space-y-4">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="md:col-span-2">
+                  <label class="block text-sm font-medium text-gray-700 mb-1"
+                    >Noted Non-conformities/Deficiencies (ISO 15189 clause)</label
+                  >
+                  <textarea
+                    id="nonConformity"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    rows="3"
+                    required
+                  ></textarea>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Major/Minor</label>
+                  <select
+                    id="majorMinor"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    required
+                  >
+                    <option value="">Select Type</option>
+                    <option value="Major">Major</option>
+                    <option value="Minor">Minor</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Assigned Personnel</label>
+                  <input
+                    type="text"
+                    id="assignedPersonnel"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    required
+                  />
+                </div>
+                <div class="md:col-span-2">
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Root Cause</label>
+                  <textarea
+                    id="rootCause"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    rows="3"
+                    required
+                  ></textarea>
+                </div>
+                <div class="md:col-span-2">
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Corrective Action</label>
+                  <textarea
+                    id="correctiveAction"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    rows="3"
+                    required
+                  ></textarea>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Completion Date</label>
+                  <input
+                    type="date"
+                    id="completionDate"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    required
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Follow-up</label>
+                  <textarea
+                    id="followUp"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    rows="2"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="flex gap-2 pt-4">
+                <button
+                  type="submit"
+                  class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-colors"
+                >
+                  Save Action Item
+                </button>
+                <button
+                  type="button"
+                  id="cancelActionBtn"
+                  class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
           </div>
-          <form id="departmentForm" class="p-4 space-y-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Department Name</label>
-              <input type="text" id="departmentName" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Number of NCs Resolved</label>
-              <input type="number" id="resolvedCount" min="0" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Number of NCs Pending</label>
-              <input type="number" id="pendingCount" min="0" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
-            </div>
-            <div class="flex gap-2 pt-4">
-              <button type="submit" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-colors">
-                Save
-              </button>
-              <button type="button" id="cancelDepartmentBtn" class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg transition-colors">
-                Cancel
-              </button>
-            </div>
-          </form>
         </div>
-      </div>
 
-      <!-- Action Plan Modal -->
-      <div id="actionModal" class="fixed inset-0 flex items-center justify-center p-4 hidden z-50 bg-black bg-opacity-50">
-        <div class="bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-          <div class="bg-blue-600 text-white p-4 rounded-t-lg">
-            <h3 id="actionModalTitle" class="text-lg font-bold">Add Action Item</h3>
-          </div>
-          <form id="actionForm" class="p-6 space-y-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div class="md:col-span-2">
-                <label class="block text-sm font-medium text-gray-700 mb-1">Noted Non-conformities/Deficiencies (ISO 15189 clause)</label>
-                <textarea id="nonConformity" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" rows="3" required></textarea>
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Major/Minor</label>
-                <select id="majorMinor" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
-                  <option value="">Select Type</option>
-                  <option value="Major">Major</option>
-                  <option value="Minor">Minor</option>
-                </select>
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Assigned Personnel</label>
-                <input type="text" id="assignedPersonnel" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
-              </div>
-              <div class="md:col-span-2">
-                <label class="block text-sm font-medium text-gray-700 mb-1">Root Cause</label>
-                <textarea id="rootCause" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" rows="3" required></textarea>
-              </div>
-              <div class="md:col-span-2">
-                <label class="block text-sm font-medium text-gray-700 mb-1">Corrective Action</label>
-                <textarea id="correctiveAction" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" rows="3" required></textarea>
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Completion Date</label>
-                <input type="date" id="completionDate" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Follow-up</label>
-                <textarea id="followUp" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" rows="2"></textarea>
-              </div>
-            </div>
-            <div class="flex gap-2 pt-4">
-              <button type="submit" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-colors">
-                Save Action Item
-              </button>
-              <button type="button" id="cancelActionBtn" class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg transition-colors">
-                Cancel
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
     `;
 
     // Initialize event listeners

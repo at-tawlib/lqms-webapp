@@ -6,12 +6,16 @@ body {
   scrollbar-color: transparent transparent; /* Hide scrollbar for Chrome, Safari, and Opera */
 }
 
+*::-webkit-scrollbar {
+  display: none;
+}
+
 #sidebar {
   position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
-  z-index: 900;
+  z-index: 20;
 }
 
 .header-sticky {
@@ -122,26 +126,6 @@ button:active {
 /* Modal Styles */
 #modal-backdrop {
   backdrop-filter: blur(4px);
-}
-
-/* Scrollbar Styling */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
 }
 
 /* Responsive Design */
