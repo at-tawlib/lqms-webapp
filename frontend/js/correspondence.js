@@ -1,7 +1,7 @@
 import { createTable } from "./ui-utils/create-table.js";
 import { showLoading } from "./ui-utils/show-loading.js";
 
-const sectionNameRaw = "Quality Workplan";
+const sectionNameRaw = "QUALITY WORKPLAN 2025 FKBTH-CL/QP/0903";
 const sectionName = sectionNameRaw.toLowerCase().replace(/ /g, "-");
 const headers = [
   "Date Received",
@@ -122,164 +122,170 @@ export const renderCorrespondenceManager = () => {
   showLoading(contentDiv);
 
   setTimeout(() => {
-    contentDiv.innerHTML = `
-            <div class="bg-green-600 text-white p-4 rounded-t-lg mb-0">
-              <h2 class="text-2xl font-bold">CENTRAL LABORATORY SERVICES-KORLE BU TEACHING HOSPITAL</h2>
-              <p class="text-green-100 text-sm">QUALITY WORKPLAN 2025 FKBTH-CL/QP/0903</p>
-            </div>
+    document.getElementById("sectionTitle").textContent = sectionNameRaw;
 
-            <div class="bg-white p-6 rounded-b-lg shadow-lg">
+    contentDiv.innerHTML = `
+          <div>
             <!-- Action Buttons -->
             <div class="flex gap-2 mb-4">
-                <button
+              <button
                 id="addEntryBtn"
                 class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm transition-colors"
-                >
+              >
                 + Add Workplan Entry
-                </button>
-                <button
+              </button>
+              <button
                 id="exportBtn"
                 class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded text-sm transition-colors"
-                >
+              >
                 Export CSV
-                </button>
-                <button id="exportExcelBtn" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm transition-colors">
-                    Export Excel
-                </button>
-                <button id="printBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors">
-                    Print
-                </button>
+              </button>
+              <button
+                id="exportExcelBtn"
+                class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm transition-colors"
+              >
+                Export Excel
+              </button>
+              <button
+                id="printBtn"
+                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors"
+              >
+                Print
+              </button>
             </div>
 
             <div
-                id="table-container"
-                class="overflow-x-auto rounded-lg shadow-md border border-gray-200"
+              id="table-container"
+              class="overflow-x-auto rounded-lg shadow-md border border-gray-200"
             ></div>
-            </div>
+          </div>
 
-            <!-- Add/Edit Entry Modal -->
-            <div
+          <!-- Add/Edit Entry Modal -->
+          <div
             id="entryModal"
             class="fixed inset-0 flex items-center justify-center p-4 hidden z-50 bg-black bg-opacity-50"
-            >
-            <div class="bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-                <div class="bg-blue-600 text-white p-4 rounded-t-lg">
+            style="overflow-y: auto"
+          >
+            <div class="bg-white rounded-lg shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+              <div class="fixed bg-blue-600 text-white p-4 rounded-t-lg max-w-lg w-full h-12">
                 <h3 id="entryModalTitle" class="text-lg font-bold">Add New Workplan Entry</h3>
-                </div>
-                <form id="entryForm" class="p-6 space-y-4">
+              </div>
+              <form id="entryForm" class="p-6 mt-12 space-y-4">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Date Received</label>
-                        <input
-                        id="dateReceived"
-                        type="date"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        required
-                        />
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Date of Correspondence</label>
-                        <input
-                        type="date"
-                        id="dateOfCorrespondence"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        required
-                        />
-                    </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Date Received</label>
+                    <input
+                      id="dateReceived"
+                      type="date"
+                      class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Date of Correspondence</label>
+                    <input
+                      type="date"
+                      id="dateOfCorrespondence"
+                      class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      required
+                    />
+                  </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Sender</label>
-                        <input
-                        type="text"
-                        id="sender"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        required
-                        />
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Action Taken By</label>
-                        <input
-                        type="text"
-                        id="actionTakenBy"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        required
-                        />
-                    </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Sender</label>
+                    <input
+                      type="text"
+                      id="sender"
+                      class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Action Taken By</label>
+                    <input
+                      type="text"
+                      id="actionTakenBy"
+                      class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      required
+                    />
+                  </div>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Subject of Correspondence</label>
-                    <textarea
+                  <label class="block text-sm font-medium text-gray-700 mb-1"
+                    >Subject of Correspondence</label
+                  >
+                  <textarea
                     id="subjectOfCorrespondence"
                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     rows="2"
                     required
-                    ></textarea>
+                  ></textarea>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Action Required</label>
-                    <textarea
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Action Required</label>
+                  <textarea
                     id="actionRequired"
                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     rows="3"
                     required
-                    ></textarea>
+                  ></textarea>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Response Required</label>
-                        <select
-                        id="responseRequired"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        required
-                        >
-                        <option value="">Select Response Requirement</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
-                        <select
-                        id="status"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        required
-                        >
-                        <option value="">Select Status</option>
-                        <option value="Pending">Pending</option>
-                        <option value="In Progress">In Progress</option>
-                        <option value="Completed">Completed</option>
-                        <option value="On Hold">On Hold</option>
-                        </select>
-                    </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Response Required</label>
+                    <select
+                      id="responseRequired"
+                      class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      required
+                    >
+                      <option value="">Select Response Requirement</option>
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                    <select
+                      id="status"
+                      class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      required
+                    >
+                      <option value="">Select Status</option>
+                      <option value="Pending">Pending</option>
+                      <option value="In Progress">In Progress</option>
+                      <option value="Completed">Completed</option>
+                      <option value="On Hold">On Hold</option>
+                    </select>
+                  </div>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Notes</label>
-                    <textarea
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Notes</label>
+                  <textarea
                     id="notes"
                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     rows="2"
                     placeholder="Additional notes or comments..."
-                    ></textarea>
+                  ></textarea>
                 </div>
                 <div class="flex gap-2 pt-4">
-                    <button
+                  <button
                     type="submit"
                     class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-colors"
-                    >
+                  >
                     Save Entry
-                    </button>
-                    <button
+                  </button>
+                  <button
                     type="button"
                     id="cancelEntryBtn"
                     class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg transition-colors"
-                    >
+                  >
                     Cancel
-                    </button>
+                  </button>
                 </div>
-                </form>
+              </form>
             </div>
-            </div>
+          </div>
     `;
 
     renderTable();
