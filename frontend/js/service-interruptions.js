@@ -1,7 +1,7 @@
 import { createTable } from "./ui-utils/create-table.js";
 import { showLoading } from "./ui-utils/show-loading.js";
 
-const sectionNameRaw = "Service Interruptions";
+const sectionNameRaw = "SERVICE INTERRUPTION RECORDS-FKBTH-CL/CS/0703";
 const sectionName = sectionNameRaw.toLowerCase().replace(/ /g, "-");
 const headers = [
   "#",
@@ -116,272 +116,293 @@ export const renderServiceInterruptions = () => {
   showLoading(contentDiv);
 
   setTimeout(() => {
+    document.getElementById("sectionTitle").textContent = sectionNameRaw;
+
     contentDiv.innerHTML = `
-            <div class="bg-green-600 text-white p-4 rounded-t-lg mb-0">
-              <h2 class="text-2xl font-bold">CENTRAL LABORATORY SERVICES-KORLE BU TEACHING HOSPITAL</h2>
-              <p class="text-teal-100 text-sm">SERVICE INTERRUPTION RECORDS-FKBTH-CL/CS/0703</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-b-lg shadow-lg">
-            <!-- Action Buttons -->
-            <div class="flex gap-2 mb-4">
-                <button
-                id="addInterruptionBtn"
-                class="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded text-sm transition-colors"
-                >
-                + Add Service Interruption
-                </button>
-                <button
-                id="exportBtn"
-                class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded text-sm transition-colors"
-                >
-                Export CSV
-                </button>
-                <button id="exportExcelBtn" class="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded text-sm transition-colors">
-                    Export Excel
-                </button>
-                <button id="printBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors">
-                    Print Interruption Log
-                </button>
-                <button id="interruptionSummaryBtn" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded text-sm transition-colors">
-                    Interruption Summary
-                </button>
-            </div>
-
-            <div
-                id="table-container"
-                class="overflow-x-auto rounded-lg shadow-md border border-gray-200"
-            ></div>
-            </div>
-
-            <!-- Add/Edit Service Interruption Modal -->
-            <div
-            id="interruptionModal"
-            class="fixed inset-0 flex items-center justify-center p-4 hidden z-50 bg-black bg-opacity-50"
+        <div>
+          <!-- Action Buttons -->
+          <div class="flex gap-2 mb-4">
+            <button
+              id="addInterruptionBtn"
+              class="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded text-sm transition-colors"
             >
-            <div class="bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-                <div class="bg-teal-600 text-white p-4 rounded-t-lg">
-                <h3 id="interruptionModalTitle" class="text-lg font-bold">Add New Service Interruption</h3>
-                </div>
-                <form id="interruptionForm" class="p-4 space-y-4">
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Interruption ID</label>
-                        <input
-                        type="text"
-                        id="interruptionId"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                        placeholder="e.g., SI-001"
-                        required
-                        />
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Date</label>
-                        <input
-                        type="date"
-                        id="interruptionDate"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                        required
-                        />
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Time of Service Interruption</label>
-                        <input
-                        type="time"
-                        id="interruptionTime"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                        required
-                        />
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Service Affected</label>
-                        <select
-                        id="serviceAffected"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                        required
-                        >
-                        <option value="">Select Service</option>
-                        <option value="Hematology Testing">Hematology Testing</option>
-                        <option value="Chemistry Panel Testing">Chemistry Panel Testing</option>
-                        <option value="Microbiology Culture Processing">Microbiology Culture Processing</option>
-                        <option value="Blood Bank Services">Blood Bank Services</option>
-                        <option value="Molecular Diagnostics">Molecular Diagnostics</option>
-                        <option value="Phlebotomy Services">Phlebotomy Services</option>
-                        <option value="Immunology Testing">Immunology Testing</option>
-                        <option value="Histopathology Services">Histopathology Services</option>
-                        <option value="Point of Care Testing">Point of Care Testing</option>
-                        <option value="Sample Processing">Sample Processing</option>
-                        <option value="Result Reporting">Result Reporting</option>
-                        <option value="Quality Control">Quality Control</option>
-                        <option value="Other">Other</option>
-                        </select>
-                    </div>
-                </div>
-                
+              + Add Service Interruption
+            </button>
+            <button
+              id="exportBtn"
+              class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded text-sm transition-colors"
+            >
+              Export CSV
+            </button>
+            <button
+              id="exportExcelBtn"
+              class="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded text-sm transition-colors"
+            >
+              Export Excel
+            </button>
+            <button
+              id="printBtn"
+              class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors"
+            >
+              Print Interruption Log
+            </button>
+            <button
+              id="interruptionSummaryBtn"
+              class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded text-sm transition-colors"
+            >
+              Interruption Summary
+            </button>
+          </div>
+
+          <div
+            id="table-container"
+            class="overflow-x-auto rounded-lg shadow-md border border-gray-200"
+          ></div>
+        </div>
+
+        <!-- Add/Edit Service Interruption Modal -->
+        <div
+          id="interruptionModal"
+          class="fixed inset-0 flex items-center justify-center p-4 hidden z-50 bg-black bg-opacity-50"
+          style="overflow-y: auto"
+        >
+          <div class="bg-white rounded-lg shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+            <div class="fixed bg-blue-600 text-white p-4 rounded-t-lg max-w-lg w-full h-12">
+              <h3 id="interruptionModalTitle" class="text-lg font-bold">Add New Service Interruption</h3>
+            </div>
+            <form id="interruptionForm" class="p-4 mt-12 space-y-4">
+              <div class="grid grid-cols-2 gap-4">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Reason for Interruption</label>
-                    <textarea
-                    id="reasonForInterruption"
-                    rows="3"
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Interruption ID</label>
+                  <input
+                    type="text"
+                    id="interruptionId"
                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                    placeholder="Describe the cause of the service interruption in detail..."
+                    placeholder="e.g., SI-001"
                     required
-                    ></textarea>
+                  />
                 </div>
-                
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Duration of Interruption</label>
-                        <input
-                        type="text"
-                        id="durationOfInterruption"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                        placeholder="e.g., 2 hours 30 minutes or Ongoing"
-                        required
-                        />
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
-                        <select
-                        id="status"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                        required
-                        >
-                        <option value="">Select Status</option>
-                        <option value="Reported">Reported</option>
-                        <option value="In Progress">In Progress</option>
-                        <option value="Under Investigation">Under Investigation</option>
-                        <option value="Resolved">Resolved</option>
-                        <option value="Partially Resolved">Partially Resolved</option>
-                        </select>
-                    </div>
-                </div>
-                
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Stakeholders Communicated</label>
-                    <div class="flex gap-4">
-                        <label class="flex items-center">
-                            <input type="radio" name="stakeholdersCommunicated" value="Yes" class="mr-2" required>
-                            Yes
-                        </label>
-                        <label class="flex items-center">
-                            <input type="radio" name="stakeholdersCommunicated" value="No" class="mr-2" required>
-                            No
-                        </label>
-                        <label class="flex items-center">
-                            <input type="radio" name="stakeholdersCommunicated" value="Partial" class="mr-2" required>
-                            Partial
-                        </label>
-                    </div>
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Stakeholders Notified (specify)</label>
-                    <textarea
-                    id="stakeholdersNotified"
-                    rows="2"
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Date</label>
+                  <input
+                    type="date"
+                    id="interruptionDate"
                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                    placeholder="List specific stakeholders who were notified (e.g., Lab Manager, Clinicians, Nursing Units...)"
-                    ></textarea>
+                    required
+                  />
                 </div>
-                
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Reported By</label>
-                        <input
-                        type="text"
-                        id="reportedBy"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                        placeholder="e.g., Mr. Joseph Boateng"
-                        required
-                        />
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Resolved By</label>
-                        <input
-                        type="text"
-                        id="resolvedBy"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                        placeholder="e.g., Dr. Kwame Asante"
-                        />
-                    </div>
-                </div>
-                
+              </div>
+
+              <div class="grid grid-cols-2 gap-4">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Resolution Details</label>
-                    <textarea
-                    id="resolutionDetails"
-                    rows="3"
+                  <label class="block text-sm font-medium text-gray-700 mb-1"
+                    >Time of Service Interruption</label
+                  >
+                  <input
+                    type="time"
+                    id="interruptionTime"
                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                    placeholder="Describe the steps taken to resolve the interruption..."
-                    ></textarea>
+                    required
+                  />
                 </div>
-                
-                <div class="flex gap-2 pt-4">
-                    <button
-                    type="submit"
-                    class="flex-1 bg-teal-600 hover:bg-teal-700 text-white py-2 px-4 rounded-lg transition-colors"
-                    >
-                    Save Service Interruption
-                    </button>
-                    <button
-                    type="button"
-                    id="cancelInterruptionBtn"
-                    class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg transition-colors"
-                    >
-                    Cancel
-                    </button>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Service Affected</label>
+                  <select
+                    id="serviceAffected"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                    required
+                  >
+                    <option value="">Select Service</option>
+                    <option value="Hematology Testing">Hematology Testing</option>
+                    <option value="Chemistry Panel Testing">Chemistry Panel Testing</option>
+                    <option value="Microbiology Culture Processing">Microbiology Culture Processing</option>
+                    <option value="Blood Bank Services">Blood Bank Services</option>
+                    <option value="Molecular Diagnostics">Molecular Diagnostics</option>
+                    <option value="Phlebotomy Services">Phlebotomy Services</option>
+                    <option value="Immunology Testing">Immunology Testing</option>
+                    <option value="Histopathology Services">Histopathology Services</option>
+                    <option value="Point of Care Testing">Point of Care Testing</option>
+                    <option value="Sample Processing">Sample Processing</option>
+                    <option value="Result Reporting">Result Reporting</option>
+                    <option value="Quality Control">Quality Control</option>
+                    <option value="Other">Other</option>
+                  </select>
                 </div>
-                </form>
-            </div>
-            </div>
+              </div>
 
-            <!-- Service Interruption Summary Modal -->
-            <div
-            id="interruptionSummaryModal"
-            class="fixed inset-0 flex items-center justify-center p-4 hidden z-50 bg-black bg-opacity-50"
-            >
-            <div class="bg-white rounded-lg shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto">
-                <div class="bg-purple-600 text-white p-4 rounded-t-lg">
-                <h3 class="text-lg font-bold">Service Interruption Summary Report</h3>
-                </div>
-                <div id="interruptionSummaryContent" class="p-4">
-                </div>
-                <div class="p-4 border-t">
-                <button
-                    id="closeSummaryBtn"
-                    class="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg transition-colors"
-                >
-                    Close
-                </button>
-                </div>
-            </div>
-            </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Reason for Interruption</label>
+                <textarea
+                  id="reasonForInterruption"
+                  rows="3"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                  placeholder="Describe the cause of the service interruption in detail..."
+                  required
+                ></textarea>
+              </div>
 
-            <!-- View Service Interruption Details Modal -->
-            <div
-            id="viewInterruptionModal"
-            class="fixed inset-0 flex items-center justify-center p-4 hidden z-50 bg-black bg-opacity-50"
-            >
-            <div class="bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-                <div class="bg-blue-600 text-white p-4 rounded-t-lg">
-                <h3 class="text-lg font-bold">Service Interruption Details</h3>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1"
+                    >Duration of Interruption</label
+                  >
+                  <input
+                    type="text"
+                    id="durationOfInterruption"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                    placeholder="e.g., 2 hours 30 minutes or Ongoing"
+                    required
+                  />
                 </div>
-                <div id="viewInterruptionContent" class="p-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                  <select
+                    id="status"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                    required
+                  >
+                    <option value="">Select Status</option>
+                    <option value="Reported">Reported</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Under Investigation">Under Investigation</option>
+                    <option value="Resolved">Resolved</option>
+                    <option value="Partially Resolved">Partially Resolved</option>
+                  </select>
                 </div>
-                <div class="p-4 border-t">
-                <button
-                    id="closeViewBtn"
-                    class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-colors"
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >Stakeholders Communicated</label
                 >
-                    Close
-                </button>
+                <div class="flex gap-4">
+                  <label class="flex items-center">
+                    <input type="radio" name="stakeholdersCommunicated" value="Yes" class="mr-2" required />
+                    Yes
+                  </label>
+                  <label class="flex items-center">
+                    <input type="radio" name="stakeholdersCommunicated" value="No" class="mr-2" required />
+                    No
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="radio"
+                      name="stakeholdersCommunicated"
+                      value="Partial"
+                      class="mr-2"
+                      required
+                    />
+                    Partial
+                  </label>
                 </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >Stakeholders Notified (specify)</label
+                >
+                <textarea
+                  id="stakeholdersNotified"
+                  rows="2"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                  placeholder="List specific stakeholders who were notified (e.g., Lab Manager, Clinicians, Nursing Units...)"
+                ></textarea>
+              </div>
+
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Reported By</label>
+                  <input
+                    type="text"
+                    id="reportedBy"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                    placeholder="e.g., Mr. Joseph Boateng"
+                    required
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Resolved By</label>
+                  <input
+                    type="text"
+                    id="resolvedBy"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                    placeholder="e.g., Dr. Kwame Asante"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Resolution Details</label>
+                <textarea
+                  id="resolutionDetails"
+                  rows="3"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                  placeholder="Describe the steps taken to resolve the interruption..."
+                ></textarea>
+              </div>
+
+              <div class="flex gap-2 pt-4">
+                <button
+                  type="submit"
+                  class="flex-1 bg-teal-600 hover:bg-teal-700 text-white py-2 px-4 rounded-lg transition-colors"
+                >
+                  Save Service Interruption
+                </button>
+                <button
+                  type="button"
+                  id="cancelInterruptionBtn"
+                  class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Service Interruption Summary Modal -->
+        <div
+          id="interruptionSummaryModal"
+          class="fixed inset-0 flex items-center justify-center p-4 hidden z-50 bg-black bg-opacity-50"
+          style="overflow-y: auto"
+        >
+          <div class="bg-white rounded-lg shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+            <div class="fixed bg-blue-600 text-white p-4 rounded-t-lg max-w-lg w-full h-12">
+              <h3 class="text-lg font-bold">Service Interruption Summary Report</h3>
             </div>
+            <div id="interruptionSummaryContent" class="p-4 mt-12"></div>
+            <div class="p-4 border-t">
+              <button
+                id="closeSummaryBtn"
+                class="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg transition-colors"
+              >
+                Close
+              </button>
             </div>
+          </div>
+        </div>
+
+        <!-- View Service Interruption Details Modal -->
+        <div
+          id="viewInterruptionModal"
+          class="fixed inset-0 flex items-center justify-center p-4 hidden z-50 bg-black bg-opacity-50"
+          style="overflow-y: auto"
+        >
+          <div class="bg-white rounded-lg shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+            <div class="fixed bg-blue-600 text-white p-4 rounded-t-lg max-w-lg w-full h-12">
+              <h3 class="text-lg font-bold">Service Interruption Details</h3>
+            </div>
+            <div id="viewInterruptionContent" class="p-4 mt-12"></div>
+            <div class="p-4 border-t">
+              <button
+                id="closeViewBtn"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
     `;
 
     renderTable();
