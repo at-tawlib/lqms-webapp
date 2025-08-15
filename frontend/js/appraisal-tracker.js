@@ -1,7 +1,7 @@
 import { createTable } from "./ui-utils/create-table.js";
 import { showLoading } from "./ui-utils/show-loading.js";
 
-const sectionNameRaw = "Staff Appraisal";
+const sectionNameRaw = "STAFF APPRAISAL-FKBTH-CL/OP/1614";
 const sectionName = sectionNameRaw.toLowerCase().replace(/ /g, "-");
 const headers = [
   "Staff Name",
@@ -97,187 +97,198 @@ export const renderAppraisalTracker = () => {
   showLoading(contentDiv);
 
   setTimeout(() => {
+    document.getElementById("sectionTitle").textContent = sectionNameRaw;
+
     contentDiv.innerHTML = `
-            <div class="bg-green-600 text-white p-4 rounded-t-lg mb-0">
-              <h2 class="text-2xl font-bold">CENTRAL LABORATORY SERVICES-KORLE BU TEACHING HOSPITAL</h2>
-              <p class="text-teal-100 text-sm">STAFF APPRAISAL-FKBTH-CL/OP/1614</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-b-lg shadow-lg">
-            <!-- Action Buttons -->
-            <div class="flex gap-2 mb-4">
-                <button
-                id="addAppraisalBtn"
-                class="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded text-sm transition-colors"
-                >
-                + Add Staff Appraisal
-                </button>
-                <button
-                id="exportBtn"
-                class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded text-sm transition-colors"
-                >
-                Export CSV
-                </button>
-                <button id="exportExcelBtn" class="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded text-sm transition-colors">
-                    Export Excel
-                </button>
-                <button id="printBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors">
-                    Print Appraisal List
-                </button>
-                <button id="appraisalSummaryBtn" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded text-sm transition-colors">
-                    Appraisal Summary
-                </button>
-            </div>
-
-            <div
-                id="table-container"
-                class="overflow-x-auto rounded-lg shadow-md border border-gray-200"
-            ></div>
-            </div>
-
-            <!-- Add/Edit Appraisal Modal -->
-            <div
-            id="appraisalModal"
-            class="fixed inset-0 flex items-center justify-center p-4 hidden z-50 bg-black bg-opacity-50"
+        <div>
+          <!-- Action Buttons -->
+          <div class="flex gap-2 mb-4">
+            <button
+              id="addAppraisalBtn"
+              class="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded text-sm transition-colors"
             >
-            <div class="bg-white rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-                <div class="bg-teal-600 text-white p-4 rounded-t-lg">
-                <h3 id="appraisalModalTitle" class="text-lg font-bold">Add New Staff Appraisal</h3>
-                </div>
-                <form id="appraisalForm" class="p-4 space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Staff Name</label>
-                    <input
-                    type="text"
-                    id="staffName"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                    placeholder="e.g., Dr. Kwame Asante"
-                    required
-                    />
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Staff Number</label>
-                    <input
-                    type="text"
-                    id="staffNumber"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                    placeholder="e.g., KBTH001"
-                    required
-                    />
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Rank</label>
-                    <select
-                    id="rank"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                    required
-                    >
-                    <option value="">Select Rank</option>
-                    <option value="Chief Medical Laboratory Scientist">Chief Medical Laboratory Scientist</option>
-                    <option value="Senior Medical Laboratory Scientist">Senior Medical Laboratory Scientist</option>
-                    <option value="Medical Laboratory Scientist">Medical Laboratory Scientist</option>
-                    <option value="Quality Control Officer">Quality Control Officer</option>
-                    <option value="Laboratory Technician">Laboratory Technician</option>
-                    <option value="Laboratory Assistant">Laboratory Assistant</option>
-                    <option value="Phlebotomist">Phlebotomist</option>
-                    <option value="Administrative Assistant">Administrative Assistant</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Objectives for the Year</label>
-                    <textarea
-                    id="objectives"
-                    rows="4"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                    placeholder="List the key objectives and goals for this staff member for the year..."
-                    required
-                    ></textarea>
-                </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Mid Year Review Date</label>
-                        <input
-                        type="date"
-                        id="midYearReview"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                        required
-                        />
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Annual Appraisal Date</label>
-                        <input
-                        type="date"
-                        id="annualAppraisal"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                        required
-                        />
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Name of Appraiser</label>
-                    <input
-                    type="text"
-                    id="appraiser"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                    placeholder="e.g., Dr. Mary Osei"
-                    required
-                    />
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
-                    <select
-                    id="status"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                    required
-                    >
-                    <option value="">Select Status</option>
-                    <option value="Scheduled">Scheduled</option>
-                    <option value="In Progress">In Progress</option>
-                    <option value="Completed">Completed</option>
-                    <option value="Overdue">Overdue</option>
-                    <option value="Postponed">Postponed</option>
-                    </select>
-                </div>
-                <div class="flex gap-2 pt-4">
-                    <button
-                    type="submit"
-                    class="flex-1 bg-teal-600 hover:bg-teal-700 text-white py-2 px-4 rounded-lg transition-colors"
-                    >
-                    Save Appraisal
-                    </button>
-                    <button
-                    type="button"
-                    id="cancelAppraisalBtn"
-                    class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg transition-colors"
-                    >
-                    Cancel
-                    </button>
-                </div>
-                </form>
-            </div>
-            </div>
-
-            <!-- Appraisal Summary Modal -->
-            <div
-            id="appraisalSummaryModal"
-            class="fixed inset-0 flex items-center justify-center p-4 hidden z-50 bg-black bg-opacity-50"
+              + Add Staff Appraisal
+            </button>
+            <button
+              id="exportBtn"
+              class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded text-sm transition-colors"
             >
-            <div class="bg-white rounded-lg shadow-2xl max-w-lg w-full">
-                <div class="bg-purple-600 text-white p-4 rounded-t-lg">
-                <h3 class="text-lg font-bold">Appraisal Summary Report</h3>
-                </div>
-                <div id="appraisalSummaryContent" class="p-4">
-                </div>
-                <div class="p-4 border-t">
-                <button
-                    id="closeSummaryBtn"
-                    class="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg transition-colors"
+              Export CSV
+            </button>
+            <button
+              id="exportExcelBtn"
+              class="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded text-sm transition-colors"
+            >
+              Export Excel
+            </button>
+            <button
+              id="printBtn"
+              class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors"
+            >
+              Print Appraisal List
+            </button>
+            <button
+              id="appraisalSummaryBtn"
+              class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded text-sm transition-colors"
+            >
+              Appraisal Summary
+            </button>
+          </div>
+
+          <div
+            id="table-container"
+            class="overflow-x-auto rounded-lg shadow-md border border-gray-200"
+          ></div>
+        </div>
+
+        <!-- Add/Edit Appraisal Modal -->
+        <div
+          id="appraisalModal"
+          class="fixed inset-0 flex items-center justify-center p-4 hidden z-50 bg-black bg-opacity-50"
+          style="overflow-y: auto"
+        >
+          <div class="bg-white rounded-lg shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+            <div class="fixed bg-blue-600 text-white p-4 rounded-t-lg max-w-lg w-full h-12">
+              <h3 id="appraisalModalTitle" class="text-lg font-bold">Add New Staff Appraisal</h3>
+            </div>
+            <form id="appraisalForm" class="p-4 mt-12 space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Staff Name</label>
+                <input
+                  type="text"
+                  id="staffName"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                  placeholder="e.g., Dr. Kwame Asante"
+                  required
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Staff Number</label>
+                <input
+                  type="text"
+                  id="staffNumber"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                  placeholder="e.g., KBTH001"
+                  required
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Rank</label>
+                <select
+                  id="rank"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                  required
                 >
-                    Close
-                </button>
+                  <option value="">Select Rank</option>
+                  <option value="Chief Medical Laboratory Scientist">
+                    Chief Medical Laboratory Scientist
+                  </option>
+                  <option value="Senior Medical Laboratory Scientist">
+                    Senior Medical Laboratory Scientist
+                  </option>
+                  <option value="Medical Laboratory Scientist">Medical Laboratory Scientist</option>
+                  <option value="Quality Control Officer">Quality Control Officer</option>
+                  <option value="Laboratory Technician">Laboratory Technician</option>
+                  <option value="Laboratory Assistant">Laboratory Assistant</option>
+                  <option value="Phlebotomist">Phlebotomist</option>
+                  <option value="Administrative Assistant">Administrative Assistant</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Objectives for the Year</label>
+                <textarea
+                  id="objectives"
+                  rows="4"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                  placeholder="List the key objectives and goals for this staff member for the year..."
+                  required
+                ></textarea>
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Mid Year Review Date</label>
+                  <input
+                    type="date"
+                    id="midYearReview"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                    required
+                  />
                 </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Annual Appraisal Date</label>
+                  <input
+                    type="date"
+                    id="annualAppraisal"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Name of Appraiser</label>
+                <input
+                  type="text"
+                  id="appraiser"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                  placeholder="e.g., Dr. Mary Osei"
+                  required
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                <select
+                  id="status"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                  required
+                >
+                  <option value="">Select Status</option>
+                  <option value="Scheduled">Scheduled</option>
+                  <option value="In Progress">In Progress</option>
+                  <option value="Completed">Completed</option>
+                  <option value="Overdue">Overdue</option>
+                  <option value="Postponed">Postponed</option>
+                </select>
+              </div>
+              <div class="flex gap-2 pt-4">
+                <button
+                  type="submit"
+                  class="flex-1 bg-teal-600 hover:bg-teal-700 text-white py-2 px-4 rounded-lg transition-colors"
+                >
+                  Save Appraisal
+                </button>
+                <button
+                  type="button"
+                  id="cancelAppraisalBtn"
+                  class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Appraisal Summary Modal -->
+        <div
+          id="appraisalSummaryModal"
+          class="fixed inset-0 flex items-center justify-center p-4 hidden z-50 bg-black bg-opacity-50"
+          style="overflow-y: auto"
+        >
+          <div class="bg-white rounded-lg shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+            <div class="fixed bg-blue-600 text-white p-4 rounded-t-lg max-w-lg w-full h-12">
+              <h3 class="text-lg font-bold">Appraisal Summary Report</h3>
             </div>
+            <div id="appraisalSummaryContent" class="mt-1 p-4"></div>
+            <div class="p-4 border-t">
+              <button
+                id="closeSummaryBtn"
+                class="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg transition-colors"
+              >
+                Close
+              </button>
             </div>
+          </div>
+        </div>
     `;
 
     renderTable();
