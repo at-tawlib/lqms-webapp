@@ -1,7 +1,7 @@
 import { createTable } from "./ui-utils/create-table.js";
 import { showLoading } from "./ui-utils/show-loading.js";
 
-const sectionNameRaw = "Continual Improvement";
+const sectionNameRaw = "CONTINUAL IMPROVEMENT-FKBTH-CL/QM/1615";
 const sectionName = sectionNameRaw.toLowerCase().replace(/ /g, "-");
 const headers = [
   "Initiative Title",
@@ -120,267 +120,274 @@ export const renderImprovementProjects = () => {
   showLoading(contentDiv);
 
   setTimeout(() => {
+    document.getElementById("sectionTitle").textContent = sectionNameRaw;
+
     contentDiv.innerHTML = `
-            <div class="bg-green-600 text-white p-4 rounded-t-lg mb-0">
-              <h2 class="text-2xl font-bold">CENTRAL LABORATORY SERVICES-KORLE BU TEACHING HOSPITAL</h2>
-              <p class="text-teal-100 text-sm">CONTINUAL IMPROVEMENT-FKBTH-CL/QM/1615</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-b-lg shadow-lg">
-            <!-- Action Buttons -->
-            <div class="flex gap-2 mb-4">
-                <button
-                id="addInitiativeBtn"
-                class="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded text-sm transition-colors"
-                >
-                + Add Initiative
-                </button>
-                <button
-                id="exportBtn"
-                class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded text-sm transition-colors"
-                >
-                Export CSV
-                </button>
-                <button id="exportExcelBtn" class="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded text-sm transition-colors">
-                    Export Excel
-                </button>
-                <button id="printBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors">
-                    Print Initiative List
-                </button>
-                <button id="improvementSummaryBtn" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded text-sm transition-colors">
-                    Improvement Summary
-                </button>
-            </div>
-
-            <div
-                id="table-container"
-                class="overflow-x-auto rounded-lg shadow-md border border-gray-200"
-            ></div>
-            </div>
-
-            <!-- Add/Edit Initiative Modal -->
-            <div
-            id="initiativeModal"
-            class="fixed inset-0 flex items-center justify-center p-4 hidden z-50 bg-black bg-opacity-50"
+        <div>
+          <!-- Action Buttons -->
+          <div class="flex gap-2 mb-4">
+            <button
+              id="addInitiativeBtn"
+              class="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded text-sm transition-colors"
             >
-            <div class="bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-                <div class="bg-teal-600 text-white p-4 rounded-t-lg">
-                <h3 id="initiativeModalTitle" class="text-lg font-bold">Add New Improvement Initiative</h3>
-                </div>
-                <form id="initiativeForm" class="p-4 space-y-4">
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Initiative Title</label>
-                        <input
-                        type="text"
-                        id="initiativeTitle"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                        placeholder="e.g., Reduce Sample Turnaround Time"
-                        required
-                        />
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
-                        <select
-                        id="category"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                        required
-                        >
-                        <option value="">Select Category</option>
-                        <option value="Process Improvement">Process Improvement</option>
-                        <option value="Quality Management">Quality Management</option>
-                        <option value="Technology Enhancement">Technology Enhancement</option>
-                        <option value="Human Resources">Human Resources</option>
-                        <option value="Equipment Management">Equipment Management</option>
-                        <option value="Customer Service">Customer Service</option>
-                        <option value="Safety & Compliance">Safety & Compliance</option>
-                        <option value="Cost Reduction">Cost Reduction</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-3 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Priority</label>
-                        <select
-                        id="priority"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                        required
-                        >
-                        <option value="">Select Priority</option>
-                        <option value="Critical">Critical</option>
-                        <option value="High">High</option>
-                        <option value="Medium">Medium</option>
-                        <option value="Low">Low</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Identified By</label>
-                        <input
-                        type="text"
-                        id="identifiedBy"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                        placeholder="e.g., Dr. Grace Owusu"
-                        required
-                        />
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Responsible Person</label>
-                        <input
-                        type="text"
-                        id="responsiblePerson"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                        placeholder="e.g., Dr. Kwame Asante"
-                        required
-                        />
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-3 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Date Identified</label>
-                        <input
-                        type="date"
-                        id="dateIdentified"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                        required
-                        />
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Target Date</label>
-                        <input
-                        type="date"
-                        id="targetDate"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                        required
-                        />
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Progress %</label>
-                        <input
-                        type="number"
-                        id="progress"
-                        min="0"
-                        max="100"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                        placeholder="0-100"
-                        required
-                        />
-                    </div>
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
-                    <select
-                    id="status"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                    required
-                    >
-                    <option value="">Select Status</option>
-                    <option value="Planning">Planning</option>
-                    <option value="Approved">Approved</option>
-                    <option value="In Progress">In Progress</option>
-                    <option value="On Hold">On Hold</option>
-                    <option value="Completed">Completed</option>
-                    <option value="Cancelled">Cancelled</option>
-                    </select>
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
-                    <textarea
-                    id="description"
-                    rows="3"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                    placeholder="Detailed description of the improvement initiative..."
-                    required
-                    ></textarea>
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Expected Outcome</label>
-                    <textarea
-                    id="expectedOutcome"
-                    rows="2"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                    placeholder="What are the expected results and benefits?"
-                    required
-                    ></textarea>
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Resources Required</label>
-                    <textarea
-                    id="resourcesRequired"
-                    rows="2"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                    placeholder="What resources are needed to complete this initiative?"
-                    required
-                    ></textarea>
-                </div>
-                
-                <div class="flex gap-2 pt-4">
-                    <button
-                    type="submit"
-                    class="flex-1 bg-teal-600 hover:bg-teal-700 text-white py-2 px-4 rounded-lg transition-colors"
-                    >
-                    Save Initiative
-                    </button>
-                    <button
-                    type="button"
-                    id="cancelInitiativeBtn"
-                    class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg transition-colors"
-                    >
-                    Cancel
-                    </button>
-                </div>
-                </form>
-            </div>
-            </div>
-
-            <!-- Improvement Summary Modal -->
-            <div
-            id="improvementSummaryModal"
-            class="fixed inset-0 flex items-center justify-center p-4 hidden z-50 bg-black bg-opacity-50"
+              + Add Initiative
+            </button>
+            <button
+              id="exportBtn"
+              class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded text-sm transition-colors"
             >
-            <div class="bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-                <div class="bg-purple-600 text-white p-4 rounded-t-lg">
-                <h3 class="text-lg font-bold">Continual Improvement Summary Report</h3>
-                </div>
-                <div id="improvementSummaryContent" class="p-4">
-                </div>
-                <div class="p-4 border-t">
-                <button
-                    id="closeSummaryBtn"
-                    class="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg transition-colors"
-                >
-                    Close
-                </button>
-                </div>
-            </div>
-            </div>
-
-            <!-- View Initiative Details Modal -->
-            <div
-            id="viewInitiativeModal"
-            class="fixed inset-0 flex items-center justify-center p-4 hidden z-50 bg-black bg-opacity-50"
+              Export CSV
+            </button>
+            <button
+              id="exportExcelBtn"
+              class="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded text-sm transition-colors"
             >
-            <div class="bg-white rounded-lg shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
-                <div class="bg-blue-600 text-white p-4 rounded-t-lg">
-                <h3 class="text-lg font-bold">Initiative Details</h3>
+              Export Excel
+            </button>
+            <button
+              id="printBtn"
+              class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors"
+            >
+              Print Initiative List
+            </button>
+            <button
+              id="improvementSummaryBtn"
+              class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded text-sm transition-colors"
+            >
+              Improvement Summary
+            </button>
+          </div>
+
+          <div
+            id="table-container"
+            class="overflow-x-auto rounded-lg shadow-md border border-gray-200"
+          ></div>
+        </div>
+
+        <!-- Add/Edit Initiative Modal -->
+        <div
+          id="initiativeModal"
+          class="fixed inset-0 flex items-center justify-center p-4 hidden z-50 bg-black bg-opacity-50"
+          style="overflow-y: auto"
+        >
+          <div class="bg-white rounded-lg shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+            <div class="fixed bg-blue-600 text-white p-4 rounded-t-lg max-w-lg w-full h-12">
+              <h3 id="initiativeModalTitle" class="text-lg font-bold">Add New Improvement Initiative</h3>
+            </div>
+            <form id="initiativeForm" class="p-4 mt-12 space-y-4">
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Initiative Title</label>
+                  <input
+                    type="text"
+                    id="initiativeTitle"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                    placeholder="e.g., Reduce Sample Turnaround Time"
+                    required
+                  />
                 </div>
-                <div id="viewInitiativeContent" class="p-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                  <select
+                    id="category"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                    required
+                  >
+                    <option value="">Select Category</option>
+                    <option value="Process Improvement">Process Improvement</option>
+                    <option value="Quality Management">Quality Management</option>
+                    <option value="Technology Enhancement">Technology Enhancement</option>
+                    <option value="Human Resources">Human Resources</option>
+                    <option value="Equipment Management">Equipment Management</option>
+                    <option value="Customer Service">Customer Service</option>
+                    <option value="Safety & Compliance">Safety & Compliance</option>
+                    <option value="Cost Reduction">Cost Reduction</option>
+                  </select>
                 </div>
-                <div class="p-4 border-t">
-                <button
-                    id="closeViewBtn"
-                    class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-colors"
+              </div>
+
+              <div class="grid grid-cols-3 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Priority</label>
+                  <select
+                    id="priority"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                    required
+                  >
+                    <option value="">Select Priority</option>
+                    <option value="Critical">Critical</option>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Identified By</label>
+                  <input
+                    type="text"
+                    id="identifiedBy"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                    placeholder="e.g., Dr. Grace Owusu"
+                    required
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Responsible Person</label>
+                  <input
+                    type="text"
+                    id="responsiblePerson"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                    placeholder="e.g., Dr. Kwame Asante"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-3 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Date Identified</label>
+                  <input
+                    type="date"
+                    id="dateIdentified"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                    required
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Target Date</label>
+                  <input
+                    type="date"
+                    id="targetDate"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                    required
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Progress %</label>
+                  <input
+                    type="number"
+                    id="progress"
+                    min="0"
+                    max="100"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                    placeholder="0-100"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                <select
+                  id="status"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                  required
                 >
-                    Close
+                  <option value="">Select Status</option>
+                  <option value="Planning">Planning</option>
+                  <option value="Approved">Approved</option>
+                  <option value="In Progress">In Progress</option>
+                  <option value="On Hold">On Hold</option>
+                  <option value="Completed">Completed</option>
+                  <option value="Cancelled">Cancelled</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                <textarea
+                  id="description"
+                  rows="3"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                  placeholder="Detailed description of the improvement initiative..."
+                  required
+                ></textarea>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Expected Outcome</label>
+                <textarea
+                  id="expectedOutcome"
+                  rows="2"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                  placeholder="What are the expected results and benefits?"
+                  required
+                ></textarea>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Resources Required</label>
+                <textarea
+                  id="resourcesRequired"
+                  rows="2"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                  placeholder="What resources are needed to complete this initiative?"
+                  required
+                ></textarea>
+              </div>
+
+              <div class="flex gap-2 pt-4">
+                <button
+                  type="submit"
+                  class="flex-1 bg-teal-600 hover:bg-teal-700 text-white py-2 px-4 rounded-lg transition-colors"
+                >
+                  Save Initiative
                 </button>
-                </div>
+                <button
+                  type="button"
+                  id="cancelInitiativeBtn"
+                  class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Improvement Summary Modal -->
+        <div
+          id="improvementSummaryModal"
+          class="fixed inset-0 flex items-center justify-center p-4 hidden z-50 bg-black bg-opacity-50"
+          style="overflow-y: auto"
+        >
+          <div class="bg-white rounded-lg shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+            <div class="fixed bg-blue-600 text-white p-4 rounded-t-lg max-w-lg w-full h-12">
+              <h3 class="text-lg font-bold">Continual Improvement Summary Report</h3>
             </div>
+            <div id="improvementSummaryContent" class="p-4 mt-12"></div>
+            <div class="p-4 border-t">
+              <button
+                id="closeSummaryBtn"
+                class="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg transition-colors"
+              >
+                Close
+              </button>
             </div>
+          </div>
+        </div>
+
+        <!-- View Initiative Details Modal -->
+        <div
+          id="viewInitiativeModal"
+          class="fixed inset-0 flex items-center justify-center p-4 hidden z-50 bg-black bg-opacity-50"
+          style="overflow-y: auto"
+        >
+          <div class="bg-white rounded-lg shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+            <div class="fixed bg-blue-600 text-white p-4 rounded-t-lg max-w-lg w-full h-12">
+              <h3 class="text-lg font-bold">Initiative Details</h3>
+            </div>
+            <div id="viewInitiativeContent" class="p-4 mt-12"></div>
+            <div class="p-4 border-t">
+              <button
+                id="closeViewBtn"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
     `;
 
     renderTable();
