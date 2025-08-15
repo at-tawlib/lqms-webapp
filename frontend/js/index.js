@@ -643,6 +643,8 @@ function initializeApp() {
 
 document.getElementById("nav-dashboard").addEventListener("click", (e) => {
   initializeApp();
+  document.getElementById("sectionTitle").textContent = "";
+  
   document.querySelectorAll(".nav-link").forEach((link) => {
     link.classList.remove("active");
   });
