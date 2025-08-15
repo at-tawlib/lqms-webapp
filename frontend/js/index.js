@@ -585,6 +585,8 @@ function handleNavClick(sectionName) {
     }
   });
 
+  document.getElementById("sectionTitle").textContent = "";
+
   if (sectionName === "Weekly Activity Tracker") {
     renderWeekLyActivityTracker();
   } else if (sectionName === "Accreditation") {

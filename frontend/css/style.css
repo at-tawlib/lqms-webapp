@@ -19,7 +19,7 @@ body {
   top: 0;
   left: 16rem;
   right: 0;
-  z-index: 1000;
+  z-index: 10;
   transition: all 0.3s ease-in-out;
   transform: translateY(0);
 }
@@ -68,8 +68,6 @@ main.scrolled {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
 }
-
-/* --------------------------------------------- */
 
 /* Card Styles */
 .card {
