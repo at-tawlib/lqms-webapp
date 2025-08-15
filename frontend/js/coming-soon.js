@@ -6,35 +6,29 @@ export const renderComingSoon = (sectionTitle = "Section", documentCode = "") =>
 
   setTimeout(() => {
     contentDiv.innerHTML = `
-      <div class="bg-green-600 text-white p-4 rounded-t-lg mb-0">
-        <h2 class="text-2xl font-bold">CENTRAL LABORATORY SERVICES-KORLE BU TEACHING HOSPITAL</h2>
-        ${documentCode ? `<p class="text-green-100 text-sm">${documentCode}</p>` : ""}
-      </div>
-
-      <div class="bg-white p-6 rounded-b-lg shadow-lg">
-        <div class="flex flex-col items-center justify-center py-20">
+      <div>
+        <div class="flex flex-col items-center justify-center">
           <!-- Construction Icon -->
-          <div class="mb-8">
-            <svg class="w-24 h-24 text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+          <div class="mb-4">
+            <svg class="w-16 h-16 text-gray-300" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2L2 7v10c0 5.55 3.84 10 9 11 1.09-.21 2.08-.64 3-1.22V15c0-1.1-.9-2-2-2s-2 .9-2 2v3.78c-.92.58-1.91 1.01-3 1.22-4.16-1-9-5.45-9-11V7l10-5z"/>
               <path d="M17 10v1h-2v-1c0-.55-.45-1-1-1s-1 .45-1 1v1h-2v-1c0-1.1.9-2 2-2h2c1.1 0 2 .9 2 2z"/>
             </svg>
           </div>
 
           <!-- Main Message -->
-          <h3 class="text-3xl font-bold text-gray-800 mb-4">${sectionTitle}</h3>
-          <h4 class="text-xl text-gray-600 mb-6">Coming Soon</h4>
+          <h3 class="text-2xl font-bold text-gray-800 mb-2">${sectionTitle}</h3>
+          <h4 class="text-xl text-gray-600 mb-4">Coming Soon</h4>
           
           <!-- Description -->
           <div class="text-center max-w-md">
-            <p class="text-gray-500 mb-4">
-              This section is currently under development. We're working hard to bring you comprehensive 
-              laboratory management tools.
+            <p class="text-gray-500 mb-2">
+              This section is currently under development.
             </p>
             
             <!-- Features Preview -->
-            <div class="bg-gray-50 p-4 rounded-lg mb-6">
-              <h5 class="font-semibold text-gray-700 mb-3">Expected Features:</h5>
+            <div class="bg-gray-50 p-4 rounded-lg mb-4">
+              <h5 class="font-semibold text-gray-700 mb-2">Expected Features:</h5>
               <ul class="text-sm text-gray-600 space-y-2">
                 <li class="flex items-center">
                   <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
@@ -46,7 +40,7 @@ export const renderComingSoon = (sectionTitle = "Section", documentCode = "") =>
                   <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                   </svg>
-                  Export to CSV and Excel
+                  Export to Excel
                 </li>
                 <li class="flex items-center">
                   <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
@@ -64,10 +58,10 @@ export const renderComingSoon = (sectionTitle = "Section", documentCode = "") =>
             </div>
 
             <!-- Progress Indicator -->
-            <div class="w-full bg-gray-200 rounded-full h-2 mb-4">
+            <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
               <div class="bg-green-600 h-2 rounded-full transition-all duration-1000" style="width: 25%"></div>
             </div>
-            <p class="text-xs text-gray-400 mb-6">Development Progress: 25%</p>
+            <p class="text-xs text-gray-400 mb-4">Development Progress: 25%</p>
 
             <!-- Call to Action -->
             <div class="space-y-3">
@@ -89,7 +83,7 @@ export const renderComingSoon = (sectionTitle = "Section", documentCode = "") =>
           </div>
 
           <!-- Estimated Timeline -->
-          <div class="mt-8 text-center">
+          <div class="mt-6 text-center">
             <p class="text-xs text-gray-400">
               Estimated completion: <span class="font-semibold">Q2 2025</span>
             </p>

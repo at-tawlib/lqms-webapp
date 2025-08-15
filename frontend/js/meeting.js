@@ -1,7 +1,7 @@
 import { createTable } from "./ui-utils/create-table.js";
 import { showLoading } from "./ui-utils/show-loading.js";
 
-const sectionNameRaw = "Quality Meeting Schedule";
+const sectionNameRaw = "2025 QUALITY MEETING SCHEDULE-FKBTH-CL/OP/0608";
 const sectionName = sectionNameRaw.toLowerCase().replace(/ /g, "-");
 const headers = [
   "Month",
@@ -144,155 +144,159 @@ export const renderMeeting = () => {
   showLoading(contentDiv);
 
   setTimeout(() => {
+    document.getElementById("sectionTitle").textContent = sectionNameRaw;
+
     contentDiv.innerHTML = `
-            <div class="bg-green-600 text-white p-4 rounded-t-lg mb-0">
-              <h2 class="text-2xl font-bold">CENTRAL LABORATORY SERVICES-KORLE BU TEACHING HOSPITAL</h2>
-              <p class="text-blue-100 text-sm">2025 QUALITY MEETING SCHEDULE-FKBTH-CL/OP/0608</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-b-lg shadow-lg">
-            <!-- Action Buttons -->
-            <div class="flex gap-2 mb-4">
-                <button
-                id="addMeetingBtn"
-                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors"
-                >
-                + Add Meeting
-                </button>
-                <button
-                id="exportBtn"
-                class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded text-sm transition-colors"
-                >
-                Export CSV
-                </button>
-                <button id="exportExcelBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors">
-                    Export Excel
-                </button>
-                <button id="printBtn" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm transition-colors">
-                    Print Schedule
-                </button>
-            </div>
-
-            <div
-                id="table-container"
-                class="overflow-x-auto rounded-lg shadow-md border border-gray-200"
-            ></div>
-            </div>
-
-            <!-- Add/Edit Meeting Modal -->
-            <div
-            id="meetingModal"
-            class="fixed inset-0 flex items-center justify-center p-4 hidden z-50 bg-black bg-opacity-50"
+        <div>
+          <!-- Action Buttons -->
+          <div class="flex gap-2 mb-4">
+            <button
+              id="addMeetingBtn"
+              class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors"
             >
-            <div class="bg-white rounded-lg shadow-2xl max-w-md w-full">
-                <div class="bg-blue-600 text-white p-4 rounded-t-lg">
-                <h3 id="meetingModalTitle" class="text-lg font-bold">Add New Meeting</h3>
-                </div>
-                <form id="meetingForm" class="p-4 space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Month</label>
-                    <select
-                    id="month"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    required
-                    >
-                    <option value="">Select Month</option>
-                    <option value="January">January</option>
-                    <option value="February">February</option>
-                    <option value="March">March</option>
-                    <option value="April">April</option>
-                    <option value="May">May</option>
-                    <option value="June">June</option>
-                    <option value="July">July</option>
-                    <option value="August">August</option>
-                    <option value="September">September</option>
-                    <option value="October">October</option>
-                    <option value="November">November</option>
-                    <option value="December">December</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Day</label>
-                    <input
-                    type="text"
-                    id="day"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="e.g., 5 or Not Applicable"
-                    required
-                    />
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Venue</label>
-                    <input
-                    type="text"
-                    id="venue"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="e.g., Conference room"
-                    required
-                    />
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Start Time</label>
-                    <input
-                    type="text"
-                    id="startTime"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="e.g., 11:00am"
-                    required
-                    />
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">End Time</label>
-                    <input
-                    type="text"
-                    id="endTime"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="e.g., 2:00pm"
-                    required
-                    />
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Person Responsible</label>
-                    <input
-                    type="text"
-                    id="personResponsible"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="e.g., Quality Manager"
-                    required
-                    />
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
-                    <select
-                    id="status"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    required
-                    >
-                    <option value="">Select Status</option>
-                    <option value="Scheduled">Scheduled</option>
-                    <option value="Completed">Completed</option>
-                    <option value="Cancelled">Cancelled</option>
-                    <option value="Postponed">Postponed</option>
-                    </select>
-                </div>
-                <div class="flex gap-2 pt-4">
-                    <button
-                    type="submit"
-                    class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-colors"
-                    >
-                    Save Meeting
-                    </button>
-                    <button
-                    type="button"
-                    id="cancelMeetingBtn"
-                    class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg transition-colors"
-                    >
-                    Cancel
-                    </button>
-                </div>
-                </form>
+              + Add Meeting
+            </button>
+            <button
+              id="exportBtn"
+              class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded text-sm transition-colors"
+            >
+              Export CSV
+            </button>
+            <button
+              id="exportExcelBtn"
+              class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors"
+            >
+              Export Excel
+            </button>
+            <button
+              id="printBtn"
+              class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm transition-colors"
+            >
+              Print Schedule
+            </button>
+          </div>
+
+          <div
+            id="table-container"
+            class="overflow-x-auto rounded-lg shadow-md border border-gray-200"
+          ></div>
+        </div>
+
+        <!-- Add/Edit Meeting Modal -->
+        <div
+          id="meetingModal"
+          class="fixed inset-0 flex items-center justify-center p-4 hidden z-50 bg-black bg-opacity-50"
+          style="overflow-y: auto"
+        >
+          <div class="bg-white rounded-lg shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+            <div class="fixed bg-blue-600 text-white p-4 rounded-t-lg max-w-lg w-full h-12">
+              <h3 id="meetingModalTitle" class="text-lg font-bold">Add New Meeting</h3>
             </div>
-            </div>
+            <form id="meetingForm" class="p-4  mt-12 space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Month</label>
+                <select
+                  id="month"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  required
+                >
+                  <option value="">Select Month</option>
+                  <option value="January">January</option>
+                  <option value="February">February</option>
+                  <option value="March">March</option>
+                  <option value="April">April</option>
+                  <option value="May">May</option>
+                  <option value="June">June</option>
+                  <option value="July">July</option>
+                  <option value="August">August</option>
+                  <option value="September">September</option>
+                  <option value="October">October</option>
+                  <option value="November">November</option>
+                  <option value="December">December</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Day</label>
+                <input
+                  type="text"
+                  id="day"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="e.g., 5 or Not Applicable"
+                  required
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Venue</label>
+                <input
+                  type="text"
+                  id="venue"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="e.g., Conference room"
+                  required
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Start Time</label>
+                <input
+                  type="text"
+                  id="startTime"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="e.g., 11:00am"
+                  required
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">End Time</label>
+                <input
+                  type="text"
+                  id="endTime"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="e.g., 2:00pm"
+                  required
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Person Responsible</label>
+                <input
+                  type="text"
+                  id="personResponsible"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="e.g., Quality Manager"
+                  required
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                <select
+                  id="status"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  required
+                >
+                  <option value="">Select Status</option>
+                  <option value="Scheduled">Scheduled</option>
+                  <option value="Completed">Completed</option>
+                  <option value="Cancelled">Cancelled</option>
+                  <option value="Postponed">Postponed</option>
+                </select>
+              </div>
+              <div class="flex gap-2 pt-4">
+                <button
+                  type="submit"
+                  class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-colors"
+                >
+                  Save Meeting
+                </button>
+                <button
+                  type="button"
+                  id="cancelMeetingBtn"
+                  class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
     `;
 
     renderTable();

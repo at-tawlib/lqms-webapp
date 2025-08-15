@@ -1,8 +1,8 @@
 import { createTable } from "./ui-utils/create-table.js";
 import { showLoading } from "./ui-utils/show-loading.js";
 
-const sectionNameRaw = "Weekly Activity Tracker";
-const sectionName = sectionNameRaw.toLowerCase().replace(/ /g, "-");
+const sectionNameRaw = "ITINERARY FOR THE WEEK-FKBTH-CL/OP/0603";
+
 const headers = ["Work Area", "Activity", "Responsible", "Timeliness", "Status", "Actions"];
 const mockData = [
   {
@@ -93,15 +93,10 @@ export const renderWeekLyActivityTracker = () => {
   showLoading(contentDiv);
 
   setTimeout(() => {
-    const pageTitle = sectionNameRaw;
+    document.getElementById("sectionTitle").textContent = sectionNameRaw;
 
     contentDiv.innerHTML = `
-            <div class="bg-green-600 text-white p-4 rounded-t-lg mb-0">
-              <h2 class="text-2xl font-bold">CENTRAL LABORATORY SERVICES-KORLE BU TEACHING HOSPITAL</h2>
-              <p class="text-green-100 text-sm">ITINERARY FOR THE WEEK-FKBTH-CL/OP/0603</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-b-lg shadow-lg">
+            <div>
             <!-- Action Buttons -->
             <div class="flex gap-2 mb-4">
                 <button
@@ -132,11 +127,12 @@ export const renderWeekLyActivityTracker = () => {
 
             <!-- Add/Edit Entry Modal -->
             <div
-            id="entryModal"
+            id="weeklyTrackerModal"
             class="fixed inset-0 flex items-center justify-center p-4 hidden z-50 bg-black bg-opacity-50"
+            style="overflow-y: auto;"
             >
-            <div class="bg-white rounded-lg shadow-2xl max-w-md w-full">
-                <div class="bg-blue-600 text-white p-4 rounded-t-lg">
+            <div class="bg-white rounded-lg shadow-2xl max-w-lg w-full">
+              <div class="bg-blue-600 text-white p-4 rounded-t-lg">
                 <h3 id="entryModalTitle" class="text-lg font-bold">Add New Entry</h3>
                 </div>
                 <form id="entryForm" class="p-4 space-y-4">
@@ -295,7 +291,7 @@ function openAddEntryModal() {
   currentEditId = null;
   document.getElementById("entryModalTitle").textContent = "Add New Entry";
   resetForm();
-  document.getElementById("entryModal").classList.remove("hidden");
+  document.getElementById("weeklyTrackerModal").classList.remove("hidden");
 }
 
 function openEditEntryModal(id) {
@@ -309,11 +305,11 @@ function openEditEntryModal(id) {
   document.getElementById("timeliness").value = entry.Timeliness;
   document.getElementById("status").value = entry.Status;
 
-  document.getElementById("entryModal").classList.remove("hidden");
+  document.getElementById("weeklyTrackerModal").classList.remove("hidden");
 }
 
 function closeEntryModal() {
-  document.getElementById("entryModal").classList.add("hidden");
+  document.getElementById("weeklyTrackerModal").classList.add("hidden");
   resetForm();
 }
 

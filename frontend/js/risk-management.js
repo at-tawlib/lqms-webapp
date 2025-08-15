@@ -1,7 +1,7 @@
 import { createTable } from "./ui-utils/create-table.js";
 import { showLoading } from "./ui-utils/show-loading.js";
 
-const sectionNameRaw = "Risk Register";
+const sectionNameRaw = "RISK REGISTER-FKBTH-CL/CI/1602";
 const sectionName = sectionNameRaw.toLowerCase().replace(/ /g, "-");
 const headers = [
   "#",
@@ -76,175 +76,183 @@ export const renderRiskManagement = () => {
   showLoading(contentDiv);
 
   setTimeout(() => {
+    document.getElementById("sectionTitle").textContent = sectionNameRaw;
+
     contentDiv.innerHTML = `
-            <div class="bg-green-600 text-white p-4 rounded-t-lg mb-0">
-              <h2 class="text-2xl font-bold">CENTRAL LABORATORY SERVICES-KORLE BU TEACHING HOSPITAL</h2>
-              <p class="text-green-100 text-sm">RISK REGISTER-FKBTH-CL/CI/1602</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-b-lg shadow-lg">
-            <!-- Action Buttons -->
-            <div class="flex gap-2 mb-4">
-                <button
-                id="addRiskBtn"
-                class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm transition-colors"
-                >
-                + Add Risk
-                </button>
-                <button
-                id="exportBtn"
-                class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded text-sm transition-colors"
-                >
-                Export CSV
-                </button>
-                <button id="exportExcelBtn" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm transition-colors">
-                    Export Excel
-                </button>
-                <button id="printBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors">
-                    Print Register
-                </button>
-                <button id="riskSummaryBtn" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded text-sm transition-colors">
-                    Risk Summary
-                </button>
-            </div>
-
-            <div
-                id="table-container"
-                class="overflow-x-auto rounded-lg shadow-md border border-gray-200"
-            ></div>
-            </div>
-
-            <!-- Add/Edit Risk Modal -->
-            <div
-            id="riskModal"
-            class="fixed inset-0 flex items-center justify-center p-4 hidden z-50 bg-black bg-opacity-50"
+        <div>
+          <!-- Action Buttons -->
+          <div class="flex gap-2 mb-4">
+            <button
+              id="addRiskBtn"
+              class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm transition-colors"
             >
-            <div class="bg-white rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-                <div class="bg-green-600 text-white p-4 rounded-t-lg">
-                <h3 id="riskModalTitle" class="text-lg font-bold">Add New Risk</h3>
-                </div>
-                <form id="riskForm" class="p-4 space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Process Name</label>
-                    <input
-                    type="text"
-                    id="processName"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                    placeholder="e.g., Sample Collection"
-                    required
-                    />
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Risk Score</label>
-                    <select
-                    id="riskScore"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                    required
-                    >
-                    <option value="">Select Risk Score</option>
-                    <option value="Very Low">Very Low</option>
-                    <option value="Low">Low</option>
-                    <option value="Medium">Medium</option>
-                    <option value="High">High</option>
-                    <option value="Very High">Very High</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Root Cause</label>
-                    <textarea
-                    id="rootCause"
-                    rows="3"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                    placeholder="Describe the root cause of the risk..."
-                    required
-                    ></textarea>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Preventive Action Implemented</label>
-                    <textarea
-                    id="preventiveAction"
-                    rows="3"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                    placeholder="Describe the preventive actions taken..."
-                    required
-                    ></textarea>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Person Responsible</label>
-                    <input
-                    type="text"
-                    id="personResponsible"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                    placeholder="e.g., Lab Manager"
-                    required
-                    />
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Follow Up Review Date</label>
-                    <input
-                    type="date"
-                    id="followUpReview"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                    required
-                    />
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Residual Risk</label>
-                    <select
-                    id="residualRisk"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                    required
-                    >
-                    <option value="">Select Residual Risk</option>
-                    <option value="Very Low">Very Low</option>
-                    <option value="Low">Low</option>
-                    <option value="Medium">Medium</option>
-                    <option value="High">High</option>
-                    <option value="Very High">Very High</option>
-                    </select>
-                </div>
-                <div class="flex gap-2 pt-4">
-                    <button
-                    type="submit"
-                    class="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transition-colors"
-                    >
-                    Save Risk
-                    </button>
-                    <button
-                    type="button"
-                    id="cancelRiskBtn"
-                    class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg transition-colors"
-                    >
-                    Cancel
-                    </button>
-                </div>
-                </form>
-            </div>
-            </div>
-
-            <!-- Risk Summary Modal -->
-            <div
-            id="riskSummaryModal"
-            class="fixed inset-0 flex items-center justify-center p-4 hidden z-50 bg-black bg-opacity-50"
+              + Add Risk
+            </button>
+            <button
+              id="exportBtn"
+              class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded text-sm transition-colors"
             >
-            <div class="bg-white rounded-lg shadow-2xl max-w-lg w-full">
-                <div class="bg-purple-600 text-white p-4 rounded-t-lg">
-                <h3 class="text-lg font-bold">Risk Summary Report</h3>
-                </div>
-                <div id="riskSummaryContent" class="p-4">
-                </div>
-                <div class="p-4 border-t">
-                <button
-                    id="closeSummaryBtn"
-                    class="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg transition-colors"
+              Export CSV
+            </button>
+            <button
+              id="exportExcelBtn"
+              class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm transition-colors"
+            >
+              Export Excel
+            </button>
+            <button
+              id="printBtn"
+              class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm transition-colors"
+            >
+              Print Register
+            </button>
+            <button
+              id="riskSummaryBtn"
+              class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded text-sm transition-colors"
+            >
+              Risk Summary
+            </button>
+          </div>
+
+          <div
+            id="table-container"
+            class="overflow-x-auto rounded-lg shadow-md border border-gray-200"
+          ></div>
+        </div>
+
+        <!-- Add/Edit Risk Modal -->
+        <div
+          id="riskModal"
+          class="fixed inset-0 flex items-center justify-center p-4 hidden z-50 bg-black bg-opacity-50"
+          style="overflow-y: auto"
+        >
+          <div class="bg-white rounded-lg shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+            <div class="fixed bg-green-600 text-white p-4 rounded-t-lg max-w-lg w-full h-12">
+              <h3 id="riskModalTitle" class="text-lg font-bold">Add New Risk</h3>
+            </div>
+            <form id="riskForm" class="p-4 mt-12 space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Process Name</label>
+                <input
+                  type="text"
+                  id="processName"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  placeholder="e.g., Sample Collection"
+                  required
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Risk Score</label>
+                <select
+                  id="riskScore"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  required
                 >
-                    Close
+                  <option value="">Select Risk Score</option>
+                  <option value="Very Low">Very Low</option>
+                  <option value="Low">Low</option>
+                  <option value="Medium">Medium</option>
+                  <option value="High">High</option>
+                  <option value="Very High">Very High</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Root Cause</label>
+                <textarea
+                  id="rootCause"
+                  rows="3"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  placeholder="Describe the root cause of the risk..."
+                  required
+                ></textarea>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >Preventive Action Implemented</label
+                >
+                <textarea
+                  id="preventiveAction"
+                  rows="3"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  placeholder="Describe the preventive actions taken..."
+                  required
+                ></textarea>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Person Responsible</label>
+                <input
+                  type="text"
+                  id="personResponsible"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  placeholder="e.g., Lab Manager"
+                  required
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Follow Up Review Date</label>
+                <input
+                  type="date"
+                  id="followUpReview"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  required
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Residual Risk</label>
+                <select
+                  id="residualRisk"
+                  class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  required
+                >
+                  <option value="">Select Residual Risk</option>
+                  <option value="Very Low">Very Low</option>
+                  <option value="Low">Low</option>
+                  <option value="Medium">Medium</option>
+                  <option value="High">High</option>
+                  <option value="Very High">Very High</option>
+                </select>
+              </div>
+              <div class="flex gap-2 pt-4">
+                <button
+                  type="submit"
+                  class="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transition-colors"
+                >
+                  Save Risk
                 </button>
-                </div>
+                <button
+                  type="button"
+                  id="cancelRiskBtn"
+                  class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Risk Summary Modal -->
+        <div
+          id="riskSummaryModal"
+          class="fixed inset-0 flex items-center justify-center p-4 hidden z-50 bg-black bg-opacity-50"
+          style="overflow-y: auto"
+        >
+          <div class="bg-white rounded-lg shadow-2xl max-w-lg w-full">
+            <div class="bg-purple-600 text-white p-4 rounded-t-lg">
+              <h3 class="text-lg font-bold">Risk Summary Report</h3>
             </div>
+            <div id="riskSummaryContent" class="p-4"></div>
+            <div class="p-4 border-t">
+              <button
+                id="closeSummaryBtn"
+                class="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg transition-colors"
+              >
+                Close
+              </button>
             </div>
+          </div>
+        </div>
     `;
-
     renderTable();
 
     // Event listeners

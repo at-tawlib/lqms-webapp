@@ -16,32 +16,41 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/style.css" />
   </head>
-  <body class="flex h-screen bg-gray-100">
-    <!-- Side Navigation -->
-    <aside id="sidebar" class="w-64 bg-white shadow-lg flex flex-col">
-      <div class="p-6 border-b border-gray-200">
-        <h1 class="text-2xl font-bold text-gray-800">Quality Planner</h1>
-        <p id="userIdDisplay" class="text-xs text-gray-500 mt-1 break-all"></p>
-      </div>
-      <nav class="flex-grow overflow-y-auto p-4">
-        <a
-          href="#"
-          id="nav-dashboard"
-          class="nav-link block text-gray-700 rounded-lg mb-2 active"
-          data-section="dashboard"
-        >
-          Dashboard
-        </a>
-        <!-- Nav links will be generated here -->
-      </nav>
-    </aside>
+  <body class="bg-gray-100">
+    <div class="flex min-h-screen">
+      <!-- Side Navigation -->
+      <aside id="sidebar" class="w-64 bg-white shadow-lg flex flex-col">
+        <div class="p-6 border-b border-gray-200">
+          <h1 class="text-2xl font-bold text-gray-800">Quality Planner</h1>
+          <p id="userIdDisplay" class="text-xs text-gray-500 mt-1 break-all"></p>
+        </div>
+        <nav class="flex-grow overflow-y-auto p-4">
+          <a
+            href="#"
+            id="nav-dashboard"
+            class="nav-link block text-gray-700 rounded-lg mb-2 active"
+            data-section="dashboard"
+          >
+            Dashboard
+          </a>
+          <!-- Nav links will be generated here -->
+        </nav>
+      </aside>
 
-    <!-- Main Content Area -->
-    <main class="flex-grow p-8 overflow-y-auto">
-      <div id="content" class="bg-white p-8 rounded-xl shadow-lg h-full overflow-y-auto">
-        <!-- Content will be rendered here -->
+      <div id="stickyHeader" class="header-sticky bg-green-600 text-white p-4">
+        <h3 class="text-1xl font-bold text-start transition-all duration-300">
+          CENTRAL LABORATORY SERVICES - KORLE BU TEACHING HOSPITAL
+        </h3>
+        <p id="sectionTitle" class="text-green-100 text-sm"></p>
       </div>
-    </main>
+
+      <!-- Main Content Area -->
+      <main id="mainContent" class="flex-grow p-8 overflow-y-auto">
+        <div id="content" class="bg-white p-8 rounded-xl shadow-lg h-full overflow-y-auto">
+          <!-- Content will be rendered here -->
+        </div>
+      </main>
+    </div>
 
     <!-- Modal Dialog -->
     <div
@@ -68,6 +77,6 @@
     </div>
 
     <!-- JavaScript -->
-    <script src="../js/index.js" type="module"></script>
+    <script src="../js/index.js" type="module" defer></script>
   </body>
 </html>
