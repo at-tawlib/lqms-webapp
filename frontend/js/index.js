@@ -1,12 +1,16 @@
 import { renderAuditNonConformities } from "./accreditation.js";
 import { renderAppraisalTracker } from "./appraisal-tracker.js";
 import { renderImprovementProjects } from "./improvement-projects.js";
+import { renderIQCRegister } from "./icqc-register.js";
 import { renderMeeting } from "./meeting.js";
 import { renderPowerTracker } from "./power-tracker.js";
 import { renderRiskManagement } from "./risk-management.js";
 import { renderServiceInterruptions } from "./service-interruptions.js";
 import { renderTrainingPlan } from "./training-plan.js";
 import { renderWeekLyActivityTracker } from "./weekly-tracker.js";
+import { renderComingSoon } from "./coming-soon.js";
+import { renderCorrespondenceManager } from "./correspondence.js";
+import { renderSupplyPlanner } from "./supply-planner.js";
 
 // TODO: Mock data storage - will be replaced with Firebase later
 let mockData = {};
@@ -565,6 +569,7 @@ function renderDashboard() {
   document.querySelectorAll(".dashboard-grid .card").forEach((card) => {
     card.addEventListener("click", () => {
       const sectionName = card.dataset.section;
+      console.log(sectionName);
       if (sectionName === "Weekly Activity Tracker") {
         renderWeekLyActivityTracker();
       } else if (sectionName === "Accreditation") {
@@ -583,6 +588,12 @@ function renderDashboard() {
         renderServiceInterruptions();
       } else if (sectionName === "Training Plan") {
         renderTrainingPlan();
+      } else if (sectionName === "ICQC Register") {
+        renderIQCRegister();
+      } else if (sectionName === "Correspondence Manager") {
+        renderCorrespondenceManager();
+      } else if (sectionName === "Supply Planner") {
+        renderSupplyPlanner();
       } else handleNavClick(sectionName);
     });
   });
@@ -598,7 +609,8 @@ function handleNavClick(sectionName) {
       link.classList.remove("active");
     }
   });
-  renderSection(sectionName.toLowerCase().replace(/ /g, "-"), sections[sectionName]);
+  // renderSection(sectionName.toLowerCase().replace(/ /g, "-"), sections[sectionName]);
+  renderComingSoon(sectionName);
 }
 
 // Generate dynamic nav links
