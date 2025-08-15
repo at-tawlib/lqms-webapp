@@ -569,32 +569,7 @@ function renderDashboard() {
   document.querySelectorAll(".dashboard-grid .card").forEach((card) => {
     card.addEventListener("click", () => {
       const sectionName = card.dataset.section;
-      console.log(sectionName);
-      if (sectionName === "Weekly Activity Tracker") {
-        renderWeekLyActivityTracker();
-      } else if (sectionName === "Accreditation") {
-        renderAuditNonConformities();
-      } else if (sectionName == "Power Stability Tracker") {
-        renderPowerTracker();
-      } else if (sectionName === "Meeting Schedule") {
-        renderMeeting();
-      } else if (sectionName === "Risk Management") {
-        renderRiskManagement();
-      } else if (sectionName === "Appraisal Tracker") {
-        renderAppraisalTracker();
-      } else if (sectionName === "Improvement Projects") {
-        renderImprovementProjects();
-      } else if (sectionName === "Service Interruptions") {
-        renderServiceInterruptions();
-      } else if (sectionName === "Training Plan") {
-        renderTrainingPlan();
-      } else if (sectionName === "ICQC Register") {
-        renderIQCRegister();
-      } else if (sectionName === "Correspondence Manager") {
-        renderCorrespondenceManager();
-      } else if (sectionName === "Supply Planner") {
-        renderSupplyPlanner();
-      } else handleNavClick(sectionName);
+      handleNavClick(sectionName);
     });
   });
 }
@@ -609,8 +584,33 @@ function handleNavClick(sectionName) {
       link.classList.remove("active");
     }
   });
+
+  if (sectionName === "Weekly Activity Tracker") {
+    renderWeekLyActivityTracker();
+  } else if (sectionName === "Accreditation") {
+    renderAuditNonConformities();
+  } else if (sectionName == "Power Stability Tracker") {
+    renderPowerTracker();
+  } else if (sectionName === "Meeting Schedule") {
+    renderMeeting();
+  } else if (sectionName === "Risk Management") {
+    renderRiskManagement();
+  } else if (sectionName === "Appraisal Tracker") {
+    renderAppraisalTracker();
+  } else if (sectionName === "Improvement Projects") {
+    renderImprovementProjects();
+  } else if (sectionName === "Service Interruptions") {
+    renderServiceInterruptions();
+  } else if (sectionName === "Training Plan") {
+    renderTrainingPlan();
+  } else if (sectionName === "ICQC Register") {
+    renderIQCRegister();
+  } else if (sectionName === "Correspondence Manager") {
+    renderCorrespondenceManager();
+  } else if (sectionName === "Supply Planner") {
+    renderSupplyPlanner();
+  } else renderComingSoon(sectionName);
   // renderSection(sectionName.toLowerCase().replace(/ /g, "-"), sections[sectionName]);
-  renderComingSoon(sectionName);
 }
 
 // Generate dynamic nav links
