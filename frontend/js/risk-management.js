@@ -3,14 +3,15 @@ import { showLoading } from "./ui-utils/show-loading.js";
 
 const sectionNameRaw = "RISK REGISTER-FKBTH-CL/CI/1602";
 const sectionName = sectionNameRaw.toLowerCase().replace(/ /g, "-");
+
 const headers = [
   "#",
-  "Process Name",
-  "Risk Score",
-  "Root Cause",
-  "Preventive Action Implemented",
-  "Person Responsible",
-  "Follow Up Review",
+  "Process",
+  "Risk",
+  "Cause",
+  "Preventive Action",
+  "Responsible",
+  "Review",
   "Residual Risk",
   "Actions",
 ];
@@ -18,53 +19,53 @@ const headers = [
 let mockData = [
   {
     id: 1,
-    "Process Name": "Sample Collection",
-    "Risk Score": "High",
-    "Root Cause": "Inadequate training of collection staff",
-    "Preventive Action Implemented":
+    "Process": "Sample Collection",
+    "Risk": "High",
+    "Cause": "Inadequate training of collection staff",
+    "Preventive Action":
       "Mandatory training program implemented for all collection staff",
-    "Person Responsible": "Lab Manager",
-    "Follow Up Review": "2025-09-15",
+    "Responsible": "Lab Manager",
+    "Review": "2025-09-15",
     "Residual Risk": "Medium",
   },
   {
     id: 2,
-    "Process Name": "Equipment Maintenance",
-    "Risk Score": "Medium",
-    "Root Cause": "Irregular maintenance schedule",
-    "Preventive Action Implemented": "Established preventive maintenance calendar",
-    "Person Responsible": "Technical Officer",
-    "Follow Up Review": "2025-08-30",
+    "Process": "Equipment Maintenance",
+    "Risk": "Medium",
+    "Cause": "Irregular maintenance schedule",
+    "Preventive Action": "Established preventive maintenance calendar",
+    "Responsible": "Technical Officer",
+    "Review": "2025-08-30",
     "Residual Risk": "Low",
   },
   {
     id: 3,
-    "Process Name": "Result Reporting",
-    "Risk Score": "High",
-    "Root Cause": "Manual transcription errors",
-    "Preventive Action Implemented": "Implemented electronic reporting system with verification",
-    "Person Responsible": "Quality Manager",
-    "Follow Up Review": "2025-09-01",
+    "Process": "Result Reporting",
+    "Risk": "High",
+    "Cause": "Manual transcription errors",
+    "Preventive Action": "Implemented electronic reporting system with verification",
+    "Responsible": "Quality Manager",
+    "Review": "2025-09-01",
     "Residual Risk": "Low",
   },
   {
     id: 4,
-    "Process Name": "Inventory Management",
-    "Risk Score": "Medium",
-    "Root Cause": "Poor stock tracking system",
-    "Preventive Action Implemented": "Digital inventory management system installed",
-    "Person Responsible": "Store Keeper",
-    "Follow Up Review": "2025-08-25",
+    "Process": "Inventory Management",
+    "Risk": "Medium",
+    "Cause": "Poor stock tracking system",
+    "Preventive Action": "Digital inventory management system installed",
+    "Responsible": "Store Keeper",
+    "Review": "2025-08-25",
     "Residual Risk": "Low",
   },
   {
     id: 5,
-    "Process Name": "Quality Control",
-    "Risk Score": "Low",
-    "Root Cause": "Inconsistent QC procedures",
-    "Preventive Action Implemented": "Standardized QC protocols and daily monitoring",
-    "Person Responsible": "Quality Control Officer",
-    "Follow Up Review": "2025-09-10",
+    "Process": "Quality Control",
+    "Risk": "Low",
+    "Cause": "Inconsistent QC procedures",
+    "Preventive Action": "Standardized QC protocols and daily monitoring",
+    "Responsible": "Quality Control Officer",
+    "Review": "2025-09-10",
     "Residual Risk": "Very Low",
   },
 ];
@@ -132,7 +133,7 @@ export const renderRiskManagement = () => {
             </div>
             <form id="riskForm" class="p-4 mt-12 space-y-4">
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Process Name</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Process</label>
                 <input
                   type="text"
                   id="processName"
@@ -142,13 +143,13 @@ export const renderRiskManagement = () => {
                 />
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Risk Score</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Risk</label>
                 <select
                   id="riskScore"
                   class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-green-500"
                   required
                 >
-                  <option value="">Select Risk Score</option>
+                  <option value="">Select Risk</option>
                   <option value="Very Low">Very Low</option>
                   <option value="Low">Low</option>
                   <option value="Medium">Medium</option>
@@ -157,7 +158,7 @@ export const renderRiskManagement = () => {
                 </select>
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Root Cause</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Cause</label>
                 <textarea
                   id="rootCause"
                   rows="3"
@@ -168,7 +169,7 @@ export const renderRiskManagement = () => {
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1"
-                  >Preventive Action Implemented</label
+                  >Preventive Action</label
                 >
                 <textarea
                   id="preventiveAction"
@@ -179,7 +180,7 @@ export const renderRiskManagement = () => {
                 ></textarea>
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Person Responsible</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Responsible</label>
                 <input
                   type="text"
                   id="personResponsible"
@@ -189,7 +190,7 @@ export const renderRiskManagement = () => {
                 />
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Follow Up Review Date</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Review Date</label>
                 <input
                   type="date"
                   id="followUpReview"
@@ -281,12 +282,12 @@ const renderTable = () => {
     // Transform data to include actions and format for table
     const tableData = mockData.map((entry, index) => ({
       "#": index + 1,
-      "Process Name": entry["Process Name"],
-      "Risk Score": entry["Risk Score"],
-      "Root Cause": entry["Root Cause"],
-      "Preventive Action Implemented": entry["Preventive Action Implemented"],
-      "Person Responsible": entry["Person Responsible"],
-      "Follow Up Review": entry["Follow Up Review"],
+      "Process": entry["Process"],
+      "Risk": entry["Risk"],
+      "Cause": entry["Cause"],
+      "Preventive Action": entry["Preventive Action"],
+      "Responsible": entry["Responsible"],
+      "Review": entry["Review"],
       "Residual Risk": entry["Residual Risk"],
       Actions: getActionButtonsHTML(entry.id),
     }));
@@ -315,24 +316,24 @@ function applyTableFormatting() {
 
     const cells = row.querySelectorAll("td");
 
-    // Find the Risk Score column (index 2) and Residual Risk column (index 7)
+    // Find the Risk column (index 2) and Residual Risk column (index 7)
     if (cells[2]) {
-      cells[2].innerHTML = getRiskScoreBadgeHTML(entry["Risk Score"]);
+      cells[2].innerHTML = getRiskScoreBadgeHTML(entry["Risk"]);
     }
 
     if (cells[7]) {
       cells[7].innerHTML = getRiskScoreBadgeHTML(entry["Residual Risk"]);
     }
 
-    // Format Follow Up Review date (index 6)
-    if (cells[6] && entry["Follow Up Review"]) {
-      const reviewDate = new Date(entry["Follow Up Review"]);
+    // Format Review date (index 6)
+    if (cells[6] && entry["Review"]) {
+      const reviewDate = new Date(entry["Review"]);
       const today = new Date();
       const isOverdue = reviewDate < today;
 
       cells[6].innerHTML = `<span class="px-2 py-1 rounded text-xs ${
         isOverdue ? "bg-red-100 text-red-800" : "bg-blue-100 text-blue-800"
-      }">${entry["Follow Up Review"]}</span>`;
+      }">${entry["Review"]}</span>`;
     }
   });
 }
@@ -392,12 +393,12 @@ function openEditRiskModal(id) {
 
   document.getElementById("riskModalTitle").textContent = "Edit Risk";
 
-  document.getElementById("processName").value = entry["Process Name"];
-  document.getElementById("riskScore").value = entry["Risk Score"];
-  document.getElementById("rootCause").value = entry["Root Cause"];
-  document.getElementById("preventiveAction").value = entry["Preventive Action Implemented"];
-  document.getElementById("personResponsible").value = entry["Person Responsible"];
-  document.getElementById("followUpReview").value = entry["Follow Up Review"];
+  document.getElementById("processName").value = entry["Process"];
+  document.getElementById("riskScore").value = entry["Risk"];
+  document.getElementById("rootCause").value = entry["Cause"];
+  document.getElementById("preventiveAction").value = entry["Preventive Action"];
+  document.getElementById("personResponsible").value = entry["Responsible"];
+  document.getElementById("followUpReview").value = entry["Review"];
   document.getElementById("residualRisk").value = entry["Residual Risk"];
 
   document.getElementById("riskModal").classList.remove("hidden");
@@ -416,12 +417,12 @@ function handleFormSubmit(e) {
   e.preventDefault();
 
   const formData = {
-    "Process Name": document.getElementById("processName").value,
-    "Risk Score": document.getElementById("riskScore").value,
-    "Root Cause": document.getElementById("rootCause").value,
-    "Preventive Action Implemented": document.getElementById("preventiveAction").value,
-    "Person Responsible": document.getElementById("personResponsible").value,
-    "Follow Up Review": document.getElementById("followUpReview").value,
+    "Process": document.getElementById("processName").value,
+    "Risk": document.getElementById("riskScore").value,
+    "Cause": document.getElementById("rootCause").value,
+    "Preventive Action": document.getElementById("preventiveAction").value,
+    "Responsible": document.getElementById("personResponsible").value,
+    "Review": document.getElementById("followUpReview").value,
     "Residual Risk": document.getElementById("residualRisk").value,
   };
 
@@ -457,7 +458,7 @@ function deleteRisk(id) {
 
 function showRiskSummary() {
   const riskCounts = mockData.reduce((acc, risk) => {
-    acc[risk["Risk Score"]] = (acc[risk["Risk Score"]] || 0) + 1;
+    acc[risk["Risk"]] = (acc[risk["Risk"]] || 0) + 1;
     return acc;
   }, {});
 
@@ -469,7 +470,7 @@ function showRiskSummary() {
   // Get overdue reviews
   const today = new Date();
   const overdueReviews = mockData.filter((risk) => {
-    const reviewDate = new Date(risk["Follow Up Review"]);
+    const reviewDate = new Date(risk["Review"]);
     return reviewDate < today;
   });
 
@@ -535,12 +536,12 @@ function closeRiskSummary() {
 
 function exportData() {
   const csvHeaders = [
-    "Process Name",
-    "Risk Score",
-    "Root Cause",
-    "Preventive Action Implemented",
-    "Person Responsible",
-    "Follow Up Review",
+    "Process",
+    "Risk",
+    "Cause",
+    "Preventive Action",
+    "Responsible",
+    "Review",
     "Residual Risk",
   ];
 
@@ -549,12 +550,12 @@ function exportData() {
 
   mockData.forEach((entry) => {
     const row = [
-      `"${entry["Process Name"]}"`,
-      `"${entry["Risk Score"]}"`,
-      `"${entry["Root Cause"].replace(/"/g, '""')}"`,
-      `"${entry["Preventive Action Implemented"].replace(/"/g, '""')}"`,
-      `"${entry["Person Responsible"]}"`,
-      `"${entry["Follow Up Review"]}"`,
+      `"${entry["Process"]}"`,
+      `"${entry["Risk"]}"`,
+      `"${entry["Cause"].replace(/"/g, '""')}"`,
+      `"${entry["Preventive Action"].replace(/"/g, '""')}"`,
+      `"${entry["Responsible"]}"`,
+      `"${entry["Review"]}"`,
       `"${entry["Residual Risk"]}"`,
     ];
     csvContent += row.join(",") + "\n";
@@ -581,12 +582,12 @@ function exportToExcel() {
 
   // Prepare data for Excel (clean format without HTML)
   const excelData = mockData.map((entry) => ({
-    "Process Name": entry["Process Name"],
-    "Risk Score": entry["Risk Score"],
-    "Root Cause": entry["Root Cause"],
-    "Preventive Action Implemented": entry["Preventive Action Implemented"],
-    "Person Responsible": entry["Person Responsible"],
-    "Follow Up Review": entry["Follow Up Review"],
+    "Process": entry["Process"],
+    "Risk": entry["Risk"],
+    "Cause": entry["Cause"],
+    "Preventive Action": entry["Preventive Action"],
+    "Responsible": entry["Responsible"],
+    "Review": entry["Review"],
     "Residual Risk": entry["Residual Risk"],
   }));
 
@@ -595,12 +596,12 @@ function exportToExcel() {
 
   // Set column widths
   const colWidths = [
-    { wch: 20 }, // Process Name
-    { wch: 12 }, // Risk Score
-    { wch: 40 }, // Root Cause
+    { wch: 20 }, // Process
+    { wch: 12 }, // Risk
+    { wch: 40 }, // Cause
     { wch: 50 }, // Preventive Action
-    { wch: 20 }, // Person Responsible
-    { wch: 15 }, // Follow Up Review
+    { wch: 20 }, // Responsible
+    { wch: 15 }, // Review
     { wch: 15 }, // Residual Risk
   ];
   ws["!cols"] = colWidths;
