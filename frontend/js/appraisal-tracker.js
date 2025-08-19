@@ -3,89 +3,91 @@ import { showLoading } from "./ui-utils/show-loading.js";
 
 const sectionNameRaw = "STAFF APPRAISAL-FKBTH-CL/OP/1614";
 const sectionName = sectionNameRaw.toLowerCase().replace(/ /g, "-");
+
 const headers = [
-  "Staff Name",
-  "Staff Number",
+  "Name",
+  "Staff No.",
   "Rank",
-  "Objectives for the Year",
-  "Mid Year Review",
-  "Annual Appraisal",
-  "Name of Appraiser",
+  "Objectives",
+  "Mid-Year Review",
+  "Appraisal",
+  "Appraiser",
   "Status",
   "Actions",
 ];
 
+
 let mockData = [
   {
     id: 1,
-    "Staff Name": "Dr. Kwame Asante",
-    "Staff Number": "KBTH001",
+    "Name": "Dr. Kwame Asante",
+    "Staff No.": "KBTH001",
     Rank: "Senior Medical Laboratory Scientist",
-    "Objectives for the Year":
+    "Objectives":
       "Improve turnaround time for critical tests, Lead quality improvement initiatives, Mentor junior staff",
-    "Mid Year Review": "2025-06-15",
-    "Annual Appraisal": "2025-12-15",
-    "Name of Appraiser": "Dr. Mary Osei",
+    "Mid-Year Review": "2025-06-15",
+    "Appraisal": "2025-12-15",
+    "Appraiser": "Dr. Mary Osei",
     Status: "In Progress",
   },
   {
     id: 2,
-    "Staff Name": "Mrs. Akosua Mensah",
-    "Staff Number": "KBTH002",
+    "Name": "Mrs. Akosua Mensah",
+    "Staff No.": "KBTH002",
     Rank: "Medical Laboratory Scientist",
-    "Objectives for the Year":
+    "Objectives":
       "Complete advanced training in molecular diagnostics, Reduce sample rejection rates by 15%",
-    "Mid Year Review": "2025-06-20",
-    "Annual Appraisal": "2025-12-20",
-    "Name of Appraiser": "Dr. Kwame Asante",
+    "Mid-Year Review": "2025-06-20",
+    "Appraisal": "2025-12-20",
+    "Appraiser": "Dr. Kwame Asante",
     Status: "Scheduled",
   },
   {
     id: 3,
-    "Staff Name": "Mr. Joseph Boateng",
-    "Staff Number": "KBTH003",
+    "Name": "Mr. Joseph Boateng",
+    "Staff No.": "KBTH003",
     Rank: "Laboratory Technician",
-    "Objectives for the Year":
+    "Objectives":
       "Maintain equipment preventive maintenance schedule, Improve customer service ratings",
-    "Mid Year Review": "2025-07-01",
-    "Annual Appraisal": "2025-12-30",
-    "Name of Appraiser": "Mrs. Akosua Mensah",
+    "Mid-Year Review": "2025-07-01",
+    "Appraisal": "2025-12-30",
+    "Appraiser": "Mrs. Akosua Mensah",
     Status: "Scheduled",
   },
   {
     id: 4,
-    "Staff Name": "Ms. Ama Darko",
-    "Staff Number": "KBTH004",
+    "Name": "Ms. Ama Darko",
+    "Staff No.": "KBTH004",
     Rank: "Quality Control Officer",
-    "Objectives for the Year":
+    "Objectives":
       "Implement new quality control procedures, Lead ISO 15189 compliance activities",
-    "Mid Year Review": "2025-06-10",
-    "Annual Appraisal": "2025-12-10",
-    "Name of Appraiser": "Dr. Mary Osei",
+    "Mid-Year Review": "2025-06-10",
+    "Appraisal": "2025-12-10",
+    "Appraiser": "Dr. Mary Osei",
     Status: "Completed",
   },
   {
     id: 5,
-    "Staff Name": "Mr. Kofi Amponsah",
-    "Staff Number": "KBTH005",
+    "Name": "Mr. Kofi Amponsah",
+    "Staff No.": "KBTH005",
     Rank: "Laboratory Assistant",
-    "Objectives for the Year":
+    "Objectives":
       "Complete certification in phlebotomy, Improve sample collection efficiency by 20%",
-    "Mid Year Review": "2025-07-15",
-    "Annual Appraisal": "2025-12-31",
-    "Name of Appraiser": "Mr. Joseph Boateng",
+    "Mid-Year Review": "2025-07-15",
+    "Appraisal": "2025-12-31",
+    "Appraiser": "Mr. Joseph Boateng",
     Status: "Overdue",
   },
   {
     id: 6,
-    "Staff Name": "Dr. Grace Owusu",
-    "Staff Number": "KBTH006",
+    "Name": "Dr. Grace Owusu",
+    "Staff No.": "KBTH006",
     Rank: "Chief Medical Laboratory Scientist",
-    "Objectives for the Year":
+    "Objectives":
       "Strategic planning for laboratory expansion, Staff development and training programs",
-    "Mid Year Review": "2025-06-05",
-    "Annual Appraisal": "2025-12-05",
-    "Name of Appraiser": "Prof. Samuel Adjei",
+    "Mid-Year Review": "2025-06-05",
+    "Appraisal": "2025-12-05",
+    "Appraiser": "Prof. Samuel Adjei",
     Status: "Completed",
   },
 ];
@@ -153,7 +155,7 @@ export const renderAppraisalTracker = () => {
             </div>
             <form id="appraisalForm" class="p-4 mt-12 space-y-4">
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Staff Name</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
                 <input
                   type="text"
                   id="staffName"
@@ -163,7 +165,7 @@ export const renderAppraisalTracker = () => {
                 />
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Staff Number</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Staff No.</label>
                 <input
                   type="text"
                   id="staffNumber"
@@ -195,7 +197,7 @@ export const renderAppraisalTracker = () => {
                 </select>
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Objectives for the Year</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Objectives</label>
                 <textarea
                   id="objectives"
                   rows="4"
@@ -206,7 +208,7 @@ export const renderAppraisalTracker = () => {
               </div>
               <div class="grid grid-cols-2 gap-4">
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Mid Year Review Date</label>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Mid-Year Review Date</label>
                   <input
                     type="date"
                     id="midYearReview"
@@ -215,7 +217,7 @@ export const renderAppraisalTracker = () => {
                   />
                 </div>
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Annual Appraisal Date</label>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Appraisal Date</label>
                   <input
                     type="date"
                     id="annualAppraisal"
@@ -225,7 +227,7 @@ export const renderAppraisalTracker = () => {
                 </div>
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Name of Appraiser</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Appraiser</label>
                 <input
                   type="text"
                   id="appraiser"
@@ -318,13 +320,13 @@ const renderTable = () => {
   } else {
     // Transform data to include actions and format for table
     const tableData = mockData.map((entry) => ({
-      "Staff Name": entry["Staff Name"],
-      "Staff Number": entry["Staff Number"],
+      "Name": entry["Name"],
+      "Staff No.": entry["Staff No."],
       Rank: entry["Rank"],
-      "Objectives for the Year": entry["Objectives for the Year"],
-      "Mid Year Review": entry["Mid Year Review"],
-      "Annual Appraisal": entry["Annual Appraisal"],
-      "Name of Appraiser": entry["Name of Appraiser"],
+      "Objectives": entry["Objectives"],
+      "Mid-Year Review": entry["Mid-Year Review"],
+      "Appraisal": entry["Appraisal"],
+      "Appraiser": entry["Appraiser"],
       Status: entry["Status"],
       Actions: getActionButtonsHTML(entry.id),
     }));
@@ -358,25 +360,25 @@ function applyTableFormatting() {
       cells[7].innerHTML = getStatusBadgeHTML(entry.Status);
     }
 
-    // Format review dates with status indicators (Mid Year Review - index 4, Annual Appraisal - index 5)
+    // Format review dates with status indicators (Mid-Year Review - index 4, Appraisal - index 5)
     const today = new Date();
 
-    if (cells[4] && entry["Mid Year Review"]) {
-      const reviewDate = new Date(entry["Mid Year Review"]);
+    if (cells[4] && entry["Mid-Year Review"]) {
+      const reviewDate = new Date(entry["Mid-Year Review"]);
       const isOverdue = reviewDate < today && entry.Status !== "Completed";
 
       cells[4].innerHTML = `<span class="px-2 py-1 rounded text-xs ${
         isOverdue ? "bg-red-100 text-red-800" : "bg-blue-100 text-blue-800"
-      }">${entry["Mid Year Review"]}</span>`;
+      }">${entry["Mid-Year Review"]}</span>`;
     }
 
-    if (cells[5] && entry["Annual Appraisal"]) {
-      const appraisalDate = new Date(entry["Annual Appraisal"]);
+    if (cells[5] && entry["Appraisal"]) {
+      const appraisalDate = new Date(entry["Appraisal"]);
       const isOverdue = appraisalDate < today && entry.Status !== "Completed";
 
       cells[5].innerHTML = `<span class="px-2 py-1 rounded text-xs ${
         isOverdue ? "bg-red-100 text-red-800" : "bg-green-100 text-green-800"
-      }">${entry["Annual Appraisal"]}</span>`;
+      }">${entry["Appraisal"]}</span>`;
     }
   });
 }
@@ -445,13 +447,13 @@ function openEditAppraisalModal(id) {
 
   document.getElementById("appraisalModalTitle").textContent = "Edit Staff Appraisal";
 
-  document.getElementById("staffName").value = entry["Staff Name"];
-  document.getElementById("staffNumber").value = entry["Staff Number"];
+  document.getElementById("staffName").value = entry["Name"];
+  document.getElementById("staffNumber").value = entry["Staff No."];
   document.getElementById("rank").value = entry["Rank"];
-  document.getElementById("objectives").value = entry["Objectives for the Year"];
-  document.getElementById("midYearReview").value = entry["Mid Year Review"];
-  document.getElementById("annualAppraisal").value = entry["Annual Appraisal"];
-  document.getElementById("appraiser").value = entry["Name of Appraiser"];
+  document.getElementById("objectives").value = entry["Objectives"];
+  document.getElementById("midYearReview").value = entry["Mid-Year Review"];
+  document.getElementById("annualAppraisal").value = entry["Appraisal"];
+  document.getElementById("appraiser").value = entry["Appraiser"];
   document.getElementById("status").value = entry["Status"];
 
   document.getElementById("appraisalModal").classList.remove("hidden");
@@ -470,13 +472,13 @@ function handleFormSubmit(e) {
   e.preventDefault();
 
   const formData = {
-    "Staff Name": document.getElementById("staffName").value,
-    "Staff Number": document.getElementById("staffNumber").value,
+    "Name": document.getElementById("staffName").value,
+    "Staff No.": document.getElementById("staffNumber").value,
     Rank: document.getElementById("rank").value,
-    "Objectives for the Year": document.getElementById("objectives").value,
-    "Mid Year Review": document.getElementById("midYearReview").value,
-    "Annual Appraisal": document.getElementById("annualAppraisal").value,
-    "Name of Appraiser": document.getElementById("appraiser").value,
+    "Objectives": document.getElementById("objectives").value,
+    "Mid-Year Review": document.getElementById("midYearReview").value,
+    "Appraisal": document.getElementById("annualAppraisal").value,
+    "Appraiser": document.getElementById("appraiser").value,
     Status: document.getElementById("status").value,
   };
 
@@ -515,7 +517,7 @@ function viewAppraisal(id) {
   if (!entry) return;
 
   alert(
-    `Staff Appraisal Details:\n\nName: ${entry["Staff Name"]}\nNumber: ${entry["Staff Number"]}\nRank: ${entry["Rank"]}\nObjectives: ${entry["Objectives for the Year"]}\nMid Year Review: ${entry["Mid Year Review"]}\nAnnual Appraisal: ${entry["Annual Appraisal"]}\nAppraiser: ${entry["Name of Appraiser"]}\nStatus: ${entry["Status"]}`
+    `Staff Appraisal Details:\n\nName: ${entry["Name"]}\nNumber: ${entry["Staff No."]}\nRank: ${entry["Rank"]}\nObjectives: ${entry["Objectives"]}\nMid Year Review: ${entry["Mid-Year Review"]}\nAnnual Appraisal: ${entry["Appraisal"]}\nAppraiser: ${entry["Appraiser"]}\nStatus: ${entry["Status"]}`
   );
 }
 
@@ -533,13 +535,13 @@ function showAppraisalSummary() {
   // Get overdue appraisals
   const today = new Date();
   const overdueAppraisals = mockData.filter((appraisal) => {
-    const midYearDate = new Date(appraisal["Mid Year Review"]);
-    const annualDate = new Date(appraisal["Annual Appraisal"]);
+    const midYearDate = new Date(appraisal["Mid-Year Review"]);
+    const annualDate = new Date(appraisal["Appraisal"]);
     return (midYearDate < today || annualDate < today) && appraisal.Status !== "Completed";
   });
 
   const upcomingAppraisals = mockData.filter((appraisal) => {
-    const annualDate = new Date(appraisal["Annual Appraisal"]);
+    const annualDate = new Date(appraisal["Appraisal"]);
     const thirtyDaysFromNow = new Date();
     thirtyDaysFromNow.setDate(today.getDate() + 30);
     return (
@@ -615,13 +617,13 @@ function closeAppraisalSummary() {
 
 function exportData() {
   const csvHeaders = [
-    "Staff Name",
-    "Staff Number",
+    "Name",
+    "Staff No.",
     "Rank",
-    "Objectives for the Year",
-    "Mid Year Review",
-    "Annual Appraisal",
-    "Name of Appraiser",
+    "Objectives",
+    "Mid-Year Review",
+    "Appraisal",
+    "Appraiser",
     "Status",
   ];
 
@@ -630,13 +632,13 @@ function exportData() {
 
   mockData.forEach((entry) => {
     const row = [
-      `"${entry["Staff Name"]}"`,
-      `"${entry["Staff Number"]}"`,
+      `"${entry["Name"]}"`,
+      `"${entry["Staff No."]}"`,
       `"${entry["Rank"]}"`,
-      `"${entry["Objectives for the Year"].replace(/"/g, '""')}"`,
-      `"${entry["Mid Year Review"]}"`,
-      `"${entry["Annual Appraisal"]}"`,
-      `"${entry["Name of Appraiser"]}"`,
+      `"${entry["Objectives"].replace(/"/g, '""')}"`,
+      `"${entry["Mid-Year Review"]}"`,
+      `"${entry["Appraisal"]}"`,
+      `"${entry["Appraiser"]}"`,
       `"${entry["Status"]}"`,
     ];
     csvContent += row.join(",") + "\n";
@@ -663,13 +665,13 @@ function exportToExcel() {
 
   // Prepare data for Excel (clean format without HTML)
   const excelData = mockData.map((entry) => ({
-    "Staff Name": entry["Staff Name"],
-    "Staff Number": entry["Staff Number"],
+    "Name": entry["Name"],
+    "Staff No.": entry["Staff No."],
     Rank: entry["Rank"],
-    "Objectives for the Year": entry["Objectives for the Year"],
-    "Mid Year Review": entry["Mid Year Review"],
-    "Annual Appraisal": entry["Annual Appraisal"],
-    "Name of Appraiser": entry["Name of Appraiser"],
+    "Objectives": entry["Objectives"],
+    "Mid-Year Review": entry["Mid-Year Review"],
+    "Appraisal": entry["Appraisal"],
+    "Appraiser": entry["Appraiser"],
     Status: entry["Status"],
   }));
 
@@ -678,13 +680,13 @@ function exportToExcel() {
 
   // Set column widths
   const colWidths = [
-    { wch: 25 }, // Staff Name
-    { wch: 12 }, // Staff Number
+    { wch: 25 }, // Name
+    { wch: 12 }, // Staff No.
     { wch: 30 }, // Rank
     { wch: 50 }, // Objectives
-    { wch: 15 }, // Mid Year Review
-    { wch: 15 }, // Annual Appraisal
-    { wch: 25 }, // Name of Appraiser
+    { wch: 15 }, // Mid-Year Review
+    { wch: 15 }, // Appraisal
+    { wch: 25 }, // Appraiser
     { wch: 12 }, // Status
   ];
   ws["!cols"] = colWidths;

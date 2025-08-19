@@ -7,11 +7,11 @@ const headers = [
   "#",
   "Topic",
   "Responsible",
-  "Timeliness",
+  "Timeline",
   "Target",
-  "Completion Deadline",
+  "Deadline",
   "Status",
-  "Mode of Evaluation",
+  "Evaluation",
   "Actions",
 ];
 
@@ -203,7 +203,7 @@ export const renderTrainingPlan = () => {
                 />
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Timeliness</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Timeline</label>
                 <input
                   type="text"
                   id="timeliness"
@@ -223,7 +223,7 @@ export const renderTrainingPlan = () => {
                 />
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Completion Deadline</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Deadline</label>
                 <input
                   type="date"
                   id="completionDeadline"
@@ -245,7 +245,7 @@ export const renderTrainingPlan = () => {
                 </select>
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Mode of Evaluation</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Evaluation</label>
                 <input
                   type="text"
                   id="modeOfEvaluation"
@@ -303,11 +303,11 @@ const renderTable = () => {
       "#": entry.number,
       Topic: entry.topic,
       Responsible: entry.responsible,
-      Timeliness: entry.timeliness,
+      Timeline: entry.timeliness,
       Target: entry.target,
-      "Completion Deadline": formatDate(entry.completionDeadline),
+      Deadline: formatDate(entry.completionDeadline),
       Status: entry.status,
-      "Mode of Evaluation": entry.modeOfEvaluation,
+      Evaluation: entry.modeOfEvaluation,
       Actions: getActionButtonsHTML(entry.id),
     }));
 
@@ -473,11 +473,11 @@ function exportData() {
     "#",
     "Topic",
     "Responsible",
-    "Timeliness",
+    "Timeline",
     "Target",
-    "Completion Deadline",
+    "Deadline",
     "Status",
-    "Mode of Evaluation",
+    "Evaluation",
   ];
 
   let csvContent = "data:text/csv;charset=utf-8,";
@@ -521,11 +521,11 @@ function exportToExcel() {
     "#": entry.number,
     Topic: entry.topic,
     Responsible: entry.responsible,
-    Timeliness: entry.timeliness,
+    Timeline: entry.timeliness,
     Target: entry.target,
-    "Completion Deadline": formatDate(entry.completionDeadline),
+    Deadline: formatDate(entry.completionDeadline),
     Status: entry.status,
-    "Mode of Evaluation": entry.modeOfEvaluation,
+    Evaluation: entry.modeOfEvaluation,
   }));
 
   // Create worksheet from data
@@ -536,11 +536,11 @@ function exportToExcel() {
     { wch: 5 }, // #
     { wch: 40 }, // Topic
     { wch: 25 }, // Responsible
-    { wch: 15 }, // Timeliness
+    { wch: 15 }, // Timeline
     { wch: 25 }, // Target
-    { wch: 18 }, // Completion Deadline
+    { wch: 18 }, // Deadline
     { wch: 15 }, // Status
-    { wch: 20 }, // Mode of Evaluation
+    { wch: 20 }, // Evaluation
   ];
   ws["!cols"] = colWidths;
 

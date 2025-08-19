@@ -27,16 +27,56 @@ let actionPlanData = [
     completionDate: "30/1/2025",
     followUp: "Training completed. Record review initiated",
   },
+  {
+    id: 2,
+    nonConformity: "Temperature monitoring logs for blood bank refrigerator were incomplete",
+    majorMinor: "Major",
+    rootCause: "Failure to assign responsibility for daily checks",
+    correctiveAction: "Appoint responsible officer and implement daily log verification",
+    assignedPersonnel: "Mariam Darko",
+    completionDate: "15/2/2025",
+    followUp: "Officer appointed, verification ongoing",
+  },
+  {
+    id: 3,
+    nonConformity: "Calibration certificate for pipettes was missing in equipment file",
+    majorMinor: "Minor",
+    rootCause: "Delay in filing calibration records",
+    correctiveAction: "Update equipment file and assign back-up for record filing",
+    assignedPersonnel: "George Addae",
+    completionDate: "10/2/2025",
+    followUp: "Certificate filed, system check pending",
+  },
+  {
+    id: 4,
+    nonConformity: "No evidence of internal audit conducted for Q2 2024",
+    majorMinor: "Major",
+    rootCause: "Audit schedule not properly monitored",
+    correctiveAction: "Revise audit plan and assign QA officer for monitoring",
+    assignedPersonnel: "Akosua Nyarko",
+    completionDate: "28/2/2025",
+    followUp: "Revised plan drafted, pending approval",
+  },
+  {
+    id: 5,
+    nonConformity: "Staff competency assessments not documented for 3 new recruits",
+    majorMinor: "Minor",
+    rootCause: "Oversight during orientation",
+    correctiveAction: "Conduct and document competency assessments within 2 weeks of hire",
+    assignedPersonnel: "Yaw Amponsah",
+    completionDate: "5/3/2025",
+    followUp: "Assessments completed, awaiting sign-off",
+  },
 ];
 
 const departmentHeaders = ["Department", "Number of NCs Resolved", "Number of NCs Pending"];
 const actionPlanHeaders = [
-  "Noted non-conformities/deficiencies (ISO 15189 clause)",
-  "Major/Minor",
-  "Root Cause",
-  "Corrective Action",
-  "Assigned Personnel",
-  "Completion Date",
+  "Non-conformity (ISO 15189)",
+  "Severity",
+  "Cause",
+  "Action",
+  "Responsible",
+  "Due Date",
   "Follow-up",
 ];
 
@@ -49,7 +89,7 @@ export function renderAuditNonConformities() {
 
   setTimeout(() => {
     document.getElementById("sectionTitle").textContent = sectionNameRaw;
-    
+
     contentDiv.innerHTML = `
         <div>
           <!-- Navigation Tabs -->
@@ -189,7 +229,7 @@ export function renderAuditNonConformities() {
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="md:col-span-2">
                   <label class="block text-sm font-medium text-gray-700 mb-1"
-                    >Noted Non-conformities/Deficiencies (ISO 15189 clause)</label
+                    >Non-conformity (ISO 15189)</label
                   >
                   <textarea
                     id="nonConformity"
@@ -199,7 +239,7 @@ export function renderAuditNonConformities() {
                   ></textarea>
                 </div>
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Major/Minor</label>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Severity</label>
                   <select
                     id="majorMinor"
                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -211,7 +251,7 @@ export function renderAuditNonConformities() {
                   </select>
                 </div>
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Assigned Personnel</label>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Responsible</label>
                   <input
                     type="text"
                     id="assignedPersonnel"
@@ -220,7 +260,7 @@ export function renderAuditNonConformities() {
                   />
                 </div>
                 <div class="md:col-span-2">
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Root Cause</label>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Cause</label>
                   <textarea
                     id="rootCause"
                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -229,7 +269,7 @@ export function renderAuditNonConformities() {
                   ></textarea>
                 </div>
                 <div class="md:col-span-2">
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Corrective Action</label>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Action</label>
                   <textarea
                     id="correctiveAction"
                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -238,7 +278,7 @@ export function renderAuditNonConformities() {
                   ></textarea>
                 </div>
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Completion Date</label>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Due Date</label>
                   <input
                     type="date"
                     id="completionDate"
@@ -350,6 +390,8 @@ function renderDepartmentTable() {
 
     tableContainer.innerHTML = "";
     tableContainer.appendChild(createTable([...departmentHeaders, "Actions"], tableData));
+
+    // Add event listeners for action buttons
     attachDepartmentActionListeners();
   }
 }
@@ -442,7 +484,7 @@ function deleteDepartment(id) {
 function renderActionPlanTable() {
   const tableContainer = document.getElementById("actionPlanTableContainer");
 
-  //   TODO; fix the Major/Minor view
+  //   TODO; fix the Severity view
   if (actionPlanData.length === 0) {
     tableContainer.innerHTML = `
       <div class="text-center p-8 text-gray-500">
@@ -453,20 +495,42 @@ function renderActionPlanTable() {
   } else {
     const tableData = actionPlanData.map((action) => ({
       ...action,
-      "Noted non-conformities/deficiencies (ISO 15189 clause)": action.nonConformity,
-      "Major/Minor": getMajorMinorBadge(action.majorMinor),
-      "Root Cause": action.rootCause,
-      "Corrective Action": action.correctiveAction,
-      "Assigned Personnel": action.assignedPersonnel,
-      "Completion Date": action.completionDate,
+      "Non-conformity (ISO 15189)": action.nonConformity,
+      Severity: action.majorMinor,
+      Cause: action.rootCause,
+      Action: action.correctiveAction,
+      Responsible: action.assignedPersonnel,
+      "Due Date": action.completionDate,
       "Follow-up": action.followUp,
       Actions: getActionPlanActionButtonsHTML(action.id),
     }));
 
     tableContainer.innerHTML = "";
     tableContainer.appendChild(createTable([...actionPlanHeaders, "Actions"], tableData));
+
+    // Apply HTML formatting after table is created
+    applyTableFormatting();
+
+    // Add event listeners for action buttons
     attachActionPlanActionListeners();
   }
+}
+
+function applyTableFormatting() {
+  const table = document.querySelector("#actionPlanTableContainer table");
+  if (!table) return;
+
+  const rows = table.querySelectorAll("tbody tr");
+
+  rows.forEach((row, index) => {
+    const entry = actionPlanData[index];
+    if (!entry) return;
+
+    const cells = row.querySelectorAll("td");
+    if (cells[1]) {
+      cells[1].innerHTML = getMajorMinorBadge(entry.majorMinor);
+    }
+  });
 }
 
 function getMajorMinorBadge(type) {
@@ -589,11 +653,11 @@ function exportToExcel() {
   // Action Plan sheet
   const actionData = actionPlanData.map((action) => ({
     "Non-conformities": action.nonConformity,
-    "Major/Minor": action.majorMinor,
-    "Root Cause": action.rootCause,
-    "Corrective Action": action.correctiveAction,
-    "Assigned Personnel": action.assignedPersonnel,
-    "Completion Date": action.completionDate,
+    Severity: action.majorMinor,
+    Cause: action.rootCause,
+    Action: action.correctiveAction,
+    Responsible: action.assignedPersonnel,
+    "Due Date": action.completionDate,
     "Follow-up": action.followUp,
   }));
 
@@ -656,8 +720,8 @@ function printReport() {
           <tr>
             <th>Non-conformity</th>
             <th>Type</th>
-            <th>Root Cause</th>
-            <th>Corrective Action</th>
+            <th>Cause</th>
+            <th>Action</th>
             <th>Assigned</th>
             <th>Due Date</th>
             <th>Follow-up</th>

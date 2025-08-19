@@ -3,13 +3,14 @@ import { showLoading } from "./ui-utils/show-loading.js";
 
 const sectionNameRaw = "POWER STABILITY RECORD-FKBTH-CL/FS/1501";
 const sectionName = sectionNameRaw.toLowerCase().replace(/ /g, "-");
+
 const headers = [
   "Date",
-  "Time of Service Interruption",
-  "Service Affected Interruption",
-  "Reason for Interruption",
-  "Duration of Interruption",
-  "Has Information of Interruption Been Communicated?",
+  "Time",
+  "Service Affected",
+  "Reason",
+  "Duration",
+  "Info Communicated",
   "Status",
   "Actions",
 ];
@@ -18,101 +19,101 @@ let mockData = [
   {
     id: 1,
     Date: "2025-08-01",
-    "Time of Service Interruption": "08:15",
-    "Service Affected Interruption": "Haematology Analyser",
-    "Reason for Interruption": "Power outage",
-    "Duration of Interruption": "45 mins",
-    "Has Information of Interruption Been Communicated?": "Yes",
+    "Time": "08:15",
+    "Service Affected": "Haematology Analyser",
+    "Reason": "Power outage",
+    "Duration": "45 mins",
+    "Info Communicated": "Yes",
     Status: "Resolved",
   },
   {
     id: 2,
     Date: "2025-08-02",
-    "Time of Service Interruption": "14:20",
-    "Service Affected Interruption": "Blood Bank Freezer",
-    "Reason for Interruption": "Voltage fluctuation",
-    "Duration of Interruption": "30 mins",
-    "Has Information of Interruption Been Communicated?": "Yes",
+    "Time": "14:20",
+    "Service Affected": "Blood Bank Freezer",
+    "Reason": "Voltage fluctuation",
+    "Duration": "30 mins",
+    "Info Communicated": "Yes",
     Status: "Resolved",
   },
   {
     id: 3,
     Date: "2025-08-03",
-    "Time of Service Interruption": "10:05",
-    "Service Affected Interruption": "PCR Machine",
-    "Reason for Interruption": "Generator failure",
-    "Duration of Interruption": "1 hr 15 mins",
-    "Has Information of Interruption Been Communicated?": "Yes",
+    "Time": "10:05",
+    "Service Affected": "PCR Machine",
+    "Reason": "Generator failure",
+    "Duration": "1 hr 15 mins",
+    "Info Communicated": "Yes",
     Status: "Pending",
   },
   {
     id: 4,
     Date: "2025-08-04",
-    "Time of Service Interruption": "16:40",
-    "Service Affected Interruption": "Cold Room",
-    "Reason for Interruption": "Maintenance work",
-    "Duration of Interruption": "2 hrs",
-    "Has Information of Interruption Been Communicated?": "Yes",
+    "Time": "16:40",
+    "Service Affected": "Cold Room",
+    "Reason": "Maintenance work",
+    "Duration": "2 hrs",
+    "Info Communicated": "Yes",
     Status: "Resolved",
   },
   {
     id: 5,
     Date: "2025-08-05",
-    "Time of Service Interruption": "07:50",
-    "Service Affected Interruption": "Microscopy Unit",
-    "Reason for Interruption": "Power outage",
-    "Duration of Interruption": "50 mins",
-    "Has Information of Interruption Been Communicated?": "No",
+    "Time": "07:50",
+    "Service Affected": "Microscopy Unit",
+    "Reason": "Power outage",
+    "Duration": "50 mins",
+    "Info Communicated": "No",
     Status: "Pending",
   },
   {
     id: 6,
     Date: "2025-08-06",
-    "Time of Service Interruption": "09:25",
-    "Service Affected Interruption": "Microbiology Incubator",
-    "Reason for Interruption": "Breaker trip",
-    "Duration of Interruption": "40 mins",
-    "Has Information of Interruption Been Communicated?": "Yes",
+    "Time": "09:25",
+    "Service Affected": "Microbiology Incubator",
+    "Reason": "Breaker trip",
+    "Duration": "40 mins",
+    "Info Communicated": "Yes",
     Status: "Resolved",
   },
   {
     id: 7,
     Date: "2025-08-07",
-    "Time of Service Interruption": "15:15",
-    "Service Affected Interruption": "Histology Tissue Processor",
-    "Reason for Interruption": "Power outage",
-    "Duration of Interruption": "35 mins",
-    "Has Information of Interruption Been Communicated?": "No",
+    "Time": "15:15",
+    "Service Affected": "Histology Tissue Processor",
+    "Reason": "Power outage",
+    "Duration": "35 mins",
+    "Info Communicated": "No",
     Status: "Pending",
   },
   {
     id: 8,
     Date: "2025-08-08",
-    "Time of Service Interruption": "11:10",
-    "Service Affected Interruption": "Blood Bank Refrigerator",
-    "Reason for Interruption": "Voltage fluctuation",
-    "Duration of Interruption": "25 mins",
-    "Has Information of Interruption Been Communicated?": "Yes",
+    "Time": "11:10",
+    "Service Affected": "Blood Bank Refrigerator",
+    "Reason": "Voltage fluctuation",
+    "Duration": "25 mins",
+    "Info Communicated": "Yes",
     Status: "Resolved",
   },
   {
     id: 9,
     Date: "2025-08-09",
-    "Time of Service Interruption": "13:30",
-    "Service Affected Interruption": "Haematology Analyser",
-    "Reason for Interruption": "Generator fuel shortage",
-    "Duration of Interruption": "1 hr",
-    "Has Information of Interruption Been Communicated?": "Yes",
+    "Time": "13:30",
+    "Service Affected": "Haematology Analyser",
+    "Reason": "Generator fuel shortage",
+    "Duration": "1 hr",
+    "Info Communicated": "Yes",
     Status: "Resolved",
   },
   {
     id: 10,
     Date: "2025-08-10",
-    "Time of Service Interruption": "17:00",
-    "Service Affected Interruption": "PCR Machine",
-    "Reason for Interruption": "Electrical fault",
-    "Duration of Interruption": "3 hrs",
-    "Has Information of Interruption Been Communicated?": "No",
+    "Time": "17:00",
+    "Service Affected": "PCR Machine",
+    "Reason": "Electrical fault",
+    "Duration": "3 hrs",
+    "Info Communicated": "No",
     Status: "Pending",
   },
 ];
@@ -184,7 +185,7 @@ export const renderPowerTracker = () => {
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1"
-                  >Time of Service Interruption</label
+                  >Time</label
                 >
                 <input
                   type="text"
@@ -196,7 +197,7 @@ export const renderPowerTracker = () => {
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1"
-                  >Service Affected Interruption</label
+                  >Service Affected</label
                 >
                 <input
                   type="text"
@@ -206,7 +207,7 @@ export const renderPowerTracker = () => {
                 />
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Reason for Interruption</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Reason</label>
                 <input
                   type="text"
                   id="reason"
@@ -297,12 +298,12 @@ const renderTable = () => {
     const tableData = mockData.map((entry) => ({
       ...entry,
       Date: entry.Date,
-      "Time of Service Interruption": entry["Time of Service Interruption"],
-      "Service Affected Interruption": entry["Service Affected Interruption"],
-      "Reason for Interruption": entry["Reason for Interruption"],
-      "Duration of Interruption": entry["Duration of Interruption"],
-      "Has Information of Interruption Been Communicated?":
-        entry["Has Information of Interruption Been Communicated?"],
+      "Time": entry["Time"],
+      "Service Affected": entry["Service Affected"],
+      "Reason": entry["Reason"],
+      "Duration": entry["Duration"],
+      "Info Communicated":
+        entry["Info Communicated"],
       Status: entry.Status,
       Actions: getActionButtonsHTML(entry.id),
     }));
@@ -333,7 +334,7 @@ function applyTableFormatting() {
 
     if (cells[5]) {
       cells[5].innerHTML = getCommunicatedBadgeHTML(
-        entry["Has Information of Interruption Been Communicated?"]
+        entry["Info Communicated"]
       );
     }
 
@@ -407,12 +408,12 @@ function openEditEntryModal(id) {
   document.getElementById("entryModalTitle").textContent = "Edit Entry";
 
   document.getElementById("date").value = entry.Date;
-  document.getElementById("interruptionTime").value = entry["Time of Service Interruption"];
-  document.getElementById("serviceAffected").value = entry["Service Affected Interruption"];
-  document.getElementById("reason").value = entry["Reason for Interruption"];
-  document.getElementById("duration").value = entry["Duration of Interruption"];
+  document.getElementById("interruptionTime").value = entry["Time"];
+  document.getElementById("serviceAffected").value = entry["Service Affected"];
+  document.getElementById("reason").value = entry["Reason"];
+  document.getElementById("duration").value = entry["Duration"];
   document.getElementById("communicated").value =
-    entry["Has Information of Interruption Been Communicated?"];
+    entry["Info Communicated"];
   document.getElementById("status").value = entry.Status;
 
   document.getElementById("entryModal").classList.remove("hidden");
@@ -432,11 +433,11 @@ function handleFormSubmit(e) {
 
   const formData = {
     Date: document.getElementById("date").value,
-    "Time of Service Interruption": document.getElementById("interruptionTime").value,
-    "Service Affected Interruption": document.getElementById("serviceAffected").value,
-    "Reason for Interruption": document.getElementById("reason").value,
-    "Duration of Interruption": document.getElementById("duration").value,
-    "Has Information of Interruption Been Communicated?":
+    "Time": document.getElementById("interruptionTime").value,
+    "Service Affected": document.getElementById("serviceAffected").value,
+    "Reason": document.getElementById("reason").value,
+    "Duration": document.getElementById("duration").value,
+    "Info Communicated":
       document.getElementById("communicated").value,
     Status: document.getElementById("status").value,
   };
@@ -474,11 +475,11 @@ function deleteEntry(id) {
 function exportData() {
   const csvHeaders = [
     "Date",
-    "Time of Service Interruption",
-    "Service Affected Interruption",
-    "Reason for Interruption",
-    "Duration of Interruption",
-    "Has Information of Interruption Been Communicated?",
+    "Time",
+    "Service Affected",
+    "Reason",
+    "Duration",
+    "Info Communicated",
     "Status",
   ];
 
@@ -488,11 +489,11 @@ function exportData() {
   mockData.forEach((entry) => {
     const row = [
       `"${entry.Date}"`,
-      `"${entry["Time of Service Interruption"]}"`,
-      `"${entry["Service Affected Interruption"]}"`,
-      `"${entry["Reason for Interruption"]}"`,
-      `"${entry["Duration of Interruption"]}"`,
-      `"${entry["Has Information of Interruption Been Communicated?"]}"`,
+      `"${entry["Time"]}"`,
+      `"${entry["Service Affected"]}"`,
+      `"${entry["Reason"]}"`,
+      `"${entry["Duration"]}"`,
+      `"${entry["Info Communicated"]}"`,
       `"${entry.Status}"`,
     ];
     csvContent += row.join(",") + "\n";
@@ -520,12 +521,12 @@ function exportToExcel() {
   // Prepare data for Excel (clean format without HTML)
   const excelData = mockData.map((entry) => ({
     Date: entry.Date,
-    "Time of Service Interruption": entry["Time of Service Interruption"],
-    "Service Affected Interruption": entry["Service Affected Interruption"],
-    "Reason for Interruption": entry["Reason for Interruption"],
-    "Duration of Interruption": entry["Duration of Interruption"],
-    "Has Information of Interruption Been Communicated?":
-      entry["Has Information of Interruption Been Communicated?"],
+    "Time": entry["Time"],
+    "Service Affected": entry["Service Affected"],
+    "Reason": entry["Reason"],
+    "Duration": entry["Duration"],
+    "Info Communicated":
+      entry["Info Communicated"],
     Status: entry.Status,
   }));
 
@@ -535,11 +536,11 @@ function exportToExcel() {
   // Set column widths
   const colWidths = [
     { wch: 15 }, // Date
-    { wch: 25 }, // Time of Service Interruption
-    { wch: 30 }, // Service Affected Interruption
-    { wch: 25 }, // Reason for Interruption
-    { wch: 20 }, // Duration of Interruption
-    { wch: 50 }, // Has Information of Interruption Been Communicated?
+    { wch: 25 }, // Time
+    { wch: 30 }, // Service Affected
+    { wch: 25 }, // Reason
+    { wch: 20 }, // Duration
+    { wch: 50 }, // Info Communicated
     { wch: 12 }, // Status
   ];
   ws["!cols"] = colWidths;

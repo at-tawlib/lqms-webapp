@@ -6,11 +6,11 @@ const sectionName = sectionNameRaw.toLowerCase().replace(/ /g, "-");
 const headers = [
   "#",
   "Date",
-  "Time of Service Interruption",
+  "Time",
   "Service Affected",
-  "Reason for Interruption",
-  "Duration of Interruption",
-  "Has Information of Interruption Communicated to Stakeholders",
+  "Reason",
+  "Duration",
+  "Info Shared",
   "Status",
   "Actions",
 ];
@@ -20,11 +20,11 @@ let mockData = [
     id: 1,
     "#": "SI-001",
     Date: "2025-01-15",
-    "Time of Service Interruption": "09:30:00",
+    Time: "09:30:00",
     "Service Affected": "Hematology Testing",
-    "Reason for Interruption": "Hematology analyzer malfunction - calibration error",
-    "Duration of Interruption": "2 hours 30 minutes",
-    "Has Information of Interruption Communicated to Stakeholders": "Yes",
+    Reason: "Hematology analyzer malfunction - calibration error",
+    Duration: "2 hours 30 minutes",
+    "Info Shared": "Yes",
     Status: "Resolved",
     "Stakeholders Notified": "Lab Manager, Clinicians, Nursing Units",
     "Resolution Details": "Recalibrated analyzer, ran quality controls, service restored",
@@ -35,11 +35,11 @@ let mockData = [
     id: 2,
     "#": "SI-002",
     Date: "2025-01-20",
-    "Time of Service Interruption": "14:15:00",
+    Time: "14:15:00",
     "Service Affected": "Chemistry Panel Testing",
-    "Reason for Interruption": "Power outage affecting chemistry department",
-    "Duration of Interruption": "45 minutes",
-    "Has Information of Interruption Communicated to Stakeholders": "Yes",
+    Reason: "Power outage affecting chemistry department",
+    Duration: "45 minutes",
+    "Info Shared": "Yes",
     Status: "Resolved",
     "Stakeholders Notified": "All Clinical Departments, Hospital Administration",
     "Resolution Details": "Power restored, equipment restarted and verified operational",
@@ -50,11 +50,11 @@ let mockData = [
     id: 3,
     "#": "SI-003",
     Date: "2025-02-02",
-    "Time of Service Interruption": "11:00:00",
+    Time: "11:00:00",
     "Service Affected": "Microbiology Culture Processing",
-    "Reason for Interruption": "Incubator temperature control failure",
-    "Duration of Interruption": "4 hours 15 minutes",
-    "Has Information of Interruption Communicated to Stakeholders": "Yes",
+    Reason: "Incubator temperature control failure",
+    Duration: "4 hours 15 minutes",
+    "Info Shared": "Yes",
     Status: "Resolved",
     "Stakeholders Notified": "Infectious Disease Team, ICU, Emergency Department",
     "Resolution Details": "Backup incubator used, temperature control unit replaced",
@@ -65,11 +65,11 @@ let mockData = [
     id: 4,
     "#": "SI-004",
     Date: "2025-02-10",
-    "Time of Service Interruption": "08:45:00",
+    Time: "08:45:00",
     "Service Affected": "Phlebotomy Services",
-    "Reason for Interruption": "Staff shortage due to emergency situation",
-    "Duration of Interruption": "1 hour 20 minutes",
-    "Has Information of Interruption Communicated to Stakeholders": "Yes",
+    Reason: "Staff shortage due to emergency situation",
+    Duration: "1 hour 20 minutes",
+    "Info Shared": "Yes",
     Status: "Resolved",
     "Stakeholders Notified": "Nursing Units, Outpatient Clinics",
     "Resolution Details": "Additional staff called in, normal operations resumed",
@@ -80,11 +80,11 @@ let mockData = [
     id: 5,
     "#": "SI-005",
     Date: "2025-02-12",
-    "Time of Service Interruption": "16:20:00",
+    Time: "16:20:00",
     "Service Affected": "Blood Bank Services",
-    "Reason for Interruption": "Network connectivity issues affecting blood bank software",
-    "Duration of Interruption": "Ongoing",
-    "Has Information of Interruption Communicated to Stakeholders": "Yes",
+    Reason: "Network connectivity issues affecting blood bank software",
+    Duration: "Ongoing",
+    "Info Shared": "Yes",
     Status: "In Progress",
     "Stakeholders Notified": "Surgery Department, Emergency Department, ICU",
     "Resolution Details":
@@ -96,11 +96,11 @@ let mockData = [
     id: 6,
     "#": "SI-006",
     Date: "2025-02-05",
-    "Time of Service Interruption": "13:30:00",
+    Time: "13:30:00",
     "Service Affected": "Molecular Diagnostics",
-    "Reason for Interruption": "PCR machine thermal block failure",
-    "Duration of Interruption": "6 hours 45 minutes",
-    "Has Information of Interruption Communicated to Stakeholders": "Yes",
+    Reason: "PCR machine thermal block failure",
+    Duration: "6 hours 45 minutes",
+    "Info Shared": "Yes",
     Status: "Resolved",
     "Stakeholders Notified": "Infectious Disease, Oncology, Emergency Department",
     "Resolution Details": "Thermal block replaced, instrument calibrated and verified",
@@ -196,7 +196,7 @@ export const renderServiceInterruptions = () => {
               <div class="grid grid-cols-2 gap-4">
                 <div>
                   <label class="block text-sm font-medium text-gray-700 mb-1"
-                    >Time of Service Interruption</label
+                    >Time</label
                   >
                   <input
                     type="time"
@@ -231,7 +231,7 @@ export const renderServiceInterruptions = () => {
               </div>
 
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Reason for Interruption</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Reason</label>
                 <textarea
                   id="reasonForInterruption"
                   rows="3"
@@ -244,7 +244,7 @@ export const renderServiceInterruptions = () => {
               <div class="grid grid-cols-2 gap-4">
                 <div>
                   <label class="block text-sm font-medium text-gray-700 mb-1"
-                    >Duration of Interruption</label
+                    >Duration</label
                   >
                   <input
                     type="text"
@@ -441,12 +441,11 @@ const renderTable = () => {
     const tableData = mockData.map((entry, index) => ({
       "#": entry["#"],
       Date: entry["Date"],
-      "Time of Service Interruption": entry["Time of Service Interruption"],
+      Time: entry["Time"],
       "Service Affected": entry["Service Affected"],
-      "Reason for Interruption": entry["Reason for Interruption"],
-      "Duration of Interruption": entry["Duration of Interruption"],
-      "Has Information of Interruption Communicated to Stakeholders":
-        entry["Has Information of Interruption Communicated to Stakeholders"],
+      Reason: entry["Reason"],
+      Duration: entry["Duration"],
+      "Info Shared": entry["Info Shared"],
       Status: entry["Status"],
       Actions: getActionButtonsHTML(entry.id),
     }));
@@ -482,9 +481,7 @@ function applyTableFormatting() {
 
     // Format Communication column (index 6)
     if (cells[6]) {
-      cells[6].innerHTML = getCommunicationBadgeHTML(
-        entry["Has Information of Interruption Communicated to Stakeholders"]
-      );
+      cells[6].innerHTML = getCommunicationBadgeHTML(entry["Info Shared"]);
     }
 
     // Format Date with urgency indicator (index 1)
@@ -503,12 +500,12 @@ function applyTableFormatting() {
 
     // Format Duration with severity indicator (index 5)
     if (cells[5]) {
-      cells[5].innerHTML = getDurationBadgeHTML(entry["Duration of Interruption"]);
+      cells[5].innerHTML = getDurationBadgeHTML(entry["Duration"]);
     }
 
     // Truncate long reasons for better table display (index 4)
-    if (cells[4] && entry["Reason for Interruption"]) {
-      const reason = entry["Reason for Interruption"];
+    if (cells[4] && entry["Reason"]) {
+      const reason = entry["Reason"];
       const truncated = reason.length > 50 ? reason.substring(0, 50) + "..." : reason;
       cells[4].innerHTML = `<span title="${reason}">${truncated}</span>`;
     }
@@ -618,13 +615,13 @@ function openEditInterruptionModal(id) {
 
   document.getElementById("interruptionId").value = entry["#"];
   document.getElementById("interruptionDate").value = entry["Date"];
-  document.getElementById("interruptionTime").value = entry["Time of Service Interruption"];
+  document.getElementById("interruptionTime").value = entry["Time"];
   document.getElementById("serviceAffected").value = entry["Service Affected"];
-  document.getElementById("reasonForInterruption").value = entry["Reason for Interruption"];
-  document.getElementById("durationOfInterruption").value = entry["Duration of Interruption"];
+  document.getElementById("reasonForInterruption").value = entry["Reason"];
+  document.getElementById("durationOfInterruption").value = entry["Duration"];
   document.getElementById("status").value = entry["Status"];
   document.querySelector(
-    `input[name="stakeholdersCommunicated"][value="${entry["Has Information of Interruption Communicated to Stakeholders"]}"]`
+    `input[name="stakeholdersCommunicated"][value="${entry["Info Shared"]}"]`
   ).checked = true;
   document.getElementById("stakeholdersNotified").value = entry["Stakeholders Notified"] || "";
   document.getElementById("reportedBy").value = entry["Reported By"];
@@ -657,11 +654,11 @@ function handleFormSubmit(e) {
   const formData = {
     "#": document.getElementById("interruptionId").value,
     Date: document.getElementById("interruptionDate").value,
-    "Time of Service Interruption": document.getElementById("interruptionTime").value,
+    Time: document.getElementById("interruptionTime").value,
     "Service Affected": document.getElementById("serviceAffected").value,
-    "Reason for Interruption": document.getElementById("reasonForInterruption").value,
-    "Duration of Interruption": document.getElementById("durationOfInterruption").value,
-    "Has Information of Interruption Communicated to Stakeholders": stakeholdersCommunicated,
+    Reason: document.getElementById("reasonForInterruption").value,
+    Duration: document.getElementById("durationOfInterruption").value,
+    "Info Shared": stakeholdersCommunicated,
     Status: document.getElementById("status").value,
     "Stakeholders Notified": document.getElementById("stakeholdersNotified").value,
     "Reported By": document.getElementById("reportedBy").value,
@@ -719,7 +716,7 @@ function viewInterruption(id) {
       <div class="grid grid-cols-2 gap-4">
         <div>
           <label class="block text-sm font-medium text-gray-700">Time of Interruption</label>
-          <p class="mt-1 text-sm text-gray-900">${entry["Time of Service Interruption"]}</p>
+          <p class="mt-1 text-sm text-gray-900">${entry["Time"]}</p>
         </div>
         <div>
           <label class="block text-sm font-medium text-gray-700">Service Affected</label>
@@ -728,14 +725,14 @@ function viewInterruption(id) {
       </div>
       
       <div>
-        <label class="block text-sm font-medium text-gray-700">Reason for Interruption</label>
-        <p class="mt-1 text-sm text-gray-900">${entry["Reason for Interruption"]}</p>
+        <label class="block text-sm font-medium text-gray-700">Reason</label>
+        <p class="mt-1 text-sm text-gray-900">${entry["Reason"]}</p>
       </div>
       
       <div class="grid grid-cols-2 gap-4">
         <div>
           <label class="block text-sm font-medium text-gray-700">Duration</label>
-          <p class="mt-1">${getDurationBadgeHTML(entry["Duration of Interruption"])}</p>
+          <p class="mt-1">${getDurationBadgeHTML(entry["Duration"])}</p>
         </div>
         <div>
           <label class="block text-sm font-medium text-gray-700">Status</label>
@@ -745,9 +742,7 @@ function viewInterruption(id) {
       
       <div>
         <label class="block text-sm font-medium text-gray-700">Stakeholders Communicated</label>
-        <p class="mt-1">${getCommunicationBadgeHTML(
-          entry["Has Information of Interruption Communicated to Stakeholders"]
-        )}</p>
+        <p class="mt-1">${getCommunicationBadgeHTML(entry["Info Shared"])}</p>
       </div>
       
       ${
@@ -807,8 +802,7 @@ function showInterruptionSummary() {
   }, {});
 
   const communicationCounts = mockData.reduce((acc, interruption) => {
-    acc[interruption["Has Information of Interruption Communicated to Stakeholders"]] =
-      (acc[interruption["Has Information of Interruption Communicated to Stakeholders"]] || 0) + 1;
+    acc[interruption["Info Shared"]] = (acc[interruption["Info Shared"]] || 0) + 1;
     return acc;
   }, {});
 
@@ -819,7 +813,7 @@ function showInterruptionSummary() {
   );
 
   const ongoingInterruptions = mockData.filter((interruption) =>
-    interruption["Duration of Interruption"].toLowerCase().includes("ongoing")
+    interruption["Duration"].toLowerCase().includes("ongoing")
   );
 
   // Get recent interruptions (last 7 days)
@@ -837,7 +831,7 @@ function showInterruptionSummary() {
 
   // Get high-impact interruptions (duration > 2 hours)
   const highImpactInterruptions = mockData.filter((interruption) => {
-    const duration = interruption["Duration of Interruption"];
+    const duration = interruption["Duration"];
     return duration.includes("hour") && parseInt(duration.match(/(\d+)\s*hour/)?.[1] || "0") >= 2;
   });
 
@@ -959,8 +953,8 @@ function showInterruptionSummary() {
           .map(
             (interruption) => `
           <div class="text-sm text-red-800 mb-2 border-b border-red-200 pb-1">
-            <strong>${interruption["#"]}</strong>: ${interruption["Service Affected"]} - ${interruption["Duration of Interruption"]}
-            <br><span class="text-xs">${interruption["Date"]} at ${interruption["Time of Service Interruption"]}</span>
+            <strong>${interruption["#"]}</strong>: ${interruption["Service Affected"]} - ${interruption["Duration"]}
+            <br><span class="text-xs">${interruption["Date"]} at ${interruption["Time"]}</span>
           </div>
         `
           )
@@ -984,11 +978,8 @@ function showInterruptionSummary() {
           <div class="text-sm text-red-800 mb-2 border-b border-red-200 pb-1">
             <strong>${interruption["Service Affected"]}</strong> - Started: ${
               interruption["Date"]
-            } at ${interruption["Time of Service Interruption"]}
-            <br><span class="text-xs">Reason: ${interruption["Reason for Interruption"].substring(
-              0,
-              60
-            )}...</span>
+            } at ${interruption["Time"]}
+            <br><span class="text-xs">Reason: ${interruption["Reason"].substring(0, 60)}...</span>
           </div>
         `
           )
@@ -1032,7 +1023,7 @@ function showInterruptionSummary() {
           .map(
             (interruption) => `
           <div class="text-sm text-purple-800 mb-2 border-b border-purple-200 pb-1">
-            <strong>${interruption["Service Affected"]}</strong> - Duration: ${interruption["Duration of Interruption"]}
+            <strong>${interruption["Service Affected"]}</strong> - Duration: ${interruption["Duration"]}
             <br><span class="text-xs">${interruption["Date"]} | Status: ${interruption.Status}</span>
           </div>
         `
@@ -1057,10 +1048,10 @@ function exportData() {
   const csvHeaders = [
     "Interruption ID",
     "Date",
-    "Time of Service Interruption",
+    "Time",
     "Service Affected",
-    "Reason for Interruption",
-    "Duration of Interruption",
+    "Reason",
+    "Duration",
     "Stakeholders Communicated",
     "Status",
     "Stakeholders Notified",
@@ -1076,11 +1067,11 @@ function exportData() {
     const row = [
       `"${entry["#"]}"`,
       `"${entry["Date"]}"`,
-      `"${entry["Time of Service Interruption"]}"`,
+      `"${entry["Time"]}"`,
       `"${entry["Service Affected"]}"`,
-      `"${entry["Reason for Interruption"].replace(/"/g, '""')}"`,
-      `"${entry["Duration of Interruption"]}"`,
-      `"${entry["Has Information of Interruption Communicated to Stakeholders"]}"`,
+      `"${entry["Reason"].replace(/"/g, '""')}"`,
+      `"${entry["Duration"]}"`,
+      `"${entry["Info Shared"]}"`,
       `"${entry["Status"]}"`,
       `"${(entry["Stakeholders Notified"] || "").replace(/"/g, '""')}"`,
       `"${entry["Reported By"]}"`,
@@ -1113,12 +1104,11 @@ function exportToExcel() {
   const excelData = mockData.map((entry) => ({
     "Interruption ID": entry["#"],
     Date: entry["Date"],
-    "Time of Service Interruption": entry["Time of Service Interruption"],
+    Time: entry["Time"],
     "Service Affected": entry["Service Affected"],
-    "Reason for Interruption": entry["Reason for Interruption"],
-    "Duration of Interruption": entry["Duration of Interruption"],
-    "Stakeholders Communicated":
-      entry["Has Information of Interruption Communicated to Stakeholders"],
+    Reason: entry["Reason"],
+    Duration: entry["Duration"],
+    "Stakeholders Communicated": entry["Info Shared"],
     Status: entry["Status"],
     "Stakeholders Notified": entry["Stakeholders Notified"] || "",
     "Reported By": entry["Reported By"],

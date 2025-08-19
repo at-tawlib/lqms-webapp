@@ -7,11 +7,11 @@ const headers = [
   "#",
   "Date",
   "Risk",
-  "Root Cause",
-  "Preventive Action Implemented",
-  "Person Responsible",
-  "Follow Up Review",
-  "Residual Risk",
+  "Cause",
+  "Preventive Action",
+  "Responsible",
+  "Review",
+  "Residual",
   "Actions",
 ];
 
@@ -173,7 +173,7 @@ export const renderIQCRegister = () => {
                     />
                   </div>
                   <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Person Responsible</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Responsible</label>
                     <input
                       type="text"
                       id="personResponsible"
@@ -192,7 +192,7 @@ export const renderIQCRegister = () => {
                   ></textarea>
                 </div>
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Root Cause</label>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Cause</label>
                   <textarea
                     type="text"
                     id="rootCause"
@@ -203,7 +203,7 @@ export const renderIQCRegister = () => {
                 </div>
                 <div>
                   <label class="block text-sm font-medium text-gray-700 mb-1"
-                    >Preventive Action Implemented</label
+                    >Preventive Action</label
                   >
                   <textarea
                     id="preventiveAction"
@@ -214,7 +214,7 @@ export const renderIQCRegister = () => {
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Follow Up Review Date</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Review Date</label>
                     <input
                       type="date"
                       id="followUpReview"
@@ -223,7 +223,7 @@ export const renderIQCRegister = () => {
                     />
                   </div>
                   <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Residual Risk</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Residual</label>
                     <select
                       id="residualRisk"
                       class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -285,11 +285,11 @@ const renderTable = () => {
       "#": entry.number,
       Date: formatDate(entry.date),
       Risk: entry.risk,
-      "Root Cause": entry.rootCause,
-      "Preventive Action Implemented": entry.preventiveAction,
-      "Person Responsible": entry.personResponsible,
-      "Follow Up Review": formatDate(entry.followUpReview),
-      "Residual Risk": entry.residualRisk,
+      Cause: entry.rootCause,
+      "Preventive Action": entry.preventiveAction,
+      Responsible: entry.personResponsible,
+      Review: formatDate(entry.followUpReview),
+      Residual: entry.residualRisk,
       Actions: getActionButtonsHTML(entry.id),
     }));
 
@@ -455,11 +455,11 @@ function exportData() {
     "#",
     "Date",
     "Risk",
-    "Root Cause",
-    "Preventive Action Implemented",
-    "Person Responsible",
-    "Follow Up Review",
-    "Residual Risk",
+    "Cause",
+    "Preventive Action",
+    "Responsible",
+    "Review",
+    "Residual",
   ];
 
   let csvContent = "data:text/csv;charset=utf-8,";
@@ -503,11 +503,11 @@ function exportToExcel() {
     "#": entry.number,
     Date: formatDate(entry.date),
     Risk: entry.risk,
-    "Root Cause": entry.rootCause,
-    "Preventive Action Implemented": entry.preventiveAction,
-    "Person Responsible": entry.personResponsible,
-    "Follow Up Review": formatDate(entry.followUpReview),
-    "Residual Risk": entry.residualRisk,
+    Cause: entry.rootCause,
+    "Preventive Action": entry.preventiveAction,
+    Responsible: entry.personResponsible,
+    Review: formatDate(entry.followUpReview),
+    Residual: entry.residualRisk,
   }));
 
   // Create worksheet from data
@@ -518,11 +518,11 @@ function exportToExcel() {
     { wch: 5 }, // #
     { wch: 12 }, // Date
     { wch: 35 }, // Risk
-    { wch: 25 }, // Root Cause
-    { wch: 40 }, // Preventive Action Implemented
-    { wch: 20 }, // Person Responsible
-    { wch: 15 }, // Follow Up Review
-    { wch: 12 }, // Residual Risk
+    { wch: 25 }, // Cause
+    { wch: 40 }, // Preventive Action
+    { wch: 20 }, // Responsible
+    { wch: 15 }, // Review
+    { wch: 12 }, // Residual
   ];
   ws["!cols"] = colWidths;
 
