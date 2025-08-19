@@ -131,11 +131,11 @@ export const renderWeekLyActivityTracker = () => {
             class="fixed inset-0 flex items-center justify-center p-4 hidden z-50 bg-black bg-opacity-50"
             style="overflow-y: auto;"
             >
-            <div class="bg-white rounded-lg shadow-2xl max-w-lg w-full">
-              <div class="bg-blue-600 text-white p-4 rounded-t-lg">
+            <div class="bg-white rounded-lg shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+              <div class="fixed bg-blue-600 text-white p-4 rounded-t-lg max-w-lg w-full h-12">
                 <h3 id="entryModalTitle" class="text-lg font-bold">Add New Entry</h3>
                 </div>
-                <form id="entryForm" class="p-4 space-y-4">
+                <form id="entryForm" class="p-4 mt-12 space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Work Area</label>
                     <input
@@ -207,7 +207,7 @@ export const renderWeekLyActivityTracker = () => {
             </div>
 
     `;
-    
+
     renderTable();
 
     // Event listeners
