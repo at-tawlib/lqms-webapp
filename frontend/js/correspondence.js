@@ -4,13 +4,13 @@ import { showLoading } from "./ui-utils/show-loading.js";
 const sectionNameRaw = "QUALITY WORKPLAN 2025 FKBTH-CL/QP/0903";
 const sectionName = sectionNameRaw.toLowerCase().replace(/ /g, "-");
 const headers = [
-  "Date Received",
-  "Date of Correspondence",
+  "Received",
+  "Correspondence Date",
   "Sender",
-  "Subject of Correspondence",
-  "Response Required (Yes/No)",
+  "Subject",
+  "Response (Y/N)",
   "Action Required",
-  "Action Taken By",
+  "Action By",
   "Status",
   "Notes",
   "Actions",
@@ -173,7 +173,7 @@ export const renderCorrespondenceManager = () => {
               <form id="entryForm" class="p-6 mt-12 space-y-4">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Date Received</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Received</label>
                     <input
                       id="dateReceived"
                       type="date"
@@ -182,7 +182,7 @@ export const renderCorrespondenceManager = () => {
                     />
                   </div>
                   <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Date of Correspondence</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Correspondence Date</label>
                     <input
                       type="date"
                       id="dateOfCorrespondence"
@@ -202,7 +202,7 @@ export const renderCorrespondenceManager = () => {
                     />
                   </div>
                   <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Action Taken By</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Action By</label>
                     <input
                       type="text"
                       id="actionTakenBy"
@@ -213,7 +213,7 @@ export const renderCorrespondenceManager = () => {
                 </div>
                 <div>
                   <label class="block text-sm font-medium text-gray-700 mb-1"
-                    >Subject of Correspondence</label
+                    >Subject</label
                   >
                   <textarea
                     id="subjectOfCorrespondence"
@@ -314,13 +314,13 @@ const renderTable = () => {
     // Transform data to include actions and format for table
     const tableData = mockData.map((entry) => ({
       ...entry,
-      "Date Received": formatDate(entry.dateReceived),
-      "Date of Correspondence": formatDate(entry.dateOfCorrespondence),
+      "Received": formatDate(entry.dateReceived),
+      "Correspondence Date": formatDate(entry.dateOfCorrespondence),
       Sender: entry.sender,
-      "Subject of Correspondence": entry.subjectOfCorrespondence,
-      "Response Required (Yes/No)": entry.responseRequired,
+      "Subject": entry.subjectOfCorrespondence,
+      "Response (Y/N)": entry.responseRequired,
       "Action Required": entry.actionRequired,
-      "Action Taken By": entry.actionTakenBy,
+      "Action By": entry.actionTakenBy,
       Status: entry.status,
       Notes: entry.notes || "—",
       Actions: getActionButtonsHTML(entry.id),
@@ -501,13 +501,13 @@ function deleteEntry(id) {
 
 function exportData() {
   const csvHeaders = [
-    "Date Received",
-    "Date of Correspondence",
+    "Received",
+    "Correspondence Date",
     "Sender",
-    "Subject of Correspondence",
-    "Response Required (Yes/No)",
+    "Subject",
+    "Response (Y/N)",
     "Action Required",
-    "Action Taken By",
+    "Action By",
     "Status",
     "Notes",
   ];
@@ -551,13 +551,13 @@ function exportToExcel() {
 
   // Prepare data for Excel (clean format without HTML)
   const excelData = mockData.map((entry) => ({
-    "Date Received": formatDate(entry.dateReceived),
-    "Date of Correspondence": formatDate(entry.dateOfCorrespondence),
+    "Received": formatDate(entry.dateReceived),
+    "Correspondence Date": formatDate(entry.dateOfCorrespondence),
     Sender: entry.sender,
-    "Subject of Correspondence": entry.subjectOfCorrespondence,
-    "Response Required (Yes/No)": entry.responseRequired,
+    "Subject": entry.subjectOfCorrespondence,
+    "Response (Y/N)": entry.responseRequired,
     "Action Required": entry.actionRequired,
-    "Action Taken By": entry.actionTakenBy,
+    "Action By": entry.actionTakenBy,
     Status: entry.status,
     Notes: entry.notes || "",
   }));
@@ -567,13 +567,13 @@ function exportToExcel() {
 
   // Set column widths
   const colWidths = [
-    { wch: 15 }, // Date Received
-    { wch: 20 }, // Date of Correspondence
+    { wch: 15 }, // Received
+    { wch: 20 }, // Correspondence Date
     { wch: 20 }, // Sender
-    { wch: 40 }, // Subject of Correspondence
+    { wch: 40 }, // Subject
     { wch: 20 }, // Response Required
     { wch: 35 }, // Action Required
-    { wch: 20 }, // Action Taken By
+    { wch: 20 }, // Action By
     { wch: 15 }, // Status
     { wch: 30 }, // Notes
   ];

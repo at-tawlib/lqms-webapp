@@ -4,30 +4,30 @@ import { showLoading } from "./ui-utils/show-loading.js";
 const sectionNameRaw = "CONTINUAL IMPROVEMENT-FKBTH-CL/QM/1615";
 const sectionName = sectionNameRaw.toLowerCase().replace(/ /g, "-");
 const headers = [
-  "Initiative Title",
+  "Title",
   "Category",
   "Priority",
   "Identified By",
-  "Date Identified",
-  "Target Date",
+  "Date",
+  "Target",
   "Status",
   "Progress %",
-  "Responsible Person",
+  "Responsible",
   "Actions",
 ];
 
 let mockData = [
   {
     id: 1,
-    "Initiative Title": "Reduce Sample Turnaround Time",
+    Title: "Reduce Sample Turnaround Time",
     Category: "Process Improvement",
     Priority: "High",
     "Identified By": "Dr. Grace Owusu",
-    "Date Identified": "2025-01-15",
-    "Target Date": "2025-06-30",
+    Date: "2025-01-15",
+    Target: "2025-06-30",
     Status: "In Progress",
     "Progress %": 65,
-    "Responsible Person": "Dr. Kwame Asante",
+    Responsible: "Dr. Kwame Asante",
     Description:
       "Implement workflow optimization to reduce sample processing time from 4 hours to 2 hours for routine tests",
     "Expected Outcome": "50% reduction in turnaround time, improved patient satisfaction",
@@ -35,30 +35,30 @@ let mockData = [
   },
   {
     id: 2,
-    "Initiative Title": "ISO 15189 Compliance Enhancement",
+    Title: "ISO 15189 Compliance Enhancement",
     Category: "Quality Management",
     Priority: "Critical",
     "Identified By": "Ms. Ama Darko",
-    "Date Identified": "2025-02-01",
-    "Target Date": "2025-12-31",
+    Date: "2025-02-01",
+    Target: "2025-12-31",
     Status: "Planning",
     "Progress %": 25,
-    "Responsible Person": "Ms. Ama Darko",
+    Responsible: "Ms. Ama Darko",
     Description: "Complete implementation of remaining ISO 15189 requirements for full compliance",
     "Expected Outcome": "Achieve full ISO 15189 accreditation",
     "Resources Required": "External consultant, staff training, documentation updates",
   },
   {
     id: 3,
-    "Initiative Title": "Digital Result Reporting System",
+    Title: "Digital Result Reporting System",
     Category: "Technology Enhancement",
     Priority: "Medium",
     "Identified By": "Mr. Joseph Boateng",
-    "Date Identified": "2025-01-20",
-    "Target Date": "2025-09-15",
+    Date: "2025-01-20",
+    Target: "2025-09-15",
     Status: "Approved",
     "Progress %": 15,
-    "Responsible Person": "Mrs. Akosua Mensah",
+    Responsible: "Mrs. Akosua Mensah",
     Description:
       "Implement electronic result delivery system to reduce paper usage and improve delivery speed",
     "Expected Outcome": "90% reduction in paper usage, faster result delivery",
@@ -66,15 +66,15 @@ let mockData = [
   },
   {
     id: 4,
-    "Initiative Title": "Staff Competency Assessment Program",
+    Title: "Staff Competency Assessment Program",
     Category: "Human Resources",
     Priority: "High",
     "Identified By": "Prof. Samuel Adjei",
-    "Date Identified": "2025-01-10",
-    "Target Date": "2025-08-30",
+    Date: "2025-01-10",
+    Target: "2025-08-30",
     Status: "Completed",
     "Progress %": 100,
-    "Responsible Person": "Dr. Grace Owusu",
+    Responsible: "Dr. Grace Owusu",
     Description:
       "Develop and implement comprehensive competency assessment for all laboratory staff",
     "Expected Outcome": "100% staff certified in their respective areas",
@@ -82,30 +82,30 @@ let mockData = [
   },
   {
     id: 5,
-    "Initiative Title": "Equipment Preventive Maintenance Optimization",
+    Title: "Equipment Preventive Maintenance Optimization",
     Category: "Equipment Management",
     Priority: "Medium",
     "Identified By": "Mr. Kofi Amponsah",
-    "Date Identified": "2025-02-10",
-    "Target Date": "2025-07-31",
+    Date: "2025-02-10",
+    Target: "2025-07-31",
     Status: "On Hold",
     "Progress %": 10,
-    "Responsible Person": "Mr. Joseph Boateng",
+    Responsible: "Mr. Joseph Boateng",
     Description: "Revise preventive maintenance schedules to reduce equipment downtime",
     "Expected Outcome": "20% reduction in unplanned equipment downtime",
     "Resources Required": "Maintenance schedule review, spare parts inventory",
   },
   {
     id: 6,
-    "Initiative Title": "Patient Satisfaction Survey Implementation",
+    Title: "Patient Satisfaction Survey Implementation",
     Category: "Customer Service",
     Priority: "High",
     "Identified By": "Dr. Mary Osei",
-    "Date Identified": "2025-01-25",
-    "Target Date": "2025-05-31",
+    Date: "2025-01-25",
+    Target: "2025-05-31",
     Status: "In Progress",
     "Progress %": 80,
-    "Responsible Person": "Mrs. Akosua Mensah",
+    Responsible: "Mrs. Akosua Mensah",
     Description:
       "Implement regular patient satisfaction surveys to identify service improvement areas",
     "Expected Outcome": "Achieve 95% patient satisfaction rating",
@@ -177,7 +177,7 @@ export const renderImprovementProjects = () => {
             <form id="initiativeForm" class="p-4 mt-12 space-y-4">
               <div class="grid grid-cols-2 gap-4">
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Initiative Title</label>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Title</label>
                   <input
                     type="text"
                     id="initiativeTitle"
@@ -232,7 +232,7 @@ export const renderImprovementProjects = () => {
                   />
                 </div>
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Responsible Person</label>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Responsible</label>
                   <input
                     type="text"
                     id="responsiblePerson"
@@ -245,7 +245,7 @@ export const renderImprovementProjects = () => {
 
               <div class="grid grid-cols-3 gap-4">
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Date Identified</label>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Date</label>
                   <input
                     type="date"
                     id="dateIdentified"
@@ -254,7 +254,7 @@ export const renderImprovementProjects = () => {
                   />
                 </div>
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Target Date</label>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Target</label>
                   <input
                     type="date"
                     id="targetDate"
@@ -420,15 +420,15 @@ const renderTable = () => {
   } else {
     // Transform data to include actions and format for table
     const tableData = mockData.map((entry) => ({
-      "Initiative Title": entry["Initiative Title"],
+      Title: entry["Title"],
       Category: entry["Category"],
       Priority: entry["Priority"],
       "Identified By": entry["Identified By"],
-      "Date Identified": entry["Date Identified"],
-      "Target Date": entry["Target Date"],
+      Date: entry["Date"],
+      Target: entry["Target"],
       Status: entry["Status"],
       "Progress %": entry["Progress %"],
-      "Responsible Person": entry["Responsible Person"],
+      Responsible: entry["Responsible"],
       Actions: getActionButtonsHTML(entry.id),
     }));
 
@@ -474,12 +474,12 @@ function applyTableFormatting() {
     // Format dates with status indicators
     const today = new Date();
 
-    if (cells[4] && entry["Date Identified"]) {
-      cells[4].innerHTML = `<span class="px-2 py-1 rounded text-xs bg-gray-100 text-gray-800">${entry["Date Identified"]}</span>`;
+    if (cells[4] && entry["Date"]) {
+      cells[4].innerHTML = `<span class="px-2 py-1 rounded text-xs bg-gray-100 text-gray-800">${entry["Date"]}</span>`;
     }
 
-    if (cells[5] && entry["Target Date"]) {
-      const targetDate = new Date(entry["Target Date"]);
+    if (cells[5] && entry["Target"]) {
+      const targetDate = new Date(entry["Target"]);
       const isOverdue = targetDate < today && entry.Status !== "Completed";
       const isDueSoon =
         targetDate <= new Date(today.getTime() + 30 * 24 * 60 * 60 * 1000) && targetDate > today;
@@ -488,7 +488,7 @@ function applyTableFormatting() {
       if (isOverdue) className = "bg-red-100 text-red-800";
       else if (isDueSoon) className = "bg-yellow-100 text-yellow-800";
 
-      cells[5].innerHTML = `<span class="px-2 py-1 rounded text-xs ${className}">${entry["Target Date"]}</span>`;
+      cells[5].innerHTML = `<span class="px-2 py-1 rounded text-xs ${className}">${entry["Target"]}</span>`;
     }
   });
 }
@@ -587,15 +587,15 @@ function openEditInitiativeModal(id) {
 
   document.getElementById("initiativeModalTitle").textContent = "Edit Improvement Initiative";
 
-  document.getElementById("initiativeTitle").value = entry["Initiative Title"];
+  document.getElementById("initiativeTitle").value = entry["Title"];
   document.getElementById("category").value = entry["Category"];
   document.getElementById("priority").value = entry["Priority"];
   document.getElementById("identifiedBy").value = entry["Identified By"];
-  document.getElementById("dateIdentified").value = entry["Date Identified"];
-  document.getElementById("targetDate").value = entry["Target Date"];
+  document.getElementById("dateIdentified").value = entry["Date"];
+  document.getElementById("targetDate").value = entry["Target"];
   document.getElementById("status").value = entry["Status"];
   document.getElementById("progress").value = entry["Progress %"];
-  document.getElementById("responsiblePerson").value = entry["Responsible Person"];
+  document.getElementById("responsiblePerson").value = entry["Responsible"];
   document.getElementById("description").value = entry["Description"];
   document.getElementById("expectedOutcome").value = entry["Expected Outcome"];
   document.getElementById("resourcesRequired").value = entry["Resources Required"];
@@ -620,15 +620,15 @@ function handleFormSubmit(e) {
   e.preventDefault();
 
   const formData = {
-    "Initiative Title": document.getElementById("initiativeTitle").value,
+    Title: document.getElementById("initiativeTitle").value,
     Category: document.getElementById("category").value,
     Priority: document.getElementById("priority").value,
     "Identified By": document.getElementById("identifiedBy").value,
-    "Date Identified": document.getElementById("dateIdentified").value,
-    "Target Date": document.getElementById("targetDate").value,
+    Date: document.getElementById("dateIdentified").value,
+    Target: document.getElementById("targetDate").value,
     Status: document.getElementById("status").value,
     "Progress %": parseInt(document.getElementById("progress").value),
-    "Responsible Person": document.getElementById("responsiblePerson").value,
+    Responsible: document.getElementById("responsiblePerson").value,
     Description: document.getElementById("description").value,
     "Expected Outcome": document.getElementById("expectedOutcome").value,
     "Resources Required": document.getElementById("resourcesRequired").value,
@@ -672,8 +672,8 @@ function viewInitiative(id) {
     <div class="space-y-4">
       <div class="grid grid-cols-2 gap-4">
         <div>
-          <label class="block text-sm font-medium text-gray-700">Initiative Title</label>
-          <p class="mt-1 text-sm text-gray-900 font-medium">${entry["Initiative Title"]}</p>
+          <label class="block text-sm font-medium text-gray-700">Title</label>
+          <p class="mt-1 text-sm text-gray-900 font-medium">${entry["Title"]}</p>
         </div>
         <div>
           <label class="block text-sm font-medium text-gray-700">Category</label>
@@ -702,19 +702,19 @@ function viewInitiative(id) {
           <p class="mt-1 text-sm text-gray-900">${entry["Identified By"]}</p>
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700">Responsible Person</label>
-          <p class="mt-1 text-sm text-gray-900">${entry["Responsible Person"]}</p>
+          <label class="block text-sm font-medium text-gray-700">Responsible</label>
+          <p class="mt-1 text-sm text-gray-900">${entry["Responsible"]}</p>
         </div>
       </div>
       
       <div class="grid grid-cols-2 gap-4">
         <div>
-          <label class="block text-sm font-medium text-gray-700">Date Identified</label>
-          <p class="mt-1 text-sm text-gray-900">${entry["Date Identified"]}</p>
+          <label class="block text-sm font-medium text-gray-700">Date</label>
+          <p class="mt-1 text-sm text-gray-900">${entry["Date"]}</p>
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700">Target Date</label>
-          <p class="mt-1 text-sm text-gray-900">${entry["Target Date"]}</p>
+          <label class="block text-sm font-medium text-gray-700">Target</label>
+          <p class="mt-1 text-sm text-gray-900">${entry["Target"]}</p>
         </div>
       </div>
       
@@ -762,14 +762,14 @@ function showImprovementSummary() {
   // Get overdue initiatives
   const today = new Date();
   const overdueInitiatives = mockData.filter((initiative) => {
-    const targetDate = new Date(initiative["Target Date"]);
+    const targetDate = new Date(initiative["Target"]);
     return (
       targetDate < today && initiative.Status !== "Completed" && initiative.Status !== "Cancelled"
     );
   });
 
   const dueSoonInitiatives = mockData.filter((initiative) => {
-    const targetDate = new Date(initiative["Target Date"]);
+    const targetDate = new Date(initiative["Target"]);
     const thirtyDaysFromNow = new Date();
     thirtyDaysFromNow.setDate(today.getDate() + 30);
     return (
@@ -911,7 +911,7 @@ function showImprovementSummary() {
           .map(
             (initiative) => `
           <div class="text-sm text-red-800 mb-1">
-            <strong>${initiative["Initiative Title"]}</strong> - Due: ${initiative["Target Date"]} (${initiative["Responsible Person"]})
+            <strong>${initiative["Title"]}</strong> - Due: ${initiative["Target"]} (${initiative["Responsible"]})
           </div>
         `
           )
@@ -933,7 +933,7 @@ function showImprovementSummary() {
           .map(
             (initiative) => `
           <div class="text-sm text-orange-800 mb-1">
-            <strong>${initiative["Initiative Title"]}</strong> - Due: ${initiative["Target Date"]} (${initiative["Responsible Person"]})
+            <strong>${initiative["Title"]}</strong> - Due: ${initiative["Target"]} (${initiative["Responsible"]})
           </div>
         `
           )
@@ -955,15 +955,15 @@ function closeImprovementSummary() {
 
 function exportData() {
   const csvHeaders = [
-    "Initiative Title",
+    "Title",
     "Category",
     "Priority",
     "Identified By",
-    "Date Identified",
-    "Target Date",
+    "Date",
+    "Target",
     "Status",
     "Progress %",
-    "Responsible Person",
+    "Responsible",
     "Description",
     "Expected Outcome",
     "Resources Required",
@@ -974,15 +974,15 @@ function exportData() {
 
   mockData.forEach((entry) => {
     const row = [
-      `"${entry["Initiative Title"]}"`,
+      `"${entry["Title"]}"`,
       `"${entry["Category"]}"`,
       `"${entry["Priority"]}"`,
       `"${entry["Identified By"]}"`,
-      `"${entry["Date Identified"]}"`,
-      `"${entry["Target Date"]}"`,
+      `"${entry["Date"]}"`,
+      `"${entry["Target"]}"`,
       `"${entry["Status"]}"`,
       `"${entry["Progress %"]}"`,
-      `"${entry["Responsible Person"]}"`,
+      `"${entry["Responsible"]}"`,
       `"${entry["Description"].replace(/"/g, '""')}"`,
       `"${entry["Expected Outcome"].replace(/"/g, '""')}"`,
       `"${entry["Resources Required"].replace(/"/g, '""')}"`,
@@ -1011,15 +1011,15 @@ function exportToExcel() {
 
   // Prepare data for Excel (clean format without HTML)
   const excelData = mockData.map((entry) => ({
-    "Initiative Title": entry["Initiative Title"],
+    Title: entry["Title"],
     Category: entry["Category"],
     Priority: entry["Priority"],
     "Identified By": entry["Identified By"],
-    "Date Identified": entry["Date Identified"],
-    "Target Date": entry["Target Date"],
+    Date: entry["Date"],
+    Target: entry["Target"],
     Status: entry["Status"],
     "Progress %": entry["Progress %"],
-    "Responsible Person": entry["Responsible Person"],
+    Responsible: entry["Responsible"],
     Description: entry["Description"],
     "Expected Outcome": entry["Expected Outcome"],
     "Resources Required": entry["Resources Required"],
@@ -1030,15 +1030,15 @@ function exportToExcel() {
 
   // Set column widths
   const colWidths = [
-    { wch: 30 }, // Initiative Title
+    { wch: 30 }, // Title
     { wch: 20 }, // Category
     { wch: 10 }, // Priority
     { wch: 20 }, // Identified By
-    { wch: 12 }, // Date Identified
-    { wch: 12 }, // Target Date
+    { wch: 12 }, // Date
+    { wch: 12 }, // Target
     { wch: 12 }, // Status
     { wch: 10 }, // Progress %
-    { wch: 20 }, // Responsible Person
+    { wch: 20 }, // Responsible
     { wch: 40 }, // Description
     { wch: 30 }, // Expected Outcome
     { wch: 30 }, // Resources Required

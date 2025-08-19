@@ -7,15 +7,15 @@ const headers = [
   "#",
   "Date",
   "Unit",
-  "Name of Item requested",
-  "Specification",
-  "Has evaluation being done (if applicable)",
-  "Result of evaluation",
+  "Item",
+  "Spec",
+  "Evaluation Done",
+  "Evaluation Result",
   "Date Supplied",
-  "Supplier Details",
-  "Serial Number",
+  "Supplier",
+  "Serial No.",
   "Lot/Model",
-  "Receiving verification",
+  "Verification",
   "Actions",
 ];
 
@@ -224,7 +224,7 @@ export const renderSupplyPlanner = () => {
                   </select>
                 </div>
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Result of evaluation</label>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Evaluation Result</label>
                   <input
                     type="text"
                     id="evaluationResult"
@@ -234,7 +234,7 @@ export const renderSupplyPlanner = () => {
               </div>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Supplier Details</label>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Supplier</label>
                   <input
                     type="text"
                     id="supplierDetails"
@@ -242,7 +242,7 @@ export const renderSupplyPlanner = () => {
                   />
                 </div>
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Serial Number</label>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Serial No.</label>
                   <input
                     type="text"
                     id="serialNumber"
@@ -317,15 +317,15 @@ const renderTable = () => {
       "#": entry.number,
       Date: formatDate(entry.date),
       Unit: entry.unit,
-      "Name of Item requested": entry.nameOfItem,
+      "Item": entry.nameOfItem,
       Specification: entry.specification,
-      "Has evaluation being done (if applicable)": entry.hasEvaluation,
-      "Result of evaluation": entry.evaluationResult,
+      "Evaluation Done": entry.hasEvaluation,
+      "Evaluation Result": entry.evaluationResult,
       "Date Supplied": formatDate(entry.dateSupplied),
-      "Supplier Details": entry.supplierDetails,
-      "Serial Number": entry.serialNumber,
+      "Supplier": entry.supplierDetails,
+      "Serial No.": entry.serialNumber,
       "Lot/Model": entry.lotModel,
-      "Receiving verification": entry.receivingVerification,
+      "Verification": entry.receivingVerification,
       Actions: getActionButtonsHTML(entry.id),
     }));
 
@@ -501,15 +501,15 @@ function exportData() {
     "#",
     "Date",
     "Unit",
-    "Name of Item requested",
+    "Item",
     "Specification",
     "Has evaluation being done",
-    "Result of evaluation",
+    "Evaluation Result",
     "Date Supplied",
-    "Supplier Details",
-    "Serial Number",
+    "Supplier",
+    "Serial No.",
     "Lot/Model",
-    "Receiving verification",
+    "Verification",
   ];
 
   let csvContent = "data:text/csv;charset=utf-8,";
@@ -557,15 +557,15 @@ function exportToExcel() {
     "#": entry.number,
     Date: formatDate(entry.date),
     Unit: entry.unit,
-    "Name of Item requested": entry.nameOfItem,
+    "Item": entry.nameOfItem,
     Specification: entry.specification,
     "Has evaluation being done": entry.hasEvaluation,
-    "Result of evaluation": entry.evaluationResult,
+    "Evaluation Result": entry.evaluationResult,
     "Date Supplied": formatDate(entry.dateSupplied),
-    "Supplier Details": entry.supplierDetails,
-    "Serial Number": entry.serialNumber,
+    "Supplier": entry.supplierDetails,
+    "Serial No.": entry.serialNumber,
     "Lot/Model": entry.lotModel,
-    "Receiving verification": entry.receivingVerification,
+    "Verification": entry.receivingVerification,
   }));
 
   // Create worksheet from data
@@ -579,12 +579,12 @@ function exportToExcel() {
     { wch: 25 }, // Name of Item
     { wch: 20 }, // Specification
     { wch: 15 }, // Has evaluation
-    { wch: 20 }, // Result of evaluation
+    { wch: 20 }, // Evaluation Result
     { wch: 12 }, // Date Supplied
-    { wch: 20 }, // Supplier Details
-    { wch: 15 }, // Serial Number
+    { wch: 20 }, // Supplier
+    { wch: 15 }, // Serial No.
     { wch: 15 }, // Lot/Model
-    { wch: 20 }, // Receiving verification
+    { wch: 20 }, // Verification
   ];
   ws["!cols"] = colWidths;
 
