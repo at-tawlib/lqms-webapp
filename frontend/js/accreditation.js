@@ -27,6 +27,46 @@ let actionPlanData = [
     completionDate: "30/1/2025",
     followUp: "Training completed. Record review initiated",
   },
+  {
+    id: 2,
+    nonConformity: "Temperature monitoring logs for blood bank refrigerator were incomplete",
+    majorMinor: "Major",
+    rootCause: "Failure to assign responsibility for daily checks",
+    correctiveAction: "Appoint responsible officer and implement daily log verification",
+    assignedPersonnel: "Mariam Darko",
+    completionDate: "15/2/2025",
+    followUp: "Officer appointed, verification ongoing",
+  },
+  {
+    id: 3,
+    nonConformity: "Calibration certificate for pipettes was missing in equipment file",
+    majorMinor: "Minor",
+    rootCause: "Delay in filing calibration records",
+    correctiveAction: "Update equipment file and assign back-up for record filing",
+    assignedPersonnel: "George Addae",
+    completionDate: "10/2/2025",
+    followUp: "Certificate filed, system check pending",
+  },
+  {
+    id: 4,
+    nonConformity: "No evidence of internal audit conducted for Q2 2024",
+    majorMinor: "Major",
+    rootCause: "Audit schedule not properly monitored",
+    correctiveAction: "Revise audit plan and assign QA officer for monitoring",
+    assignedPersonnel: "Akosua Nyarko",
+    completionDate: "28/2/2025",
+    followUp: "Revised plan drafted, pending approval",
+  },
+  {
+    id: 5,
+    nonConformity: "Staff competency assessments not documented for 3 new recruits",
+    majorMinor: "Minor",
+    rootCause: "Oversight during orientation",
+    correctiveAction: "Conduct and document competency assessments within 2 weeks of hire",
+    assignedPersonnel: "Yaw Amponsah",
+    completionDate: "5/3/2025",
+    followUp: "Assessments completed, awaiting sign-off",
+  },
 ];
 
 const departmentHeaders = ["Department", "Number of NCs Resolved", "Number of NCs Pending"];
@@ -40,7 +80,6 @@ const actionPlanHeaders = [
   "Follow-up",
 ];
 
-
 let currentEditId = null;
 let currentSection = "departments";
 
@@ -50,7 +89,7 @@ export function renderAuditNonConformities() {
 
   setTimeout(() => {
     document.getElementById("sectionTitle").textContent = sectionNameRaw;
-    
+
     contentDiv.innerHTML = `
         <div>
           <!-- Navigation Tabs -->
@@ -351,6 +390,8 @@ function renderDepartmentTable() {
 
     tableContainer.innerHTML = "";
     tableContainer.appendChild(createTable([...departmentHeaders, "Actions"], tableData));
+
+    // Add event listeners for action buttons
     attachDepartmentActionListeners();
   }
 }
@@ -455,10 +496,10 @@ function renderActionPlanTable() {
     const tableData = actionPlanData.map((action) => ({
       ...action,
       "Non-conformity (ISO 15189)": action.nonConformity,
-      "Severity": getMajorMinorBadge(action.majorMinor),
-      "Cause": action.rootCause,
-      "Action": action.correctiveAction,
-      "Responsible": action.assignedPersonnel,
+      Severity: action.majorMinor,
+      Cause: action.rootCause,
+      Action: action.correctiveAction,
+      Responsible: action.assignedPersonnel,
       "Due Date": action.completionDate,
       "Follow-up": action.followUp,
       Actions: getActionPlanActionButtonsHTML(action.id),
@@ -466,8 +507,30 @@ function renderActionPlanTable() {
 
     tableContainer.innerHTML = "";
     tableContainer.appendChild(createTable([...actionPlanHeaders, "Actions"], tableData));
+
+    // Apply HTML formatting after table is created
+    applyTableFormatting();
+
+    // Add event listeners for action buttons
     attachActionPlanActionListeners();
   }
+}
+
+function applyTableFormatting() {
+  const table = document.querySelector("#actionPlanTableContainer table");
+  if (!table) return;
+
+  const rows = table.querySelectorAll("tbody tr");
+
+  rows.forEach((row, index) => {
+    const entry = actionPlanData[index];
+    if (!entry) return;
+
+    const cells = row.querySelectorAll("td");
+    if (cells[1]) {
+      cells[1].innerHTML = getMajorMinorBadge(entry.majorMinor);
+    }
+  });
 }
 
 function getMajorMinorBadge(type) {
@@ -590,10 +653,10 @@ function exportToExcel() {
   // Action Plan sheet
   const actionData = actionPlanData.map((action) => ({
     "Non-conformities": action.nonConformity,
-    "Severity": action.majorMinor,
-    "Cause": action.rootCause,
-    "Action": action.correctiveAction,
-    "Responsible": action.assignedPersonnel,
+    Severity: action.majorMinor,
+    Cause: action.rootCause,
+    Action: action.correctiveAction,
+    Responsible: action.assignedPersonnel,
     "Due Date": action.completionDate,
     "Follow-up": action.followUp,
   }));
