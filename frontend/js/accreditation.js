@@ -31,14 +31,15 @@ let actionPlanData = [
 
 const departmentHeaders = ["Department", "Number of NCs Resolved", "Number of NCs Pending"];
 const actionPlanHeaders = [
-  "Noted non-conformities/deficiencies (ISO 15189 clause)",
-  "Major/Minor",
-  "Root Cause",
-  "Corrective Action",
-  "Assigned Personnel",
-  "Completion Date",
+  "Non-conformity (ISO 15189)",
+  "Severity",
+  "Cause",
+  "Action",
+  "Responsible",
+  "Due Date",
   "Follow-up",
 ];
+
 
 let currentEditId = null;
 let currentSection = "departments";
@@ -189,7 +190,7 @@ export function renderAuditNonConformities() {
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="md:col-span-2">
                   <label class="block text-sm font-medium text-gray-700 mb-1"
-                    >Noted Non-conformities/Deficiencies (ISO 15189 clause)</label
+                    >Non-conformity (ISO 15189)</label
                   >
                   <textarea
                     id="nonConformity"
@@ -199,7 +200,7 @@ export function renderAuditNonConformities() {
                   ></textarea>
                 </div>
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Major/Minor</label>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Severity</label>
                   <select
                     id="majorMinor"
                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -211,7 +212,7 @@ export function renderAuditNonConformities() {
                   </select>
                 </div>
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Assigned Personnel</label>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Responsible</label>
                   <input
                     type="text"
                     id="assignedPersonnel"
@@ -220,7 +221,7 @@ export function renderAuditNonConformities() {
                   />
                 </div>
                 <div class="md:col-span-2">
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Root Cause</label>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Cause</label>
                   <textarea
                     id="rootCause"
                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -229,7 +230,7 @@ export function renderAuditNonConformities() {
                   ></textarea>
                 </div>
                 <div class="md:col-span-2">
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Corrective Action</label>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Action</label>
                   <textarea
                     id="correctiveAction"
                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -238,7 +239,7 @@ export function renderAuditNonConformities() {
                   ></textarea>
                 </div>
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Completion Date</label>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Due Date</label>
                   <input
                     type="date"
                     id="completionDate"
@@ -442,7 +443,7 @@ function deleteDepartment(id) {
 function renderActionPlanTable() {
   const tableContainer = document.getElementById("actionPlanTableContainer");
 
-  //   TODO; fix the Major/Minor view
+  //   TODO; fix the Severity view
   if (actionPlanData.length === 0) {
     tableContainer.innerHTML = `
       <div class="text-center p-8 text-gray-500">
@@ -453,12 +454,12 @@ function renderActionPlanTable() {
   } else {
     const tableData = actionPlanData.map((action) => ({
       ...action,
-      "Noted non-conformities/deficiencies (ISO 15189 clause)": action.nonConformity,
-      "Major/Minor": getMajorMinorBadge(action.majorMinor),
-      "Root Cause": action.rootCause,
-      "Corrective Action": action.correctiveAction,
-      "Assigned Personnel": action.assignedPersonnel,
-      "Completion Date": action.completionDate,
+      "Non-conformity (ISO 15189)": action.nonConformity,
+      "Severity": getMajorMinorBadge(action.majorMinor),
+      "Cause": action.rootCause,
+      "Action": action.correctiveAction,
+      "Responsible": action.assignedPersonnel,
+      "Due Date": action.completionDate,
       "Follow-up": action.followUp,
       Actions: getActionPlanActionButtonsHTML(action.id),
     }));
@@ -589,11 +590,11 @@ function exportToExcel() {
   // Action Plan sheet
   const actionData = actionPlanData.map((action) => ({
     "Non-conformities": action.nonConformity,
-    "Major/Minor": action.majorMinor,
-    "Root Cause": action.rootCause,
-    "Corrective Action": action.correctiveAction,
-    "Assigned Personnel": action.assignedPersonnel,
-    "Completion Date": action.completionDate,
+    "Severity": action.majorMinor,
+    "Cause": action.rootCause,
+    "Action": action.correctiveAction,
+    "Responsible": action.assignedPersonnel,
+    "Due Date": action.completionDate,
     "Follow-up": action.followUp,
   }));
 
@@ -656,8 +657,8 @@ function printReport() {
           <tr>
             <th>Non-conformity</th>
             <th>Type</th>
-            <th>Root Cause</th>
-            <th>Corrective Action</th>
+            <th>Cause</th>
+            <th>Action</th>
             <th>Assigned</th>
             <th>Due Date</th>
             <th>Follow-up</th>
