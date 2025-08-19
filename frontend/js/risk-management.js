@@ -19,53 +19,52 @@ const headers = [
 let mockData = [
   {
     id: 1,
-    "Process": "Sample Collection",
-    "Risk": "High",
-    "Cause": "Inadequate training of collection staff",
-    "Preventive Action":
-      "Mandatory training program implemented for all collection staff",
-    "Responsible": "Lab Manager",
-    "Review": "2025-09-15",
+    Process: "Sample Collection",
+    Risk: "High",
+    Cause: "Inadequate training of collection staff",
+    "Preventive Action": "Mandatory training program implemented for all collection staff",
+    Responsible: "Lab Manager",
+    Review: "2025-09-15",
     "Residual Risk": "Medium",
   },
   {
     id: 2,
-    "Process": "Equipment Maintenance",
-    "Risk": "Medium",
-    "Cause": "Irregular maintenance schedule",
+    Process: "Equipment Maintenance",
+    Risk: "Medium",
+    Cause: "Irregular maintenance schedule",
     "Preventive Action": "Established preventive maintenance calendar",
-    "Responsible": "Technical Officer",
-    "Review": "2025-08-30",
+    Responsible: "Technical Officer",
+    Review: "2025-08-30",
     "Residual Risk": "Low",
   },
   {
     id: 3,
-    "Process": "Result Reporting",
-    "Risk": "High",
-    "Cause": "Manual transcription errors",
+    Process: "Result Reporting",
+    Risk: "High",
+    Cause: "Manual transcription errors",
     "Preventive Action": "Implemented electronic reporting system with verification",
-    "Responsible": "Quality Manager",
-    "Review": "2025-09-01",
+    Responsible: "Quality Manager",
+    Review: "2025-09-01",
     "Residual Risk": "Low",
   },
   {
     id: 4,
-    "Process": "Inventory Management",
-    "Risk": "Medium",
-    "Cause": "Poor stock tracking system",
+    Process: "Inventory Management",
+    Risk: "Medium",
+    Cause: "Poor stock tracking system",
     "Preventive Action": "Digital inventory management system installed",
-    "Responsible": "Store Keeper",
-    "Review": "2025-08-25",
+    Responsible: "Store Keeper",
+    Review: "2025-08-25",
     "Residual Risk": "Low",
   },
   {
     id: 5,
-    "Process": "Quality Control",
-    "Risk": "Low",
-    "Cause": "Inconsistent QC procedures",
+    Process: "Quality Control",
+    Risk: "Low",
+    Cause: "Inconsistent QC procedures",
     "Preventive Action": "Standardized QC protocols and daily monitoring",
-    "Responsible": "Quality Control Officer",
-    "Review": "2025-09-10",
+    Responsible: "Quality Control Officer",
+    Review: "2025-09-10",
     "Residual Risk": "Very Low",
   },
 ];
@@ -282,18 +281,30 @@ const renderTable = () => {
     // Transform data to include actions and format for table
     const tableData = mockData.map((entry, index) => ({
       "#": index + 1,
-      "Process": entry["Process"],
-      "Risk": entry["Risk"],
-      "Cause": entry["Cause"],
+      Process: entry["Process"],
+      Risk: entry["Risk"],
+      Cause: entry["Cause"],
       "Preventive Action": entry["Preventive Action"],
-      "Responsible": entry["Responsible"],
-      "Review": entry["Review"],
+      Responsible: entry["Responsible"],
+      Review: entry["Review"],
       "Residual Risk": entry["Residual Risk"],
       Actions: getActionButtonsHTML(entry.id),
     }));
 
     tableContainer.innerHTML = "";
-    const table = createTable(headers, tableData);
+    // const table = createTable(headers, tableData);
+    const table = createTable(headers, tableData, {
+      textLimit: 20,
+      columnWidths: {
+        PROCESS: "15%",
+        RISK: "10%",
+        CAUSE: "20%",
+        "PREVENTIVE ACTION": "25%",
+        RESPONSIBLE: "15%",
+        REVIEW: "10%",
+        ACTIONS: "15%",
+      },
+    });
     tableContainer.appendChild(table);
 
     // Apply HTML formatting after table is created
@@ -334,6 +345,10 @@ function applyTableFormatting() {
       cells[6].innerHTML = `<span class="px-2 py-1 rounded text-xs ${
         isOverdue ? "bg-red-100 text-red-800" : "bg-blue-100 text-blue-800"
       }">${entry["Review"]}</span>`;
+    }
+
+    if(cells[8]){
+      cells[8].innerHTML = getActionButtonsHTML(entry.id);
     }
   });
 }
@@ -417,12 +432,12 @@ function handleFormSubmit(e) {
   e.preventDefault();
 
   const formData = {
-    "Process": document.getElementById("processName").value,
-    "Risk": document.getElementById("riskScore").value,
-    "Cause": document.getElementById("rootCause").value,
+    Process: document.getElementById("processName").value,
+    Risk: document.getElementById("riskScore").value,
+    Cause: document.getElementById("rootCause").value,
     "Preventive Action": document.getElementById("preventiveAction").value,
-    "Responsible": document.getElementById("personResponsible").value,
-    "Review": document.getElementById("followUpReview").value,
+    Responsible: document.getElementById("personResponsible").value,
+    Review: document.getElementById("followUpReview").value,
     "Residual Risk": document.getElementById("residualRisk").value,
   };
 
@@ -582,12 +597,12 @@ function exportToExcel() {
 
   // Prepare data for Excel (clean format without HTML)
   const excelData = mockData.map((entry) => ({
-    "Process": entry["Process"],
-    "Risk": entry["Risk"],
-    "Cause": entry["Cause"],
+    Process: entry["Process"],
+    Risk: entry["Risk"],
+    Cause: entry["Cause"],
     "Preventive Action": entry["Preventive Action"],
-    "Responsible": entry["Responsible"],
-    "Review": entry["Review"],
+    Responsible: entry["Responsible"],
+    Review: entry["Review"],
     "Residual Risk": entry["Residual Risk"],
   }));
 
